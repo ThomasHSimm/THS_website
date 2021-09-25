@@ -1,1 +1,1 @@
-Sitemap: https://thomashsimm.github.io/THS/sitemap.xml
+Sitemap: https://thomashsimm.com/THS/sitemap.xml
