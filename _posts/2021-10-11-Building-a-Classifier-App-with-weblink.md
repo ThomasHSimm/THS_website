@@ -1,4 +1,4 @@
-![](C:\Users\44781\Documents\GitHub\THS_website\images\header2.png)
+![]({{ site.baseurl }}\images\header2.png)
 
 # Building a Classifier App with Weblink
 
@@ -105,7 +105,7 @@ dls = dests.dataloaders(path)
 dls.valid.show_batch(max_n=40, nrows=10)
 ```
 
-![](C:\Users\44781\Documents\GitHub\THS_website\images\ic1.png)
+![]({{ site.baseurl }}\images\ic1.png)
 
 create a dls for the learner
 
@@ -126,7 +126,7 @@ learn = cnn_learner(dls, resnet18, metrics=error_rate)
 learn.fine_tune(4)
 ```
 
-![](C:\Users\44781\Documents\GitHub\THS_website\images\ic2.png)
+![]({{ site.baseurl }}\images\ic2.png)
 
 Confusion matrix
 
@@ -135,7 +135,7 @@ interp = ClassificationInterpretation.from_learner(learn)
 interp.plot_confusion_matrix()
 ```
 
-![ic3](C:\Users\44781\Documents\GitHub\THS_website\images\ic3.png)
+![ic3]({{ site.baseurl }}\images\ic3.png)
 
 Save the model (saves as export.pkl)
 
@@ -232,7 +232,7 @@ In requirements.txt:
 > packaging
 > ipywidgets
 
-![ic4](C:\Users\44781\Documents\GitHub\THS_website\images\ic4.png)
+![ic4]({{ site.baseurl }}\images\ic4.png)
 
 
 
@@ -244,5 +244,5 @@ https://tinyurl.com/LocClassAppThomasHSimm
 
 -------------------- -------------------- -------------------- ----------------
 
-![ic5](C:\Users\44781\Documents\GitHub\THS_website\images\ic5.png)
+![ic5]({{ site.baseurl }}\images\ic5.png)
 
