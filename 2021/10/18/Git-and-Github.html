@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      12 min read
+      15 min read
     
 </span></p>
 
@@ -133,6 +133,15 @@ window.onload = wrap_img;
 <p>The Linux kernel documentation itself (<a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process/submitting-patches.rst?id=HEAD">https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process/submitting-patches.rst?id=HEAD</a>), as well as impassioned opinions from other developers. (<a href="http://stopwritingramblingcommitmessages.com/">http://stopwritingramblingcommitmessages.com/</a> <a href="https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message">https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message</a>)</p>
 <p>You can check out "Setting your email in Git" (<a href="https://help.github.com/articles/setting-your-email-in-git/">https://help.github.com/articles/setting-your-email-in-git/</a>) and "Keeping your email address private" on the GitHub help site for how to do this. (<a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-user-account/managing-email-preferences/setting-your-commit-email-address">https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-user-account/managing-email-preferences/setting-your-commit-email-address</a>)</p>
 <p>Run in github bash</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Git is a distributed version control system.</p>
+<p>Distributed means that each developer has a copy of the whole repository
+on their local machine.</p>
 
 </div>
 </div>
@@ -1709,6 +1718,119 @@ diff -u</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Working-with-remotes">Working with remotes<a class="anchor-link" href="#Working-with-remotes"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>GitHub is a web-based Git repository hosting service.</p>
+<p>On top of the version control functionality of Git, GitHub includes extra features like bug tracking, wikis, and task management.</p>
+<p>GitHub lets us share and access repositories on the web and copy or clone them to our local computer, so we can work on them.</p>
+<p>GitHub is a popular choice with a robust feature set, but it's not the only one.
+Other services that provide similar functionality are BitBucket, and GitLab.</p>
+<p><img src="/images/copied_from_nb/ghtop_images/git.png" alt="htpps://github.com" /></p>
+<p>GitHub provides free access to a Git server for public and private repositories.</p>
+<p>It limits the number of contributors for the free private repositories, and offers an unlimited private repository service for a monthly fee.
+We'll be using a free repository for our examples, which is fine for educational use, small personal projects, or open source development.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Clone-a-directory">Clone a directory<a class="anchor-link" href="#Clone-a-directory"> </a></h3><p>This is to create a local copy of a repository from the github website</p>
+<p>1) Go to the repo</p>
+<p>2) Click code and copy the clone URL HTTPS</p>
+<ul>
+<li>other options are availabe too</li>
+</ul>
+<p><img src="/images/copied_from_nb/ghtop_images/gitclone.png" alt="" /></p>
+<p>3) In Git bash run</p>
+<p><code>git clone https://github.com/ThomasHSimm/SwanseaProperty.git</code></p>
+<p>Fill in any passwords if required</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Then add and commit the changes</span>
+<span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">a</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Modified the readme&quot;</span>
+<span class="p">[</span><span class="n">main</span> <span class="n">c9307f7</span><span class="p">]</span> <span class="n">modified</span> <span class="n">read</span> <span class="n">me</span>
+ <span class="mi">1</span> <span class="n">file</span> <span class="n">changed</span><span class="p">,</span> <span class="mi">1</span> <span class="n">insertion</span><span class="p">(</span><span class="o">+</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Git-Push">Git Push<a class="anchor-link" href="#Git-Push"> </a></h2><p>Send the changes to the remote repository</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">push</span>
+<span class="n">Enumerating</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">Counting</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">5</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">Delta</span> <span class="n">compression</span> <span class="n">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span>
+<span class="n">Compressing</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">Writing</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span> <span class="mi">309</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="mf">309.00</span> <span class="n">KiB</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">Total</span> <span class="mi">3</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">2</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="n">pack</span><span class="o">-</span><span class="n">reused</span> <span class="mi">0</span>
+<span class="n">remote</span><span class="p">:</span> <span class="n">Resolving</span> <span class="n">deltas</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="n">completed</span> <span class="k">with</span> <span class="mi">2</span> <span class="n">local</span> <span class="n">objects</span><span class="o">.</span>
+<span class="n">To</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ThomasHSimm</span><span class="o">/</span><span class="n">SwanseaProperty</span><span class="o">.</span><span class="n">git</span>
+   <span class="mi">08</span><span class="n">aa0a2</span><span class="o">..</span><span class="n">c9307f7</span>  <span class="n">main</span> <span class="o">-&gt;</span> <span class="n">main</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Basic-Interaction-with-GitHub-Cheat-Sheet">Basic Interaction with GitHub Cheat-Sheet<a class="anchor-link" href="#Basic-Interaction-with-GitHub-Cheat-Sheet"> </a></h2><p>There are various remote repository hosting sites:</p>
+
+<pre><code>- GitHub
+
+- BitBucket
+
+- Gitlab.
+
+</code></pre>
+<p>Follow the workflow at <a href="https://github.com/join">https://github.com/join</a> to set up a free account, username, and password. After that, these steps (<a href="https://help.github.com/articles/create-a-repo/">https://help.github.com/articles/create-a-repo/</a>) will help you create a brand new repository on GitHub.</p>
+<p>Some useful commands for getting started:</p>
+<h4 id="git-clone-URL">git clone URL<a class="anchor-link" href="#git-clone-URL"> </a></h4><p>Git clone is used to clone a remote repository into a local workspace
+<a href="https://git-scm.com/docs/git-clone">https://git-scm.com/docs/git-clone</a></p>
+<h4 id="git-push">git push<a class="anchor-link" href="#git-push"> </a></h4><p>Git push is used to push commits from your local repo to a remote repo
+<a href="https://git-scm.com/docs/git-push">https://git-scm.com/docs/git-push</a></p>
+<h4 id="git-pull">git pull<a class="anchor-link" href="#git-pull"> </a></h4><p>Git pull is used to fetch the newest updates from a remote repository
+<a href="https://git-scm.com/docs/git-pull">https://git-scm.com/docs/git-pull</a></p>
+<h4 id="These-can-be-useful-for-keeping-your-local-workspace-up-to-date.">These can be useful for keeping your local workspace up to date.<a class="anchor-link" href="#These-can-be-useful-for-keeping-your-local-workspace-up-to-date."> </a></h4><ul>
+<li><a href="https://help.github.com/en/articles/caching-your-github-password-in-git">https://help.github.com/en/articles/caching-your-github-password-in-git</a></li>
+</ul>
+<ul>
+<li><a href="https://help.github.com/en/articles/generating-an-ssh-key">https://help.github.com/en/articles/generating-an-ssh-key</a>  </li>
+</ul>
+
 </div>
 </div>
 </div>
