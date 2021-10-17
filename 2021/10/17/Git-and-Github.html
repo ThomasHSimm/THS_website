@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Git and Github | Thomas Simm</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Git and Github" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Thomas H Simm" />
+<meta property="og:description" content="Thomas H Simm" />
+<link rel="canonical" href="https://thomashsimm.com/2021/10/17/Git-and-Github.html" />
+<meta property="og:url" content="https://thomashsimm.com/2021/10/17/Git-and-Github.html" />
+<meta property="og:site_name" content="Thomas Simm" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-17T00:00:00-05:00" />
+<script type="application/ld+json">
+{"datePublished":"2021-10-17T00:00:00-05:00","url":"https://thomashsimm.com/2021/10/17/Git-and-Github.html","@type":"BlogPosting","headline":"Git and Github","dateModified":"2021-10-17T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://thomashsimm.com/2021/10/17/Git-and-Github.html"},"description":"Thomas H Simm","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://thomashsimm.com/feed.xml" title="Thomas Simm" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Thomas Simm</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Git and Github</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-10-17T00:00:00-05:00" itemprop="datePublished">
+        Oct 17, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      6 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ThomasHSimm/THS_website/tree/master/_notebooks/2021-10-17-Git-and-Github.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ThomasHSimm/THS_website/master?filepath=_notebooks%2F2021-10-17-Git-and-Github.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ThomasHSimm/THS_website/blob/master/_notebooks/2021-10-17-Git-and-Github.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-10-17-Git-and-Github.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nano</span> <span class="n">file</span><span class="o">.</span><span class="n">txt</span>
+<span class="c1">#create file</span>
+<span class="n">touch</span> <span class="n">file</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/GithubIMG.png" alt="" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="diff-find-the-difference-between-two-files"><em>diff</em> find the difference between two files<a class="anchor-link" href="#diff-find-the-difference-between-two-files"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>diff</p>
+<p><a href="https://man7.org/linux/man-pages/man1/diff.1.html">https://man7.org/linux/man-pages/man1/diff.1.html</a></p>
+<p>diff is used to find differences between two files. On its own, it’s a bit hard to use; instead, use it with diff -u to find lines which differ in two files:
+diff -u</p>
+<p>diff -u is used to compare two files, line by line, and have the differing lines compared side-by-side in the same output. See below:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">diff</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span> <span class="n">test2</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>output</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">3</span><span class="n">c3</span>
+<span class="o">&lt;</span> <span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="o">**</span><span class="n">b</span>
+<span class="o">---</span>
+<span class="o">&gt;</span> <span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="o">**</span><span class="n">b</span><span class="o">+</span><span class="n">a</span>
+<span class="mi">4</span><span class="n">a5</span>
+<span class="o">&gt;</span> <span class="n">d</span><span class="o">=</span><span class="n">c</span><span class="o">**</span><span class="n">c</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>3c3</p>
+<p>line in file 1 - c=change - line in file 2
+                 a=added</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">diff</span> <span class="o">-</span><span class="n">u</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span> <span class="n">test2</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1">#output</span>
+
+<span class="o">---</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span>     <span class="mi">2021</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">17</span> <span class="mi">11</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mf">24.880950400</span> <span class="o">+</span><span class="mi">0100</span>
+<span class="o">+++</span> <span class="n">test2</span><span class="o">.</span><span class="n">py</span>    <span class="mi">2021</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">17</span> <span class="mi">11</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mf">21.155278200</span> <span class="o">+</span><span class="mi">0100</span>
+<span class="o">@@</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span> <span class="o">@@</span>
+ <span class="n">a</span><span class="o">=</span><span class="mi">3</span>
+ <span class="n">b</span><span class="o">=</span><span class="mi">2</span>
+<span class="o">-</span><span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="o">**</span><span class="n">b</span>
+<span class="o">+</span><span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="o">**</span><span class="n">b</span><span class="o">+</span><span class="n">a</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="o">+</span><span class="n">d</span><span class="o">=</span><span class="n">c</span><span class="o">**</span><span class="n">c</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>adding -u gives extra context to changes</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="applying-changes">applying changes<a class="anchor-link" href="#applying-changes"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Create-a-file-with-the-changes-in">Create a file with the changes in<a class="anchor-link" href="#Create-a-file-with-the-changes-in"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">diff</span> <span class="o">-</span><span class="n">u</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span> <span class="n">test2</span><span class="o">.</span><span class="n">py</span> <span class="o">&gt;</span><span class="n">change</span><span class="o">.</span><span class="n">diff</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="patch">patch<a class="anchor-link" href="#patch"> </a></h3><p><a href="http://man7.org/linux/man-pages/man1/patch.1.html">http://man7.org/linux/man-pages/man1/patch.1.html</a></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">patch</span> <span class="n">test</span><span class="o">-</span><span class="n">Copy1</span><span class="o">.</span><span class="n">py</span> <span class="o">&lt;</span> <span class="n">change</span><span class="o">.</span><span class="n">diff</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>this applies changes in change.diff to test-Copy1.diff</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="VCS-version-control-system">VCS version control system<a class="anchor-link" href="#VCS-version-control-system"> </a></h2><p>By keeping track of the changes that we make to our files, a VCS lets us know when a file changed, who changed it, and also lets us easily roll back those changes.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="git-config">git config<a class="anchor-link" href="#git-config"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="s2">&quot;me@example.com&quot;</span> 
+<span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;My name&quot;</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>set email and name</p>
+<p>--global means for all repositories</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">config</span> <span class="o">-</span><span class="n">l</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="create-a-new-repository">create a new repository<a class="anchor-link" href="#create-a-new-repository"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">mkdir</span> <span class="n">testa</span>
+<span class="o">&gt;&gt;</span><span class="n">cd</span> <span class="n">testa</span>
+<span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">init</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>detals of the created directory</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">ls</span> <span class="o">-</span><span class="n">l</span> <span class="o">.</span><span class="n">git</span>
+
+<span class="c1">#output-&gt;&gt;</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="mi">44781</span> <span class="mi">197609</span>  <span class="mi">23</span> <span class="n">Oct</span> <span class="mi">17</span> <span class="mi">12</span><span class="p">:</span><span class="mi">06</span> <span class="n">HEAD</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="mi">44781</span> <span class="mi">197609</span> <span class="mi">130</span> <span class="n">Oct</span> <span class="mi">17</span> <span class="mi">12</span><span class="p">:</span><span class="mi">06</span> <span class="n">config</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="mi">44781</span> <span class="mi">197609</span>  <span class="mi">73</span> <span class="n">Oct</span> <span class="mi">17</span> <span class="mi">12</span><span class="p">:</span><span class="mi">06</span> <span class="n">description</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">1</span> <span class="mi">44781</span> <span class="mi">197609</span>   <span class="mi">0</span> <span class="n">Oct</span> <span class="mi">17</span> <span class="mi">12</span><span class="p">:</span><span class="mi">06</span> <span class="n">hooks</span><span class="o">/</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">1</span> <span class="mi">44781</span> <span class="mi">197609</span>   <span class="mi">0</span> <span class="n">Oct</span> <span class="mi">17</span> <span class="mi">12</span><span class="p">:</span><span class="mi">06</span> <span class="n">info</span><span class="o">/</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">1</span> <span class="mi">44781</span> <span class="mi">197609</span>   <span class="mi">0</span> <span class="n">Oct</span> <span class="mi">17</span> <span class="mi">12</span><span class="p">:</span><span class="mi">06</span> <span class="n">objects</span><span class="o">/</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">1</span> <span class="mi">44781</span> <span class="mi">197609</span>   <span class="mi">0</span> <span class="n">Oct</span> <span class="mi">17</span> <span class="mi">12</span><span class="p">:</span><span class="mi">06</span> <span class="n">refs</span><span class="o">/</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The git directory acts as a database for all the changes tracked in Git and the working tree acts as a sandbox where we can edit the current versions of the files.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="add-a-file-to-the-directory-and-get-it-tracked">add a file to the directory and get it tracked<a class="anchor-link" href="#add-a-file-to-the-directory-and-get-it-tracked"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">cp</span> <span class="o">../</span><span class="n">test</span><span class="o">.</span><span class="n">py</span> <span class="o">.</span> 
+<span class="c1">#note the dot at end to say copy to this directory</span>
+<span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">add</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The file is now in the <strong>staging area</strong> or <strong>index</strong></p>
+<p>contains all info about what files and changes are in the next commit</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">add</span> <span class="o">-</span><span class="n">p</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>this would all tracked and shows differences and asks if want to make the add</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="get-the-status">get the status<a class="anchor-link" href="#get-the-status"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">status</span>
+
+<span class="n">On</span> <span class="n">branch</span> <span class="n">master</span>
+
+<span class="n">No</span> <span class="n">commits</span> <span class="n">yet</span>
+
+<span class="n">Changes</span> <span class="n">to</span> <span class="n">be</span> <span class="n">committed</span><span class="p">:</span>
+  <span class="p">(</span><span class="n">use</span> <span class="s2">&quot;git rm --cached &lt;file&gt;...&quot;</span> <span class="n">to</span> <span class="n">unstage</span><span class="p">)</span>
+        <span class="n">new</span> <span class="n">file</span><span class="p">:</span>   <span class="n">test</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>test.py ready to be committed</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Make-a-commit">Make a commit<a class="anchor-link" href="#Make-a-commit"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">commit</span>
+
+<span class="c1"># Please enter the commit message for your changes. Lines starting</span>
+<span class="c1"># with &#39;#&#39; will be ignored, and an empty message aborts the commit.</span>
+<span class="c1">#</span>
+<span class="c1"># On branch master</span>
+<span class="c1">#</span>
+<span class="c1"># Initial commit</span>
+<span class="c1">#</span>
+<span class="c1"># Changes to be committed:</span>
+<span class="c1">#       new file:   test.py</span>
+<span class="c1">#</span>
+<span class="o">~</span>
+<span class="o">~</span>
+<span class="o">~</span>
+<span class="o">~</span>
+<span class="o">~</span>
+<span class="o">~</span>
+<span class="o">~</span>
+<span class="o">~</span>
+<span class="o">~</span>
+<span class="o">~</span>
+<span class="o">~</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>this opens up an editor with text as shown</p>
+<p>Enter details of the commit</p>
+<p>To exit and save:
+ Type the description at the very top, press esc to exit insert mode, then type :x! (now the cursor is at the bottom) and hit enter to save and exit</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Alternatively add -m command with details of commit</p>
+<p><code>git commit -m 'Changed print to include some text'</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Tracked-files">Tracked files<a class="anchor-link" href="#Tracked-files"> </a></h4><ul>
+<li>Modified<ul>
+<li>made changes but not committed yet</li>
+</ul>
+</li>
+<li>Staged<ul>
+<li>in staging area</li>
+<li><code>git add</code></li>
+</ul>
+</li>
+<li>Committed<ul>
+<li>in git directory</li>
+<li><code>git commit</code></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Commit-messages">Commit messages<a class="anchor-link" href="#Commit-messages"> </a></h3><p>Brief description</p>
+<p>More indepth details</p>
+<p>More indepth</p>
+<p>(remember to add new lines)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Git-log">Git log<a class="anchor-link" href="#Git-log"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">log</span>
+<span class="n">commit</span> <span class="mi">05958854</span><span class="n">b7ad68f8b1a178f260dccd844aec0e16</span> <span class="p">(</span><span class="n">HEAD</span> <span class="o">-&gt;</span> <span class="n">master</span><span class="p">)</span>
+<span class="n">Author</span><span class="p">:</span> <span class="n">thomashsimm</span> <span class="o">&lt;</span><span class="n">thomas</span> <span class="nd">@gmail</span><span class="o">.</span><span class="n">com</span><span class="o">&gt;</span>
+<span class="n">Date</span><span class="p">:</span>   <span class="n">Sun</span> <span class="n">Oct</span> <span class="mi">17</span> <span class="mi">13</span><span class="p">:</span><span class="mi">04</span><span class="p">:</span><span class="mi">10</span> <span class="mi">2021</span> <span class="o">+</span><span class="mi">0100</span>
+
+    <span class="n">added</span> <span class="n">python</span> <span class="n">start</span> <span class="n">line</span>
+
+<span class="n">commit</span> <span class="mi">917</span><span class="n">a027f6282ce1c2c01e00a48bb72995e3984a6</span>
+<span class="n">Author</span><span class="p">:</span> <span class="n">thomashsimm</span> <span class="o">&lt;</span><span class="n">thomas</span> <span class="nd">@gmail</span><span class="o">.</span><span class="n">com</span><span class="o">&gt;</span>
+<span class="n">Date</span><span class="p">:</span>   <span class="n">Sun</span> <span class="n">Oct</span> <span class="mi">17</span> <span class="mi">12</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mi">41</span> <span class="mi">2021</span> <span class="o">+</span><span class="mi">0100</span>
+
+    <span class="n">Changed</span> <span class="nb">print</span> <span class="n">to</span> <span class="n">include</span> <span class="n">some</span> <span class="n">text</span>
+
+<span class="n">commit</span> <span class="mf">7e32</span><span class="n">e328db17594fd0a507b4a23f489b68c09543</span>
+<span class="n">Author</span><span class="p">:</span> <span class="n">thomashsimm</span> <span class="o">&lt;</span><span class="n">thomas</span>  <span class="nd">@gmail</span><span class="o">.</span><span class="n">com</span><span class="o">&gt;</span>
+<span class="n">Date</span><span class="p">:</span>   <span class="n">Sun</span> <span class="n">Oct</span> <span class="mi">17</span> <span class="mi">12</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">02</span> <span class="mi">2021</span> <span class="o">+</span><span class="mi">0100</span>
+
+    <span class="n">Add</span> <span class="n">new</span> <span class="n">file</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Skipping-the-Staging-Area">Skipping the Staging Area<a class="anchor-link" href="#Skipping-the-Staging-Area"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">a</span>
+
+<span class="ow">or</span>
+<span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">a</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Added a new output&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>a shortcut to stage any changes to <strong>tracked files</strong> and commit them in one step</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Getting-more-information-about-our-changes">Getting more information about our changes<a class="anchor-link" href="#Getting-more-information-about-our-changes"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">log</span> <span class="o">-</span><span class="n">p</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Equivalent to diff -u (describe above)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>to get more info on a particular commit</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">show</span> <span class="mf">7e32</span><span class="n">e328db17594fd0a507b4a23f489b68c09543</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Some stats of repo</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">log</span> <span class="o">--</span><span class="n">stat</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>changes in file, relative to repo/staging area</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">diff</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Deleting-and-Renaming-Files">Deleting and Renaming Files<a class="anchor-link" href="#Deleting-and-Renaming-Files"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">rm</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>removes the file test.py</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Deleted test.py&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>commit the change/deletion of the file</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">mv</span> <span class="n">test2</span><span class="o">.</span><span class="n">py</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>rename a file</p>
+<p>N.B. <code>git mv</code> can also be used for moving files</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">echo</span> <span class="o">.</span><span class="n">DS_STORE</span> <span class="o">&gt;</span> <span class="o">.</span><span class="n">gitignore</span>
+<span class="c1">#create .gitignore file to ignore .DS_STORE files (OS sys)</span>
+<span class="o">&gt;&gt;</span><span class="n">ls</span> <span class="o">-</span><span class="n">la</span>
+<span class="c1">#view hidden files</span>
+<span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">add</span> <span class="o">.</span><span class="n">gitignore</span>
+<span class="c1">#add file</span>
+<span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;added a gitignore file&quot;</span>
+<span class="c1">#commit changes</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Overview-git-cheat-sheet">Overview git cheat sheet<a class="anchor-link" href="#Overview-git-cheat-sheet"> </a></h1><p><code>git commit -a </code> &nbsp;&nbsp;&nbsp; Stages files automatically</p>
+<p><code>git log -p</code> &nbsp;&nbsp;&nbsp; Produces patch text</p>
+<p><code>git show</code>&nbsp;&nbsp;&nbsp;Shows various objects</p>
+<p><code>git diff</code>&nbsp;&nbsp;&nbsp;Is similar to the Linux <code>diff</code> command, and can show the differences in various commits</p>
+<p><code>git diff --staged</code>&nbsp;&nbsp;&nbsp;An alias to --cached, this will show all staged files compared to the named commit</p>
+<p><code>git add -p</code> &nbsp;&nbsp;&nbsp;Allows a user to interactively review patches to add to the current commit</p>
+<p><code>git mv</code>&nbsp;&nbsp;&nbsp;Similar to the Linux <code>mv</code> command, this moves a file</p>
+<p><code>git rm</code>Similar to the Linux <code>rm</code> command, this deletes, or removes a file</p>
+<p>There are many useful git cheatsheets online as well. Please take some time to research and study a few, such as this one. <a href="https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf">https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf</a></p>
+<h2 id=".gitignore-files">.gitignore files<a class="anchor-link" href="#.gitignore-files"> </a></h2><p>.gitignore files are used to tell the git tool to intentionally ignore some files in a given Git repository. For example, this can be useful for configuration files or metadata files that a user may not want to check into the master branch. Check out more at: <a href="https://git-scm.com/docs/gitignore">https://git-scm.com/docs/gitignore</a>.</p>
+<p>A few common examples of file patterns to exclude can be found here <a href="https://gist.github.com/octocat/9257657">https://gist.github.com/octocat/9257657</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Undoing-changes">Undoing changes<a class="anchor-link" href="#Undoing-changes"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Undoing-unstaged-changes">Undoing unstaged changes<a class="anchor-link" href="#Undoing-unstaged-changes"> </a></h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">restore</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>"git restore <file>..." to discard changes in working directory&lt;/p&gt;
+<p>This comes up as an option to do when go <code>git status</code></p>
+<p>Same as <code>git checkout</code></p>
+<p>This takes the file from the directory and changes the one in the working tree to match this</p>
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Undoing-staged-changes">Undoing staged changes<a class="anchor-link" href="#Undoing-staged-changes"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Say we've added all files in a directory</p>
+<p><code>git add *</code></p>
+<p>When we run 
+<code>git status</code> we reaslise it includes a file we don't want to add</p>
+<p>To remove the add we do:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">restore</span> <span class="o">--</span><span class="n">staged</span> <span class="n">newfile</span><span class="o">.</span><span class="n">txt</span>
+
+<span class="ow">or</span>
+<span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">reset</span> <span class="n">HEAD</span> <span class="n">newfile</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Amending-commits">Amending commits<a class="anchor-link" href="#Amending-commits"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;</span><span class="n">git</span> <span class="n">commit</span> <span class="o">--</span><span class="n">amend</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This allows us to ammend the last commit</p>
+<p>So for example we could add some more files to it and then modify the comments on the commit</p>
+<p>Then <strong>overwrites</strong> the previous commit</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3>Only use for: local changes</h3><h3>Amend Commits are not for commits that have been made public</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Rollbacks">Rollbacks<a class="anchor-link" href="#Rollbacks"> </a></h2>
+</div>
+</div>
+</div>
+&lt;/div&gt;
+ 
+
+</file></p></div></div></div></div>
+
+
+  </div><a class="u-url" href="/2021/10/17/Git-and-Github.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Thomas H Simm</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/thomashsimm" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/thomashsimm" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
