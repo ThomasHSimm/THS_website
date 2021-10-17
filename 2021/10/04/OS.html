@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>The operating system | Thomas Simm</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="The operating system" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Thomas H Simm" />
+<meta property="og:description" content="Thomas H Simm" />
+<link rel="canonical" href="https://thomashsimm.com/2021/10/04/OS.html" />
+<meta property="og:url" content="https://thomashsimm.com/2021/10/04/OS.html" />
+<meta property="og:site_name" content="Thomas Simm" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-04T00:00:00-05:00" />
+<script type="application/ld+json">
+{"datePublished":"2021-10-04T00:00:00-05:00","url":"https://thomashsimm.com/2021/10/04/OS.html","@type":"BlogPosting","headline":"The operating system","dateModified":"2021-10-04T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://thomashsimm.com/2021/10/04/OS.html"},"description":"Thomas H Simm","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://thomashsimm.com/feed.xml" title="Thomas Simm" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Thomas Simm</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">The operating system</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-10-04T00:00:00-05:00" itemprop="datePublished">
+        Oct 4, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      1 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ThomasHSimm/THS_website/tree/master/_notebooks/2021-10-04-OS.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ThomasHSimm/THS_website/master?filepath=_notebooks%2F2021-10-04-OS.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ThomasHSimm/THS_website/blob/master/_notebooks/2021-10-04-OS.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-10-04-OS.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="name-of-operating-system">name of operating system<a class="anchor-link" href="#name-of-operating-system"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;os.name&#39;</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>os.name , nt 
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="get-current-dir">get current dir<a class="anchor-link" href="#get-current-dir"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;os.getcwd()&#39;</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>os.getcwd() , C:\Users\44781\pyproj\_misc 
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="list-files-in-dir">list files in dir<a class="anchor-link" href="#list-files-in-dir"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;os.listdir()&#39;</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(),</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>os.listdir() , [&#39;.ipynb_checkpoints&#39;, &#39;adapic.jpg&#39;, &#39;awarhol.jpg&#39;, &#39;awarhol.webp&#39;, &#39;dog.jpg&#39;, &#39;draw.png&#39;, &#39;ebsd2.tif&#39;, &#39;ebsdmap.png&#39;, &#39;ebsdmap.tif&#39;, &#39;fastAI_C1_notes.ipynb&#39;, &#39;image_1000.jpg&#39;, &#39;image_5000(1).jpg&#39;, &#39;IndeedExtract-Copy1.ipynb&#39;, &#39;IndeedExtract-Copy2.ipynb&#39;, &#39;No_61_Mark_Rothko-thumbnail_webp-9999x9999.webp&#39;, &#39;os.ipynb&#39;, &#39;output&#39;, &#39;PF_500C R.png&#39;, &#39;PythonBook.ipynb&#39;, &#39;re.ipynb&#39;, &#39;styleTransfer.ipynb&#39;, &#39;test2&#39;, &#39;Untitled.ipynb&#39;, &#39;vangogh.jpg&#39;, &#39;vgg19_weights_tf_dim_ordering_tf_kernels_notop.h5&#39;, &#39;water.webp&#39;] 
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="make-a-directory">make a directory<a class="anchor-link" href="#make-a-directory"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">this_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="n">directory</span><span class="o">=</span><span class="s1">&#39;test&#39;</span>
+<span class="c1">#this adds either / or \ depending on os</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">this_dir</span><span class="p">,</span> <span class="n">directory</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="c1">#or </span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;test2&#39;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="list-files-in-dir">list files in dir<a class="anchor-link" href="#list-files-in-dir"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;os.listdir()&#39;</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(),</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>os.listdir() , [&#39;.ipynb_checkpoints&#39;, &#39;adapic.jpg&#39;, &#39;awarhol.jpg&#39;, &#39;awarhol.webp&#39;, &#39;dog.jpg&#39;, &#39;draw.png&#39;, &#39;ebsd2.tif&#39;, &#39;ebsdmap.png&#39;, &#39;ebsdmap.tif&#39;, &#39;fastAI_C1_notes.ipynb&#39;, &#39;image_1000.jpg&#39;, &#39;image_5000(1).jpg&#39;, &#39;IndeedExtract-Copy1.ipynb&#39;, &#39;IndeedExtract-Copy2.ipynb&#39;, &#39;No_61_Mark_Rothko-thumbnail_webp-9999x9999.webp&#39;, &#39;os.ipynb&#39;, &#39;output&#39;, &#39;PF_500C R.png&#39;, &#39;PythonBook.ipynb&#39;, &#39;re.ipynb&#39;, &#39;styleTransfer.ipynb&#39;, &#39;test&#39;, &#39;test2&#39;, &#39;Untitled.ipynb&#39;, &#39;vangogh.jpg&#39;, &#39;vgg19_weights_tf_dim_ordering_tf_kernels_notop.h5&#39;, &#39;water.webp&#39;] 
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Check-file/dir-exists">Check file/dir exists<a class="anchor-link" href="#Check-file/dir-exists"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;test2&quot;</span><span class="p">),</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>True True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="change-directory">change directory<a class="anchor-link" href="#change-directory"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;os.getcwd()&#39;</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>os.getcwd() , C:\Users\44781\pyproj\_misc\test 
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Create-and-Rename-a-file">Create and Rename a file<a class="anchor-link" href="#Create-and-Rename-a-file"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Old.txt&#39;</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># check file exists </span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;old=&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;Old.txt&quot;</span><span class="p">),</span><span class="s1">&#39;. new=&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;New.txt&quot;</span><span class="p">))</span>
+
+<span class="c1"># rename a file</span>
+<span class="n">fd</span> <span class="o">=</span> <span class="s2">&quot;Old.txt&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="s1">&#39;New.txt&#39;</span><span class="p">)</span>
+
+<span class="c1"># check file exists </span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;old=&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;Old.txt&quot;</span><span class="p">),</span><span class="s1">&#39;. new=&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;New.txt&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>old= True . new= False
+old= False . new= True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Copy-a-file-">Copy a file-<a class="anchor-link" href="#Copy-a-file-"> </a></h2><h3 id="can-be-done-in-os-but-easier-in-shutil">can be done in os but easier in shutil<a class="anchor-link" href="#can-be-done-in-os-but-easier-in-shutil"> </a></h3><p><a href="https://stackabuse.com/how-to-copy-a-file-in-python/">https://stackabuse.com/how-to-copy-a-file-in-python/</a></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">shutil</span>
+<span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="s1">&#39;New.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;Old.txt&#39;</span><span class="p">)</span>
+
+<span class="c1"># check file exists </span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;old=&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;Old.txt&quot;</span><span class="p">),</span><span class="s1">&#39;. new=&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;New.txt&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>old= True . new= True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Remove-a-file">Remove a file<a class="anchor-link" href="#Remove-a-file"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;New.txt&quot;</span><span class="p">)</span>
+<span class="c1"># os.remove(&quot;Old.txt&quot;)</span>
+
+<span class="c1"># check file exists </span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;old=&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;Old.txt&quot;</span><span class="p">),</span><span class="s1">&#39;. new=&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;New.txt&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>old= True . new= False
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Go-back-up-in-directory">Go back up in directory<a class="anchor-link" href="#Go-back-up-in-directory"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>   <span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;C:\\Users\\44781\\pyproj&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">rmdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="c1">#list files in dir</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;os.listdir()&#39;</span><span class="p">,</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(),</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>os.listdir() , [&#39;.ipynb_checkpoints&#39;, &#39;adapic.jpg&#39;, &#39;awarhol.jpg&#39;, &#39;awarhol.webp&#39;, &#39;dog.jpg&#39;, &#39;draw.png&#39;, &#39;ebsd2.tif&#39;, &#39;ebsdmap.png&#39;, &#39;ebsdmap.tif&#39;, &#39;fastAI_C1_notes.ipynb&#39;, &#39;image_1000.jpg&#39;, &#39;image_5000(1).jpg&#39;, &#39;IndeedExtract-Copy1.ipynb&#39;, &#39;IndeedExtract-Copy2.ipynb&#39;, &#39;No_61_Mark_Rothko-thumbnail_webp-9999x9999.webp&#39;, &#39;os.ipynb&#39;, &#39;output&#39;, &#39;PF_500C R.png&#39;, &#39;PythonBook.ipynb&#39;, &#39;re.ipynb&#39;, &#39;styleTransfer.ipynb&#39;, &#39;test2&#39;, &#39;Untitled.ipynb&#39;, &#39;vangogh.jpg&#39;, &#39;vgg19_weights_tf_dim_ordering_tf_kernels_notop.h5&#39;, &#39;water.webp&#39;] 
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Create-new-files">Create new files<a class="anchor-link" href="#Create-new-files"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nano</span> <span class="n">file</span><span class="o">.</span><span class="n">txt</span>
+<span class="c1">#create file</span>
+<span class="n">touch</span> <span class="n">file</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>cd
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>C:\Users\44781\pyproj\_misc\test
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/2021/10/04/OS.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Thomas H Simm</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/thomashsimm" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/thomashsimm" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
