@@ -15,5 +15,6 @@ permalink: /about/
  
 ### [Research Gate](https://www.researchgate.net/profile/Thomas-Simm)
 
+### [Wordpress site](https://thomashsimm.wordpress.com)
 
 {% twitter https://twitter.com/thomashsimm %}
