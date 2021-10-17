@@ -3,9 +3,16 @@ layout: page
 title: About Me
 permalink: /about/
 ---
+![]({{site.baseurl}}/images/header2.png)
 
-This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
+![]({{site.baseurl}}/images/logo.jpg)
+
+## Materials scientist / Data scientist
+
+### [LinkedIn](https://www.linkedin.com/in/thomashsimm/)
+
+### [Google Scholar](https://scholar.google.com/citations?user=HdPDn1sAAAAJ)
+ 
+### [Research Gate](https://www.researchgate.net/profile/Thomas-Simm)
 
 
-
-[^1]:a blogging platform that natively supports Jupyter notebooks in addition to other formats.
