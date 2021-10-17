@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Regular expressions RE | Thomas Simm</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Regular expressions RE" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Thomas H Simm" />
+<meta property="og:description" content="Thomas H Simm" />
+<link rel="canonical" href="https://thomashsimm.com/2020/10/17/Regular-Expressions.html" />
+<meta property="og:url" content="https://thomashsimm.com/2020/10/17/Regular-Expressions.html" />
+<meta property="og:site_name" content="Thomas Simm" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-17T00:00:00-05:00" />
+<script type="application/ld+json">
+{"datePublished":"2020-10-17T00:00:00-05:00","url":"https://thomashsimm.com/2020/10/17/Regular-Expressions.html","@type":"BlogPosting","headline":"Regular expressions RE","dateModified":"2020-10-17T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://thomashsimm.com/2020/10/17/Regular-Expressions.html"},"description":"Thomas H Simm","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://thomashsimm.com/feed.xml" title="Thomas Simm" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Thomas Simm</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Regular expressions RE</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-10-17T00:00:00-05:00" itemprop="datePublished">
+        Oct 17, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      8 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ThomasHSimm/THS_website/tree/master/_notebooks/2020-10-17-Regular-Expressions.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ThomasHSimm/THS_website/master?filepath=_notebooks%2F2020-10-17-Regular-Expressions.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ThomasHSimm/THS_website/blob/master/_notebooks/2020-10-17-Regular-Expressions.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-10-17-Regular-Expressions.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/header2.png" alt="" /></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">search</span> <span class="k">for</span> <span class="n">details</span> <span class="n">of</span> <span class="n">text</span> <span class="n">matching</span> <span class="n">a</span> <span class="n">pattern</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find a string within a string</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;aza&quot;</span><span class="p">,</span><span class="s2">&quot;bazaar&quot;</span><span class="p">)</span>
+<span class="n">result</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;re.Match object; span=(1, 4), match=&#39;aza&#39;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;aza&quot;</span><span class="p">,</span><span class="s2">&quot;plaza&quot;</span><span class="p">)</span>
+<span class="n">result</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;re.Match object; span=(2, 5), match=&#39;aza&#39;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find a string at the start</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^x&quot;</span><span class="p">,</span><span class="s2">&quot;xenon&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;re.Match object; span=(0, 1), match=&#39;x&#39;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The . is a joker button</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;x.n&quot;</span><span class="p">,</span><span class="s2">&quot;xenon&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;re.Match object; span=(0, 3), match=&#39;xen&#39;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Character classes are inside square brackets</p>
+<p>These are OR statements</p>
+<p>[a-z] is all lowercase letters
+[A-Z] is upercase letters
+[0-9] is numbers</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[Ppc]ython&quot;</span><span class="p">,</span><span class="s2">&quot;cython&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[a-z]ython&quot;</span><span class="p">,</span><span class="s2">&quot;dython&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[a-z]way&quot;</span><span class="p">,</span><span class="s2">&quot;My way&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[a-z]way&quot;</span><span class="p">,</span><span class="s2">&quot;Myway&quot;</span><span class="p">))</span>
+
+<span class="c1">#find cloud with letter or number after it</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;cloud[a-zA-Z0-9]&quot;</span><span class="p">,</span><span class="s2">&quot;cloud9&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[a-zA-Z0-9]&quot;</span><span class="p">,</span><span class="s2">&quot;dy9thon&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;re.Match object; span=(0, 6), match=&#39;cython&#39;&gt;
+&lt;re.Match object; span=(0, 6), match=&#39;dython&#39;&gt;
+None
+&lt;re.Match object; span=(1, 5), match=&#39;yway&#39;&gt;
+&lt;re.Match object; span=(0, 6), match=&#39;cloud9&#39;&gt;
+&lt;re.Match object; span=(0, 1), match=&#39;d&#39;&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>apply a NOT to all in the character class</p>
+<p>This uses the pipe class ^</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[^a-zA-Z0-9]&quot;</span><span class="p">,</span><span class="s2">&quot;dy9 thon&quot;</span><span class="p">))</span>
+<span class="c1">#this finds an underscore</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[^a-zA-Z0-9]&quot;</span><span class="p">,</span><span class="s2">&quot;dy9_thon&quot;</span><span class="p">))</span>
+
+<span class="c1">#this includes a not for spaces</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[^a-zA-Z0-9 ]&quot;</span><span class="p">,</span><span class="s2">&quot;dy9 thon-&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;re.Match object; span=(3, 4), match=&#39; &#39;&gt;
+&lt;re.Match object; span=(3, 4), match=&#39;_&#39;&gt;
+&lt;re.Match object; span=(8, 9), match=&#39;-&#39;&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>find a string OR another one</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;cat|dog&quot;</span><span class="p">,</span><span class="s2">&quot;I ilke cats&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;re.Match object; span=(7, 10), match=&#39;cat&#39;&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Extension of .</p>
+<p>.* means can have any length</p>
+<p>Greedy</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;p.*n&quot;</span><span class="p">,</span><span class="s2">&quot;python programming&quot;</span><span class="p">))</span>
+
+<span class="c1">#this finds something starting with py ending n but only a-z chars</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;py[a-z]*n&quot;</span><span class="p">,</span><span class="s2">&quot;python programming&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;re.Match object; span=(0, 17), match=&#39;python programmin&#39;&gt;
+&lt;re.Match object; span=(0, 6), match=&#39;python&#39;&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>matches one or more occurences of it</li>
+</ul>
+<p>So o+l looks for ol</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;o+l&quot;</span><span class="p">,</span><span class="s2">&quot;olly&quot;</span><span class="p">))</span>
+
+<span class="c1">#this fails because there is an i inbetween</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;o+l&quot;</span><span class="p">,</span><span class="s2">&quot;oilly&quot;</span><span class="p">))</span>
+
+<span class="c1">#this finds from 1st o to l</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;o+l&quot;</span><span class="p">,</span><span class="s2">&quot;oolly&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;re.Match object; span=(0, 2), match=&#39;ol&#39;&gt;
+None
+&lt;re.Match object; span=(0, 3), match=&#39;ool&#39;&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>? zero or one occurence of the character before it</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;p?each&quot;</span><span class="p">,</span><span class="s2">&quot;To each their own&quot;</span><span class="p">))</span>
+
+<span class="c1">#</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;p?each&quot;</span><span class="p">,</span><span class="s2">&quot;To peach their own&quot;</span><span class="p">))</span>
+
+<span class="c1">#</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;p?each&quot;</span><span class="p">,</span><span class="s2">&quot;Top each their own&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;re.Match object; span=(3, 7), match=&#39;each&#39;&gt;
+&lt;re.Match object; span=(3, 8), match=&#39;peach&#39;&gt;
+&lt;re.Match object; span=(4, 8), match=&#39;each&#39;&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Check for special characters</p>
+<p>Putting \ before finds the special char</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.com&quot;</span><span class="p">,</span><span class="s2">&quot;internet.com&quot;</span><span class="p">))</span>
+<span class="c1"># but not here</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.com&quot;</span><span class="p">,</span><span class="s2">&quot;welcome&quot;</span><span class="p">))</span>
+<span class="c1"># Add backslash we get it here </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\.com&quot;</span><span class="p">,</span><span class="s2">&quot;internet.com&quot;</span><span class="p">))</span>
+<span class="c1"># and a negative here</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\.com&quot;</span><span class="p">,</span><span class="s2">&quot;welcome&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;re.Match object; span=(8, 12), match=&#39;.com&#39;&gt;
+&lt;re.Match object; span=(2, 6), match=&#39;lcom&#39;&gt;
+&lt;re.Match object; span=(8, 12), match=&#39;.com&#39;&gt;
+None
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>\w matches letters number and underscores</p>
+<p>\d matches digits</p>
+<p>\s for whitespace characters, space tab or newline</p>
+<p>\b for word boundaries</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\w*&quot;</span><span class="p">,</span><span class="s2">&quot;internet.com&quot;</span><span class="p">))</span>
+<span class="c1"># and here the whole string</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\w*&quot;</span><span class="p">,</span><span class="s2">&quot;internet99_com&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;re.Match object; span=(0, 8), match=&#39;internet&#39;&gt;
+&lt;re.Match object; span=(0, 14), match=&#39;internet99_com&#39;&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>^ Beginning character</p>
+<p>$ End character</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># works here</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;A.*a&quot;</span><span class="p">,</span><span class="s2">&quot;Australia&quot;</span><span class="p">))</span>
+<span class="c1"># anot here as want to end in a</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;A.*a&quot;</span><span class="p">,</span><span class="s2">&quot;Azerbaijan&quot;</span><span class="p">))</span>
+
+<span class="c1">#add the begin and end chars- works correct for both</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^A.*a$&quot;</span><span class="p">,</span><span class="s2">&quot;Australia&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^A.*a$&quot;</span><span class="p">,</span><span class="s2">&quot;Azerbaijan&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;re.Match object; span=(0, 9), match=&#39;Australia&#39;&gt;
+&lt;re.Match object; span=(0, 9), match=&#39;Azerbaija&#39;&gt;
+&lt;re.Match object; span=(0, 9), match=&#39;Australia&#39;&gt;
+None
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Combine a few</p>
+<p>This is for valid variable names</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># [a-zA-Z0-9_] then letters, numbers or undercore</span>
+<span class="c1"># *$ end with above</span>
+<span class="n">pattern</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;^[a-zA-Z_][a-zA-Z0-9_]*$&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span><span class="s2">&quot;LLnananj_9&quot;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span><span class="s2">&quot;LLnananj_9&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span><span class="s2">&quot;9LLnananj_9&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;re.Match object; span=(0, 10), match=&#39;LLnananj_9&#39;&gt;
+&lt;re.Match object; span=(0, 10), match=&#39;LLnananj_9&#39;&gt;
+None
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>capturing groups</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># then comma and space</span>
+<span class="c1"># ends with letters number and underscores</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(\w*), (\w*)$&quot;</span><span class="p">,</span><span class="s2">&quot;Lovelace, Ada&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">groups</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        
+       <span class="c1">#print result2 followed by 1 separated by space</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;re.Match object; span=(0, 13), match=&#39;Lovelace, Ada&#39;&gt;
+(&#39;Lovelace&#39;, &#39;Ada&#39;)
+Lovelace, Ada
+Lovelace
+Ada
+Ada Lovelace
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>numeric repetition qualifiers</p>
+<p>[a-z]{n} for a repetition of lower case chars n time</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[a-zA-Z]</span><span class="si">{5}</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;a ghost&quot;</span><span class="p">))</span>
+
+<span class="c1"># a number but we only get the first</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[a-zA-Z]</span><span class="si">{5}</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;a scary super ghost&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;re.Match object; span=(2, 7), match=&#39;ghost&#39;&gt;
+&lt;re.Match object; span=(2, 7), match=&#39;scary&#39;&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>re.findall will find all instances</p>
+<p>and \b either side we will get a full word</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[a-zA-Z]</span><span class="si">{5}</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;a scary super ghost&quot;</span><span class="p">))</span>
+
+<span class="c1"># but if we give a longer word?</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[a-zA-Z]</span><span class="si">{5}</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;a scary superior ghost&quot;</span><span class="p">))</span>
+
+<span class="c1"># we get part of the superior word</span>
+
+<span class="c1"># to get just the words we want of 5 long can use \b</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\b[a-zA-Z]</span><span class="si">{5}</span><span class="s2">\b&quot;</span><span class="p">,</span><span class="s2">&quot;a scary superior ghost&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;scary&#39;, &#39;super&#39;, &#39;ghost&#39;]
+[&#39;scary&#39;, &#39;super&#39;, &#39;ghost&#39;]
+[&#39;scary&#39;, &#39;ghost&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>[a-z]{n,m}  repetition between n and m</p>
+<p>[a-z]{n,}   repetition of n or more</p>
+<p>[a-z]{,n}   repetitions of n or less</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\b[a-zA-Z]{2,4}\b&quot;</span><span class="p">,</span><span class="s2">&quot;a ab abc abcd abcde abcdef&quot;</span><span class="p">))</span>
+
+<span class="c1">#NB \b needed otherwise see below</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[a-zA-Z]{2,4}&quot;</span><span class="p">,</span><span class="s2">&quot;a ab abc abcd abcde abcdef&quot;</span><span class="p">))</span>
+
+<span class="c1"># 2 and above full word</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\b[a-zA-Z]{2,}\b&quot;</span><span class="p">,</span><span class="s2">&quot;a ab abc abcd abcde abcdef&quot;</span><span class="p">))</span>
+
+<span class="c1"># {,3} up to this many reps</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\b[a-zA-Z]{,3}\b&quot;</span><span class="p">,</span><span class="s2">&quot;a ab abc abcd abcde abcdef&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;ab&#39;, &#39;abc&#39;, &#39;abcd&#39;]
+[&#39;ab&#39;, &#39;abc&#39;, &#39;abcd&#39;, &#39;abcd&#39;, &#39;abcd&#39;, &#39;ef&#39;]
+[&#39;ab&#39;, &#39;abc&#39;, &#39;abcd&#39;, &#39;abcde&#39;, &#39;abcdef&#39;]
+[&#39;a&#39;, &#39;&#39;, &#39;ab&#39;, &#39;&#39;, &#39;abc&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">log</span> <span class="o">=</span> <span class="s2">&quot;July 31 07:51:48 mycomputer bad_process[12345]: ERROR Performing package upgrade&quot;</span>
+<span class="c1"># has [ followed by digits at least 1 followed by ]</span>
+<span class="n">regex</span><span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\[(\d+)\]&quot;</span>
+<span class="n">result</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span><span class="n">log</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[12345]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">extract_pid</span><span class="p">(</span><span class="n">log_line</span><span class="p">):</span>
+    <span class="n">regex</span><span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\[(\d+)\]&quot;</span>
+    <span class="n">result</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span><span class="n">log_line</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">extract_pid</span><span class="p">(</span><span class="n">log</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">extract_pid</span><span class="p">(</span><span class="s2">&quot;[cat]  sass&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>12345
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>re.split  split based on some characters</p>
+<p>re.sub    substitute values</p>
+<p>With sub</p>
+
+<pre><code> "A","B","C"
+ A=pattern
+ B=what to put as replacement
+ C=full text</code></pre>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[.?!]&quot;</span><span class="p">,</span><span class="s2">&quot;One sentence. Another one? And the last one!&quot;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([.?!])&quot;</span><span class="p">,</span><span class="s2">&quot;One sentence. Another one? And the last one!&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;One sentence&#39;, &#39; Another one&#39;, &#39; And the last one&#39;, &#39;&#39;]
+[&#39;One sentence&#39;, &#39;.&#39;, &#39; Another one&#39;, &#39;?&#39;, &#39; And the last one&#39;, &#39;!&#39;, &#39;&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[\w.%+-]+@[\w.-]+&quot;</span><span class="p">,</span><span class="s2">&quot;[REDACTED]&quot;</span><span class="p">,</span><span class="s2">&quot;Received an email for go_nuts95@my.examle.com&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Received an email for [REDACTED]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">texta</span> <span class="o">=</span> <span class="s2">&quot;Lovelace, Ada&quot;</span>
+<span class="n">patt</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;^([\w]*), ([\w]*$)&quot;</span>
+<span class="n">res</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">patt</span><span class="p">,</span> <span class="n">texta</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">res</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+     <span class="c1">#this says sub with: result2 space result 1</span>
+<span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">patt</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\2 \1&quot;</span><span class="p">,</span><span class="n">texta</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Lovelace, Ada Lovelace Ada
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;Ada Lovelace&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Some-Examples">Some Examples<a class="anchor-link" href="#Some-Examples"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">repeating_letter_a</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1">#here we go A or a - followed by a-z or space- followed by a or A  </span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(a|A)[a-z ]*(a|A)&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span> <span class="o">!=</span> <span class="kc">None</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">repeating_letter_a</span><span class="p">(</span><span class="s2">&quot;banana&quot;</span><span class="p">))</span> <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">repeating_letter_a</span><span class="p">(</span><span class="s2">&quot;pineapple&quot;</span><span class="p">))</span> <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">repeating_letter_a</span><span class="p">(</span><span class="s2">&quot;Animal Kingdom&quot;</span><span class="p">))</span> <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">repeating_letter_a</span><span class="p">(</span><span class="s2">&quot;A is for apple&quot;</span><span class="p">))</span> <span class="c1"># True</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>True
+False
+True
+True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># passed has at least 2 groups of alphanumeric characters </span>
+<span class="c1"># (including letters, numbers, and underscores)</span>
+<span class="c1"># separated by one or more whitespace characters.</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">check_character_groups</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\w\s\w&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">result</span> <span class="o">!=</span> <span class="kc">None</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">check_character_groups</span><span class="p">(</span><span class="s2">&quot;One&quot;</span><span class="p">))</span> <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">check_character_groups</span><span class="p">(</span><span class="s2">&quot;123  Ready Set GO&quot;</span><span class="p">))</span> <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">check_character_groups</span><span class="p">(</span><span class="s2">&quot;username user_01&quot;</span><span class="p">))</span> <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">check_character_groups</span><span class="p">(</span><span class="s2">&quot;shopping_list: milk, bread, eggs.&quot;</span><span class="p">))</span> <span class="c1"># False</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>False
+True
+True
+False
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">check_web_address</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+
+<span class="c1"># starts with letters,numbers,underscores</span>
+<span class="c1"># followed by a dot then ends with letters,numbers,underscores</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\w\.\w*$&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span> <span class="o">!=</span> <span class="kc">None</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">check_web_address</span><span class="p">(</span><span class="s2">&quot;gmail.com&quot;</span><span class="p">))</span> <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">check_web_address</span><span class="p">(</span><span class="s2">&quot;www@google&quot;</span><span class="p">))</span> <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">check_web_address</span><span class="p">(</span><span class="s2">&quot;www.Coursera.org&quot;</span><span class="p">))</span> <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">check_web_address</span><span class="p">(</span><span class="s2">&quot;web-address.com/homepage&quot;</span><span class="p">))</span> <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">check_web_address</span><span class="p">(</span><span class="s2">&quot;My_Favorite-Blog.US&quot;</span><span class="p">))</span> <span class="c1"># True</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>True
+False
+True
+False
+True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">rearrange_name</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^([\w \.-]*), ([\w \.-]*)$&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        
+        <span class="k">return</span> <span class="n">name</span>
+        
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">name</span><span class="o">=</span><span class="n">rearrange_name</span><span class="p">(</span><span class="s2">&quot;Kennedy, John F.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">name</span><span class="o">=</span><span class="n">rearrange_name</span><span class="p">(</span><span class="s2">&quot;Kennedy, John Franklin&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>John F. Kennedy
+John Franklin Kennedy
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">long_words</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1">#this says full words (\b) with chars [A-Za-z] repeated 7 times or more {7,}</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\b[A-Za-z]{7,}\b&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">long_words</span><span class="p">(</span><span class="s2">&quot;I like to drink coffee in the morning.&quot;</span><span class="p">))</span> <span class="c1"># [&#39;morning&#39;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">long_words</span><span class="p">(</span><span class="s2">&quot;I also have a taste for hot chocolate in the afternoon.&quot;</span><span class="p">))</span> <span class="c1"># [&#39;chocolate&#39;, &#39;afternoon&#39;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">long_words</span><span class="p">(</span><span class="s2">&quot;I never drink tea late at night.&quot;</span><span class="p">))</span> <span class="c1"># []</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;morning&#39;]
+[&#39;chocolate&#39;, &#39;afternoon&#39;]
+[]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># to return the uppercase message in parenthesis, after the process id.</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">extract_pid</span><span class="p">(</span><span class="n">log_line</span><span class="p">):</span>
+    <span class="n">regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(\[(\d+)\]), (\b[A-Z]{2,}\b)&quot;</span>  <span class="c1">#</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">log_line</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="c1">#&quot;{} ({})&quot;.format(result[1],result[2])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">extract_pid</span><span class="p">(</span><span class="s2">&quot;July 31 07:51:48 mycomputer bad_process[12345]: ERROR Performing package upgrade&quot;</span><span class="p">))</span> <span class="c1"># 12345 (ERROR)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">extract_pid</span><span class="p">(</span><span class="s2">&quot;99 elephants in a [cage]&quot;</span><span class="p">))</span> <span class="c1"># None</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">extract_pid</span><span class="p">(</span><span class="s2">&quot;A string that also has numbers [34567] but no uppercase message&quot;</span><span class="p">))</span> <span class="c1"># None</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">extract_pid</span><span class="p">(</span><span class="s2">&quot;July 31 08:08:08 mycomputer new_process[67890]: RUNNING Performing backup&quot;</span><span class="p">))</span> <span class="c1"># 67890 (RUNNING)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>None
+None
+None
+None
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># as implemented in the following code. </span>
+<span class="c1"># What is the resulting split list?</span>
+
+<span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;the|a&quot;</span><span class="p">,</span> <span class="s2">&quot;One sentence. Another one? And the last one!&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;One sentence. Ano&#39;, &#39;r one? And &#39;, &#39; l&#39;, &#39;st one!&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">transform_record</span><span class="p">(</span><span class="n">record</span><span class="p">):</span>
+    <span class="n">pat</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(\b[A-Za-z ]{2,}\b),([0-9-]{2,}),(\b[A-Za-z ]{2,}\b)&quot;</span>
+    <span class="n">new_record</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pat</span><span class="p">,</span><span class="sa">r</span><span class="s2">&quot;\1,+1-\2,\3&quot;</span><span class="p">,</span><span class="n">record</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">new_record</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">transform_record</span><span class="p">(</span><span class="s2">&quot;Sabrina Green,802-867-5309,System Administrator&quot;</span><span class="p">))</span> 
+<span class="c1"># Sabrina Green,+1-802-867-5309,System Administrator</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">transform_record</span><span class="p">(</span><span class="s2">&quot;Eli Jones,684-3481127,IT specialist&quot;</span><span class="p">))</span> 
+<span class="c1"># Eli Jones,+1-684-3481127,IT specialist</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">transform_record</span><span class="p">(</span><span class="s2">&quot;Melody Daniels,846-687-7436,Programmer&quot;</span><span class="p">))</span> 
+<span class="c1"># Melody Daniels,+1-846-687-7436,Programmer</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">transform_record</span><span class="p">(</span><span class="s2">&quot;Charlie Rivera,698-746-3357,Web Developer&quot;</span><span class="p">))</span> 
+<span class="c1"># Charlie Rivera,+1-698-746-3357,Web Developer</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Sabrina Green,+1-802-867-5309,System Administrator
+Eli Jones,+1-684-3481127,IT specialist
+Melody Daniels,+1-846-687-7436,Programmer
+Charlie Rivera,+1-698-746-3357,Web Developer
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">multi_vowel_words</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+  <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;[A-Za-z]*[aeiou]{3,}[a-z]*&quot;</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">result</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">multi_vowel_words</span><span class="p">(</span><span class="s2">&quot;Life is beautiful&quot;</span><span class="p">))</span> 
+<span class="c1"># [&#39;beautiful&#39;]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">multi_vowel_words</span><span class="p">(</span><span class="s2">&quot;Obviously, the queen is courageous and gracious.&quot;</span><span class="p">))</span> 
+<span class="c1"># [&#39;Obviously&#39;, &#39;queen&#39;, &#39;courageous&#39;, &#39;gracious&#39;]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">multi_vowel_words</span><span class="p">(</span><span class="s2">&quot;The rambunctious children had to sit quietly and await their delicious dinner.&quot;</span><span class="p">))</span> 
+<span class="c1"># [&#39;rambunctious&#39;, &#39;quietly&#39;, &#39;delicious&#39;]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">multi_vowel_words</span><span class="p">(</span><span class="s2">&quot;The order of a data queue is First In First Out (FIFO)&quot;</span><span class="p">))</span> 
+<span class="c1"># [&#39;queue&#39;]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">multi_vowel_words</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">))</span> 
+<span class="c1"># []</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;beautiful&#39;]
+[&#39;Obviously&#39;, &#39;queen&#39;, &#39;courageous&#39;, &#39;gracious&#39;]
+[&#39;rambunctious&#39;, &#39;quietly&#39;, &#39;delicious&#39;]
+[&#39;queue&#39;]
+[]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">transform_comments</span><span class="p">(</span><span class="n">line_of_code</span><span class="p">):</span>
+    <span class="n">patt</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;#{1,}&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">patt</span><span class="p">,</span><span class="s2">&quot;//&quot;</span><span class="p">,</span><span class="n">line_of_code</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">transform_comments</span><span class="p">(</span><span class="s2">&quot;### Start of program&quot;</span><span class="p">))</span> 
+<span class="c1"># Should be &quot;// Start of program&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">transform_comments</span><span class="p">(</span><span class="s2">&quot;  number = 0   ## Initialize the variable&quot;</span><span class="p">))</span> 
+<span class="c1"># Should be &quot;  number = 0   // Initialize the variable&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">transform_comments</span><span class="p">(</span><span class="s2">&quot;  number += 1   # Increment the variable&quot;</span><span class="p">))</span> 
+<span class="c1"># Should be &quot;  number += 1   // Increment the variable&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">transform_comments</span><span class="p">(</span><span class="s2">&quot;  return(number)&quot;</span><span class="p">))</span> 
+<span class="c1"># Should be &quot;  return(number)&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>// Start of program
+  number = 0   // Initialize the variable
+  number += 1   // Increment the variable
+  return(number)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">convert_phone_number</span><span class="p">(</span><span class="n">phone</span><span class="p">):</span>
+    <span class="n">patt</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;[0-9]{1,}&quot;</span>
+    <span class="n">resa</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">patt</span><span class="p">,</span><span class="n">phone</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">patt</span><span class="p">,</span><span class="sa">r</span><span class="s2">&quot;resa[0],resa[1]&quot;</span><span class="p">,</span><span class="n">phone</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">convert_phone_number</span><span class="p">(</span><span class="s2">&quot;My number is 212-345-9999.&quot;</span><span class="p">))</span> 
+<span class="c1"># My number is (212) 345-9999.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">convert_phone_number</span><span class="p">(</span><span class="s2">&quot;Please call 888-555-1234&quot;</span><span class="p">))</span> 
+<span class="c1"># Please call (888) 555-1234</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">convert_phone_number</span><span class="p">(</span><span class="s2">&quot;123-123-12345&quot;</span><span class="p">))</span> 
+<span class="c1"># 123-123-12345</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">convert_phone_number</span><span class="p">(</span><span class="s2">&quot;Phone number of Buckingham Palace is +44 303 123 7300&quot;</span><span class="p">))</span> 
+<span class="c1"># Phone number of Buckingham Palace is +44 303 123 7300</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>My number is resa[0],resa[1]-resa[0],resa[1]-resa[0],resa[1].
+Please call resa[0],resa[1]-resa[0],resa[1]-resa[0],resa[1]
+resa[0],resa[1]-resa[0],resa[1]-resa[0],resa[1]
+Phone number of Buckingham Palace is +resa[0],resa[1] resa[0],resa[1] resa[0],resa[1] resa[0],resa[1]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/2020/10/17/Regular-Expressions.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Thomas H Simm</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/thomashsimm" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/thomashsimm" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
