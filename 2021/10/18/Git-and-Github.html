@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      15 min read
+      18 min read
     
 </span></p>
 
@@ -1830,6 +1830,266 @@ We'll be using a free repository for our examples, which is fine for educational
 <ul>
 <li><a href="https://help.github.com/en/articles/generating-an-ssh-key">https://help.github.com/en/articles/generating-an-ssh-key</a>  </li>
 </ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Using-a-remote-repository">Using a remote repository<a class="anchor-link" href="#Using-a-remote-repository"> </a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>to find the configuration of a remote repository go to the local copy and use git remote -v to find where the data is fetched from and pushed to. Below they are the same but can be different if say fetch with HTTP for read only and say SSH for pushing. But need to be same place.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">remote</span> <span class="o">-</span><span class="n">v</span>
+<span class="n">origin</span>  <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ThomasHSimm</span><span class="o">/</span><span class="n">THS_website</span><span class="o">.</span><span class="n">git</span> <span class="p">(</span><span class="n">fetch</span><span class="p">)</span>
+<span class="n">origin</span>  <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ThomasHSimm</span><span class="o">/</span><span class="n">THS_website</span><span class="o">.</span><span class="n">git</span> <span class="p">(</span><span class="n">push</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And more information with git remote show origin</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">remote</span> <span class="n">show</span> <span class="n">origin</span>
+<span class="o">*</span> <span class="n">remote</span> <span class="n">origin</span>
+  <span class="n">Fetch</span> <span class="n">URL</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ThomasHSimm</span><span class="o">/</span><span class="n">THS_website</span><span class="o">.</span><span class="n">git</span>
+  <span class="n">Push</span>  <span class="n">URL</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ThomasHSimm</span><span class="o">/</span><span class="n">THS_website</span><span class="o">.</span><span class="n">git</span>
+  <span class="n">HEAD</span> <span class="n">branch</span><span class="p">:</span> <span class="n">master</span>
+  <span class="n">Remote</span> <span class="n">branches</span><span class="p">:</span>
+    <span class="n">gh</span><span class="o">-</span><span class="n">pages</span> <span class="n">tracked</span>
+    <span class="n">master</span>   <span class="n">tracked</span>
+  <span class="n">Local</span> <span class="n">branch</span> <span class="n">configured</span> <span class="k">for</span> <span class="s1">&#39;git pull&#39;</span><span class="p">:</span>
+    <span class="n">master</span> <span class="n">merges</span> <span class="k">with</span> <span class="n">remote</span> <span class="n">master</span>
+  <span class="n">Local</span> <span class="n">ref</span> <span class="n">configured</span> <span class="k">for</span> <span class="s1">&#39;git push&#39;</span><span class="p">:</span>
+    <span class="n">master</span> <span class="n">pushes</span> <span class="n">to</span> <span class="n">master</span> <span class="p">(</span><span class="n">up</span> <span class="n">to</span> <span class="n">date</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If above had said --- master pushes to master (local out of date)</p>
+<p>This means there have been changes on the remote and the local is now out of date- e.g. someone else has changed the repo.</p>
+<p>We'd now need to run <code>&gt;&gt;git fetch</code> to sync the data.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find branches git is tracking <code>git branch -r</code></p>
+<p>To make changes to a remote branch we have to pull the remote branch, merge it with the local branch then push to the origin- the same thing we'd do with the master.</p>
+<p>Like with local change <code>&gt;&gt;git status</code> can give us changes in the remote repository if it exists (when in the local one) as well as the local changes</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Fetching-new-changes">Fetching new changes<a class="anchor-link" href="#Fetching-new-changes"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">fetch</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This copies changes done in remote repo to local repo</p>
+<p><strong>But</strong> unlike git pull doesn't instantly merge changes</p>
+<ul>
+<li>git pull = fetch and merge </li>
+<li>git fetch = just fetches</li>
+</ul>
+<p>Can merge like this</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">merge</span> <span class="n">orgin</span><span class="o">/</span><span class="n">master</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Or just do both with pull</p>
+<p>As long as there are no conflicts, Git will move the current branch tip up to the target branch tip and combine histories of both commits. Using a fast-forward merge</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">git</span> <span class="n">pull</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To create a local branch for a remote branch we don't have yet run <code>git checkout BRANCH_NAME</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>git remote update</code> will fetch the contents of all remote branches and allow us to merge the contents ourselves.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Git-Remotes-Cheat-Sheet">Git Remotes Cheat-Sheet<a class="anchor-link" href="#Git-Remotes-Cheat-Sheet"> </a></h1><p><code>git remote</code></p>
+<p>Lists remote repos</p>
+<p><code>git remote -v</code></p>
+<p>List remote repos verbosely</p>
+<p><code>git remote show [name]</code></p>
+<p>Describes a single remote repo</p>
+<p><code>git remote update</code></p>
+<p>Fetches the most up-to-date objects</p>
+<p><code>git fetch</code></p>
+<p>Downloads specific objects</p>
+<p><code>git branch -r</code></p>
+<p>Lists remote branches; can be combined with other branch arguments to manage remote branches</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Conflict-Resolution-Cheat-Sheet">Conflict Resolution Cheat Sheet<a class="anchor-link" href="#Conflict-Resolution-Cheat-Sheet"> </a></h1><p>Merge conflicts are not uncommon when working in a team of developers, or on Open Source Software. Fortunately, GitHub has some good documentation on how to handle them when they happen:</p>
+<p><a href="https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-merge-conflicts">https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-merge-conflicts</a></p>
+<p><a href="https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/resolving-a-merge-conflict-using-the-command-line">https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/resolving-a-merge-conflict-using-the-command-line</a></p>
+<p>You can also use git rebase branchname to change the base of the current branch to be branchname</p>
+<p>The git rebase command is a lot more powerful.  Check out this link (<a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History">https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History</a>) for more information.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Git-Fork-and-Pull-Request-Cheat-Sheet">Git Fork and Pull Request Cheat Sheet<a class="anchor-link" href="#Git-Fork-and-Pull-Request-Cheat-Sheet"> </a></h1><p>Check out the following link for more information:</p>
+<p><a href="https://help.github.com/en/articles/about-pull-request-merges">https://help.github.com/en/articles/about-pull-request-merges</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="More-Information-on-Code-Reviews">More Information on Code Reviews<a class="anchor-link" href="#More-Information-on-Code-Reviews"> </a></h1><p>Check out the following links for more information:</p>
+<p><a href="http://google.github.io/styleguide/">http://google.github.io/styleguide/</a></p>
+<p><a href="https://help.github.com/en/articles/about-pull-request-reviews">https://help.github.com/en/articles/about-pull-request-reviews</a></p>
+<p><a href="https://medium.com/osedea/the-perfect-code-review-process-845e6ba5c31">https://medium.com/osedea/the-perfect-code-review-process-845e6ba5c31</a></p>
+<p><a href="https://smartbear.com/learn/code-review/what-is-code-review/">https://smartbear.com/learn/code-review/what-is-code-review/</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Additional-Tools">Additional Tools<a class="anchor-link" href="#Additional-Tools"> </a></h1><p>Check out the following links for more information:</p>
+<ul>
+<li><a href="https://arp242.net/diy.html">https://arp242.net/diy.html</a> </li>
+</ul>
+<ul>
+<li><a href="https://help.github.com/en/articles/closing-issues-using-keywords">https://help.github.com/en/articles/closing-issues-using-keywords</a></li>
+</ul>
+<ul>
+<li><a href="https://help.github.com/en/articles/setting-guidelines-for-repository-contributors">https://help.github.com/en/articles/setting-guidelines-for-repository-contributors</a> </li>
+</ul>
+<ul>
+<li><a href="https://www.infoworld.com/article/3271126/what-is-cicd-continuous-integration-and-continuous-delivery-explained.html">https://www.infoworld.com/article/3271126/what-is-cicd-continuous-integration-and-continuous-delivery-explained.html</a></li>
+</ul>
+<ul>
+<li><a href="https://stackify.com/what-is-cicd-whats-important-and-how-to-get-it-right/">https://stackify.com/what-is-cicd-whats-important-and-how-to-get-it-right/</a></li>
+</ul>
+<ul>
+<li><a href="https://docs.travis-ci.com/user/tutorial/">https://docs.travis-ci.com/user/tutorial/</a></li>
+</ul>
+<ul>
+<li><a href="https://docs.travis-ci.com/user/build-stages/">https://docs.travis-ci.com/user/build-stages/</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/google_git.png" alt="" /></p>
 
 </div>
 </div>
