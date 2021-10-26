@@ -5,7 +5,7 @@ permalink: /about/
 ---
 ![]({{site.baseurl}}/images/header2.png)
 
-![]({{site.baseurl}}/images/logo.jpg)
+![]({{site.baseurl}}/images/Thomas-Simm.jpg)
 
 ## Materials scientist / Data scientist
 
