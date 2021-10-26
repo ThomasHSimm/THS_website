@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      4 min read
     
 </span></p>
 
@@ -667,6 +667,143 @@ old= False . new= True
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Subprocess-module">Subprocess module<a class="anchor-link" href="#Subprocess-module"> </a></h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="c1"># subprocess.run(&quot;date&quot;,shell=True)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="s1">&#39;/c&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CompletedProcess(args=[&#39;cmd&#39;, &#39;/c&#39;, &#39;date&#39;], returncode=1)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Pointers-for-Getting-Your-Environment-Setup">Pointers for Getting Your Environment Setup<a class="anchor-link" href="#Pointers-for-Getting-Your-Environment-Setup"> </a></h1><h3 id="Learning-more-about-operating-systems">Learning more about operating systems<a class="anchor-link" href="#Learning-more-about-operating-systems"> </a></h3><p>We’ve talked briefly about what an operating system is and what we'll need to know about operating systems for this course. If you want to learn some additional operating system concepts, check out the videos on this subject in the Technical Support Fundamentals course (<a href="https://www.coursera.org/lecture/technical-support-fundamentals/module-introduction-I3n9l">https://www.coursera.org/lecture/technical-support-fundamentals/module-introduction-I3n9l</a>). If you want to dive deeper onto how to manage Windows and Linux, check out the Operating Systems and You: Becoming a Power User course (<a href="https://www.coursera.org/learn/os-power-user">https://www.coursera.org/learn/os-power-user</a>).</p>
+<p>If you want to discover more about the history of Unix, you can read all the details on the Unix Wikipedia page <a href="https://en.wikipedia.org/wiki/History_of_Unix">https://en.wikipedia.org/wiki/History_of_Unix</a>.</p>
+<h3 id="Installing-Python-and-additional-modules">Installing Python and additional modules<a class="anchor-link" href="#Installing-Python-and-additional-modules"> </a></h3><p>If you don't have Python installed yet, we recommend that you visit the official Python website (<a href="http://www.python.org/">http://www.python.org/</a>) and download the installer that corresponds to your operating system.</p>
+<p>There’s a bunch of guides out there for installing Python and they all follow a similar process to the one we described in the videos. This guide from Real Python (<a href="https://realpython.com/installing-python/">https://realpython.com/installing-python/</a>) includes instructions on how to install python on a range of different operating systems and distributions.</p>
+<p>Once you have Python installed on your operating system, it's a good idea to familiarize yourself with pip and the associated tools. You can find more info about these here <a href="https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/">https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/</a>.</p>
+<h3 id="Using-package-management-systems">Using package management systems<a class="anchor-link" href="#Using-package-management-systems"> </a></h3><p>Package management systems help you better manage the software installed on your machine. These management systems vary a lot from operating system to operating system. So, you need to pick the one that works for the OS you’re using. Check out these guides for help with this:</p>
+<ul>
+<li>Installing Python 3 on Windows 10 with Chocolatey
+<a href="https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-windows-10">https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-windows-10</a></li>
+</ul>
+<ul>
+<li>Installing Python 3 on MacOS with Homebrew
+<a href="http://www.pyladies.com/blog/Get-Your-Mac-Ready-for-Python-Programming/">http://www.pyladies.com/blog/Get-Your-Mac-Ready-for-Python-Programming/</a></li>
+</ul>
+<ul>
+<li>Package management basics on Linux
+<a href="https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg">https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg</a></li>
+</ul>
+<p>Other information</p>
+<ul>
+<li>Python in the Microsoft Store for Windows 10
+<a href="https://devblogs.microsoft.com/python/python-in-the-windows-10-may-2019-update/">https://devblogs.microsoft.com/python/python-in-the-windows-10-may-2019-update/</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Setting-up-Your-Environment">Setting up Your Environment<a class="anchor-link" href="#Setting-up-Your-Environment"> </a></h1><p>After you’ve installed Python and checked that it works, the next step to set up your developer environment is to choose your main code editor.</p>
+<p>These are some of the common editors for Python, available for all platforms:</p>
+<ul>
+<li><p>Atom <a href="https://atom.io/">https://atom.io/</a></p>
+</li>
+<li><p>Eclipse <a href="https://www.eclipse.org/">https://www.eclipse.org/</a></p>
+</li>
+<li><p>PyCharm <a href="https://www.jetbrains.com/pycharm/">https://www.jetbrains.com/pycharm/</a></p>
+</li>
+<li><p>Sublime Text <a href="http://www.sublimetext.com/">http://www.sublimetext.com/</a></p>
+</li>
+<li><p>Visual Studio Code <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></p>
+</li>
+</ul>
+<p>You can read more about these editors, and others, in these overview comparatives:</p>
+<ul>
+<li><p>Python IDEs and Code Editors (Guide) <a href="https://realpython.com/python-ides-code-editors-guide/#pycharm">https://realpython.com/python-ides-code-editors-guide/#pycharm</a></p>
+</li>
+<li><p>Best Python IDEs and Code Editors <a href="https://www.softwaretestinghelp.com/python-ide-code-editors/">https://www.softwaretestinghelp.com/python-ide-code-editors/</a></p>
+</li>
+<li><p>Top 5 Python IDEs for Data Science <a href="https://www.datacamp.com/community/tutorials/data-science-python-ide">https://www.datacamp.com/community/tutorials/data-science-python-ide</a></p>
+</li>
+</ul>
+<p>We encourage you to try out these editors and pick your favorite. Then, install it on your computer and experiment with writing and executing Python scripts locally.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Reading-and-Writing-Files-Cheat-Sheet">Reading and Writing Files Cheat-Sheet<a class="anchor-link" href="#Reading-and-Writing-Files-Cheat-Sheet"> </a></h1><p>Check out the following link for more information:</p>
+<ul>
+<li><a href="https://docs.python.org/3/library/functions.html#open">https://docs.python.org/3/library/functions.html#open</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Files-and-Directories-Cheat-Sheet">Files and Directories Cheat-Sheet<a class="anchor-link" href="#Files-and-Directories-Cheat-Sheet"> </a></h1><p>Check out the following links for more information:</p>
+<ul>
+<li><p><a href="https://docs.python.org/3/library/os.html">https://docs.python.org/3/library/os.html</a></p>
+</li>
+<li><p><a href="https://docs.python.org/3/library/os.path.html">https://docs.python.org/3/library/os.path.html</a></p>
+</li>
+<li><p><a href="https://en.wikipedia.org/wiki/Unix_time">https://en.wikipedia.org/wiki/Unix_time</a></p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="CSV-Files-Cheat-Sheet">CSV Files Cheat Sheet<a class="anchor-link" href="#CSV-Files-Cheat-Sheet"> </a></h1><p>Check out the following links for more information:</p>
+<ul>
+<li><p><a href="https://docs.python.org/3/library/csv.html">https://docs.python.org/3/library/csv.html</a></p>
+</li>
+<li><p><a href="https://realpython.com/python-csv/">https://realpython.com/python-csv/</a></p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
 </div>
 
 
