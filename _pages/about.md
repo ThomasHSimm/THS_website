@@ -9,17 +9,23 @@ permalink: /about/
 
 ## Materials scientist / Data scientist
 
-## [Data Science Courses Completed](https://thomashsimm.wordpress.com/datascience_courses/)
-
 ## Projects
+
+### [Materials science data viz](https://thomashsimm.com/2021/10/24/Data-Viz.html)
+
+### [Some Computer Programming projects](https://thomashsimm.wordpress.com/computer-programming/)
 
 ### [Swansea house prices- regression model ](https://thomashsimm.com/2021/08/04/Swansea-House-Price-Report.html)
 
 ### [Building a NN Image Classifier App on the web](https://thomashsimm.com/fastai/jupyter/binder/voila/mybinder/thomashsimm/2021/10/10/ImageClassifier.html)
 
-### [Materials science data viz](https://thomashsimm.com/2021/10/24/Data-Viz.html)
+### [Neural network art style transfer](https://thomashsimm.com/tensorflow/deep%20learning/jupyter/2021/11/17/StyleTransfer.html)
 
-### [Some Computer Programming projects](https://thomashsimm.wordpress.com/computer-programming/)
+### [Bike share in Chicago data science](https://thomashsimm.com/2021/11/16/ChicagoBikes.html)
+
+
+## [Data Science Courses Completed](https://thomashsimm.wordpress.com/datascience_courses/)
+
 
 ## Links
 
