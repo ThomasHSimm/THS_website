@@ -4,9 +4,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Fastpages Notebook Blog Post | Thomas Simm</title>
+<title>Deep Learning and Art Neural Style Transfer | Thomas Simm</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Fastpages Notebook Blog Post" />
+<meta property="og:title" content="Deep Learning and Art Neural Style Transfer" />
 <meta name="author" content="Thomas Simm" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Using neural networks to create images by style transfer." />
@@ -17,7 +17,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-11-17T00:00:00-06:00" />
 <script type="application/ld+json">
-{"datePublished":"2021-11-17T00:00:00-06:00","url":"https://thomashsimm.com/tensorflow/deep%20learning/jupyter/2021/11/17/StyleTransfer.html","@type":"BlogPosting","headline":"Fastpages Notebook Blog Post","dateModified":"2021-11-17T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://thomashsimm.com/tensorflow/deep%20learning/jupyter/2021/11/17/StyleTransfer.html"},"author":{"@type":"Person","name":"Thomas Simm"},"description":"Using neural networks to create images by style transfer.","@context":"https://schema.org"}</script>
+{"datePublished":"2021-11-17T00:00:00-06:00","url":"https://thomashsimm.com/tensorflow/deep%20learning/jupyter/2021/11/17/StyleTransfer.html","@type":"BlogPosting","headline":"Deep Learning and Art Neural Style Transfer","dateModified":"2021-11-17T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://thomashsimm.com/tensorflow/deep%20learning/jupyter/2021/11/17/StyleTransfer.html"},"author":{"@type":"Person","name":"Thomas Simm"},"description":"Using neural networks to create images by style transfer.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://thomashsimm.com/feed.xml" title="Thomas Simm" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -72,7 +72,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Fastpages Notebook Blog Post</h1><p class="page-description">Using neural networks to create images by style transfer.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-11-17T00:00:00-06:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">Deep Learning and Art Neural Style Transfer</h1><p class="page-description">Using neural networks to create images by style transfer.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-11-17T00:00:00-06:00" itemprop="datePublished">
         Nov 17, 2021
       </time>• 
           <span itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -125,7 +125,8 @@ window.onload = wrap_img;
 
   <div class="post-content e-content" itemprop="articleBody">
     <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#What:">What: </a></li>
+<li class="toc-entry toc-h2"><a href="#Introduction">Introduction </a></li>
+<li class="toc-entry toc-h2"><a href="#How-it-works">How it works </a></li>
 <li class="toc-entry toc-h2"><a href="#Code">Code </a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#5.3-Randomly-Initialize-the-Image-to-be-Generated">5.3 Randomly Initialize the Image to be Generated </a></li>
@@ -154,8 +155,8 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What:">
-<a class="anchor" href="#What:" aria-hidden="true"><span class="octicon octicon-link"></span></a>What:<a class="anchor-link" href="#What:"> </a>
+<h2 id="Introduction">
+<a class="anchor" href="#Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction<a class="anchor-link" href="#Introduction"> </a>
 </h2>
 <p>Use two images a content image and style image to create a new image of the content image in the style of the style image.</p>
 <p>Source used, Deep Learning Specialization Week 4
@@ -168,6 +169,15 @@ window.onload = wrap_img;
 
 From <a href="https://arxiv.org/abs/1508.06576">original NST paper</a> published by the Visual Geometry Group at University of Oxford in 2014
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="How-it-works">
+<a class="anchor" href="#How-it-works" aria-hidden="true"><span class="octicon octicon-link"></span></a>How it works<a class="anchor-link" href="#How-it-works"> </a>
+</h2>
 </div>
 </div>
 </div>
@@ -233,6 +243,14 @@ From <a href="https://arxiv.org/abs/1508.06576">original NST paper</a> published
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Set the style image</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -240,7 +258,7 @@ From <a href="https://arxiv.org/abs/1508.06576">original NST paper</a> published
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">style_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"/content/drive/MyDrive/Colab Notebooks/Abo.jpg"</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">style_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"/content/drive/MyDrive/Colab Notebooks/Tiles.jpg"</span><span class="p">))</span>
 
 <span class="n">imshow</span><span class="p">(</span><span class="n">style_image</span><span class="p">)</span>
 </pre></div>
@@ -260,6 +278,14 @@ From <a href="https://arxiv.org/abs/1508.06576">original NST paper</a> published
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And the content image</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -267,9 +293,7 @@ From <a href="https://arxiv.org/abs/1508.06576">original NST paper</a> published
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">img_size</span> <span class="o">=</span> <span class="mi">1100</span>
-
-<span class="n">content_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"/content/drive/MyDrive/Colab Notebooks/boat.jpg"</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">content_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"/content/drive/MyDrive/Colab Notebooks/boat.jpg"</span><span class="p">))</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">content_image</span><span class="p">))</span>
 <span class="n">imshow</span><span class="p">(</span><span class="n">content_image</span><span class="p">)</span>   
@@ -290,6 +314,14 @@ From <a href="https://arxiv.org/abs/1508.06576">original NST paper</a> published
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Resize the images</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -297,7 +329,10 @@ From <a href="https://arxiv.org/abs/1508.06576">original NST paper</a> published
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">content_image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">content_image</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">img_size</span> <span class="o">=</span> <span class="mi">1100</span>
+
+<span class="c1"># np.shape(content_image)</span>
+<span class="n">content_image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">content_image</span><span class="p">)</span>
 <span class="n">content_image</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">content_image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="n">img_size</span><span class="p">,</span> <span class="n">img_size</span><span class="p">)))</span>
 
 <span class="n">content_image</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">content_image</span><span class="p">,</span> <span class="p">((</span><span class="mi">1</span><span class="p">,)</span> <span class="o">+</span> <span class="n">content_image</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
@@ -333,7 +368,9 @@ From <a href="https://arxiv.org/abs/1508.06576">original NST paper</a> published
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Load parameters from the VGG model. This may take a few seconds.</p>
+<p>Load parameters from the VGG model. A pretrained model for image classification</p>
+<p><a href="https://www.robots.ox.ac.uk/~vgg/research/very_deep/">https://www.robots.ox.ac.uk/~vgg/research/very_deep/</a></p>
+<p><a href="https://gist.github.com/ksimonyan/3785162f95cd2d5fee77#file-readme-md">https://gist.github.com/ksimonyan/3785162f95cd2d5fee77#file-readme-md</a></p>
 
 </div>
 </div>
