@@ -25,8 +25,12 @@ permalink: /about/
 
 ### [Data Science Courses Completed](https://thomashsimm.wordpress.com/datascience_courses/)
 
+### [Python Web Scraping](https://thomashsimm.com/web%20scraping/python/beautifulsoup/selenium/jupyter/2021/11/18/WebScraping.html)
+
 
 ## Links
+
+### [GitHub](https://github.com/ThomasHSimm)
 
 ### [LinkedIn](https://www.linkedin.com/in/thomashsimm/)
 
