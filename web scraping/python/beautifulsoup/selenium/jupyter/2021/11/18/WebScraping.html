@@ -143,9 +143,12 @@ window.onload = wrap_img;
 </li>
 <li class="toc-entry toc-h2"><a href="#Example-using-selenium">Example using selenium </a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#The-functions">The functions </a></li>
+<li class="toc-entry toc-h3"><a href="#The-functions">The functions </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#1.-innerPage">1. innerPage </a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h3"><a href="#Look-at-the-data">Look at the data </a></li>
-<li class="toc-entry toc-h3"><a href="#Put-the-data-into-an-app">Put the data into an app </a></li>
 <li class="toc-entry toc-h3"><a href="#Do-some-Quick-Machine-Learning">Do some Quick Machine Learning </a></li>
 </ul>
 </li>
@@ -1575,6 +1578,16 @@ The information is limited (see details tab below).</p>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This uses the same methodology as above but instead uses Selenium which controls a web browser.</p>
+<p>This means links can be clicked, or other boxes can be okayed (e.g. accept cookie box).</p>
+<p><em>Since this was done it appears the website has slightly changed as the code does not work.</em></p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1660,31 +1673,19 @@ The information is limited (see details tab below).</p>
 <h3 id="The-functions">
 <a class="anchor" href="#The-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>The functions<a class="anchor-link" href="#The-functions"> </a>
 </h3>
-<ol>
-<li>#### innerPage</li>
-</ol>
+<h4 id="1.-innerPage">
+<a class="anchor" href="#1.-innerPage" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. innerPage<a class="anchor-link" href="#1.-innerPage"> </a>
+</h4>
 <ul>
 <li>this scrolls through each search page</li>
-<li>and calls</li>
-</ul>
-<ol>
-<li>####  OneSearchPage</li>
-</ol>
-<ul>
+<li>and calls
+#### 2. OneSearchPage</li>
 <li>One of the search pages</li>
-<li>For each link calls-&gt;</li>
-</ul>
-<ol>
-<li>#### gothrough_A_Link</li>
-</ol>
-<ul>
+<li>For each link calls-&gt;
+####  3. gothrough_A_Link</li>
 <li>This looks on a materials page</li>
-<li>This then calls another function to extract table data--&gt;</li>
-</ul>
-<ol>
-<li>#### getTableData</li>
-</ol>
-<ul>
+<li>This then calls another function to extract table data--&gt;
+####  4. getTableData</li>
 <li>getTableData</li>
 </ul>
 
@@ -2265,24 +2266,6 @@ The information is limited (see details tab below).</p>
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Put-the-data-into-an-app">
-<a class="anchor" href="#Put-the-data-into-an-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>Put the data into an app<a class="anchor-link" href="#Put-the-data-into-an-app"> </a>
-</h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<video width="320" height="240" controls="">
-  <source src="ghtop_images/MatData.mp4" type="video/mp4"></source>
-</video>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
