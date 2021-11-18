@@ -23,9 +23,9 @@ permalink: /about/
 
 ### [Bike share in Chicago data science](https://thomashsimm.com/2021/11/16/ChicagoBikes.html)
 
-### [Data Science Courses Completed](https://thomashsimm.wordpress.com/datascience_courses/)
-
 ### [Python Web Scraping](https://thomashsimm.com/web%20scraping/python/beautifulsoup/selenium/jupyter/2021/11/18/WebScraping.html)
+
+### [Data Science Courses Completed](https://thomashsimm.wordpress.com/datascience_courses/)
 
 
 ## Links
