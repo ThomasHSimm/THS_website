@@ -2,8 +2,8 @@
   
     
         "post0": {
-            "title": "Folf body position recognition",
-            "content": "Use the video analysis dataset to create images of golf swings .",
+            "title": "Golf body position recognition",
+            "content": "Introduction . This is a first step in a project to analyse golf swings. . In this first step I try to identify different parts of the body and golf equipment during the golf swing. This step is of limited success for overall analysis but the steps used are useful for the lessons learnt. . This work uses deep learning to identify locations (vectors) on images and fitting by regression. . In this step I will use a dataSet found at Git Hub GolfSwing and the paper of the work https://arxiv.org/abs/1903.06528. . What this dataset/paper does is split the golf swing into a number of sequences based on the position of the body and golf club, e.g. start, golf club parallel to ground, striking the ball etc. We will call these the golf positions. These positions are shown below. . . The dataset includes a series of videos that have been characterised based on the different swing sequences. . Steps in this page . Download the video dataset and the details of the frames of the different positions . | Create images at the different positions from the videos . | Classify points on the images and a file for each image of these . | Upload data to GitHub and download on notebook for analysis . | Use deep learning to identify the positions on the images . | Use the video analysis dataset to create images of golf swings . First I cloned the directory (https://github.com/wmcnally/golfdb) onto my local PC. I then need to identify which videos to use- I want the ones behind the golfer and preferably of lower frame rate. . Below are the names of the videos I selected . import numpy as np import os useVids=[1,3,5,7,13,24,43,46,48,71,77,81,83,89,93,242,681,1060] .",
             "url": "https://thomashsimm.com/jupyter/2021/12/04/GolfPos1.html",
             "relUrl": "/jupyter/2021/12/04/GolfPos1.html",
             "date": " • Dec 4, 2021"
