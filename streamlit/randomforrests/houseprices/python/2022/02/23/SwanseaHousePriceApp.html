@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      6 min read
     
 </span></p>
 
@@ -129,6 +129,16 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h2"><a href="#The-Python-Script-for-the-App">The Python Script for the App </a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#Loading-the-data">Loading the data </a></li>
+<li class="toc-entry toc-h3"><a href="#Updating-data-so-prediction-is-for-today">Updating data so prediction is for today </a></li>
+<li class="toc-entry toc-h3"><a href="#Getting-the-predictions">Getting the predictions </a></li>
+<li class="toc-entry toc-h3"><a href="#Help-with-reducing-code-for-selecting-data">Help with reducing code for selecting data </a></li>
+<li class="toc-entry toc-h3"><a href="#The-user-interface-parts-of-the-app">The user interface parts of the app </a></li>
+<li class="toc-entry toc-h3"><a href="#Predictions-and-Output">Predictions and Output </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Creating-the-App">Creating the App </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Full-Python-function">Full Python function </a></li>
 </ul>
 </li>
 </ul><!--
@@ -178,10 +188,6 @@ window.onload = wrap_img;
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>
 </p>
-<center class="youtube-iframe-wrapper">
-    <iframe width="730" height="315" src="https://www.youtube.com/embed/watch?v=IGykZUeZqRA" frameborder="0" allowfullscreen=""></iframe>
-</center>
-
 <center class="youtube-iframe-wrapper">
     <iframe width="730" height="315" src="https://www.youtube.com/embed/IGykZUeZqRA" frameborder="0" allowfullscreen=""></iframe>
 </center>
@@ -245,6 +251,361 @@ This line at the top of the python file means the data is cached and don't need 
 <span class="n">data_load_state</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">'Loading data...'</span><span class="p">)</span>
 <span class="n">m1</span><span class="p">,</span> <span class="n">to1</span><span class="p">,</span> <span class="n">xsAll1</span><span class="p">,</span> <span class="n">yAll1</span><span class="o">=</span><span class="n">load_data</span><span class="p">()</span>
 <span class="n">data_load_state</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">"Loaded data (using st.cache)"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Updating-data-so-prediction-is-for-today">
+<a class="anchor" href="#Updating-data-so-prediction-is-for-today" aria-hidden="true"><span class="octicon octicon-link"></span></a>Updating data so prediction is for today<a class="anchor-link" href="#Updating-data-so-prediction-is-for-today"> </a>
+</h3>
+<p>The following function changes the date of sale details for each property so that they are today's date</p>
+<p><code>def add_datepart(df, field_name, prefix=None, drop=True, time=False):</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Getting-the-predictions">
+<a class="anchor" href="#Getting-the-predictions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting the predictions<a class="anchor-link" href="#Getting-the-predictions"> </a>
+</h3>
+<p>The following function takes the address selected and outputs the predicted property price</p>
+<p><code>get_predTodayNotExact(m,address,toTEMP,xs_final,y)</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Help-with-reducing-code-for-selecting-data">
+<a class="anchor" href="#Help-with-reducing-code-for-selecting-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Help with reducing code for selecting data<a class="anchor-link" href="#Help-with-reducing-code-for-selecting-data"> </a>
+</h3>
+<p>The following function is used to allow to select different details from the dataframes. Really just a function to get around the slightly unusual way data is selected in 'to' and dataFrames</p>
+<p><code>def doSelect(typee,option2,typeeOut,toTEMP):</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-user-interface-parts-of-the-app">
+<a class="anchor" href="#The-user-interface-parts-of-the-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>The user interface parts of the app<a class="anchor-link" href="#The-user-interface-parts-of-the-app"> </a>
+</h3>
+<p><code>optionSELECT = st.sidebar.selectbox(
+    'Select how to search',
+     choice)</code></p>
+<p>This is a select box loacted in the LHS sidebar. The options for the user are as follows and choice dictates what boxes they see:</p>
+<p><code>choice=['Post Code','Region', 'Street']</code></p>
+<p>For example if 'Post code' is selected the folowing selectbox is shown with all post code options for first part of the postcode:</p>
+<p><code>option2 = st.sidebar.selectbox(
+        'Select Postcode',
+        indexPCSA)</code></p>
+<p>Whatever option selected the individual address must be selected:</p>
+<p><code>address = st.sidebar.selectbox(
+    'Select Address',
+    AdSel)</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Predictions-and-Output">
+<a class="anchor" href="#Predictions-and-Output" aria-hidden="true"><span class="octicon octicon-link"></span></a>Predictions and Output<a class="anchor-link" href="#Predictions-and-Output"> </a>
+</h3>
+<p>Once the address is selected, teh predictions are found by calling the prediction function:</p>
+<p><code>Pri1, Pri2, typa=get_predTodayNotExact(m,address,(to),(xsAll),(yAll))</code></p>
+<p>And then displayed in the main screen with the following code:</p>
+<p><code>'You selected: ', option2, 'and', address</code></p>
+<p><code>'Property type is ',typa</code></p>
+<p><code>stra = 'The predicted price is: '
+st.subheader(stra)
+st.header('£'+ str(Pri1[0])+'k')</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Creating-the-App">
+<a class="anchor" href="#Creating-the-App" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating the App<a class="anchor-link" href="#Creating-the-App"> </a>
+</h2>
+<p>The Python .py file along with a requirements file are uploaded to a GitHub repository. The one for this is at <a href="https://github.com/dMaterialia/PropertyStreamlit">https://github.com/dMaterialia/PropertyStreamlit</a></p>
+<p>The requirements file includes all the modules not included in python that need to be loaded. For this function the file is as follows:</p>
+
+<pre><code>numpy
+pandas
+matplotlib
+gdown
+scikit-learn
+fastai
+
+</code></pre>
+<p>Then simply log into Streamlit select the repository and the python file and hit go to get the app working</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Full-Python-function">
+<a class="anchor" href="#Full-Python-function" aria-hidden="true"><span class="octicon octicon-link"></span></a>Full Python function<a class="anchor-link" href="#Full-Python-function"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="c1"># To make things easier later, we're also importing numpy and pandas for</span>
+<span class="c1"># working with sample data.</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Swansea Property Price Predictor'</span><span class="p">)</span>
+
+<span class="nd">@st</span><span class="o">.</span><span class="n">cache</span><span class="p">(</span><span class="n">allow_output_mutation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">load_data</span><span class="p">():</span>
+    <span class="sd">"""</span>
+<span class="sd">    Loads the data</span>
+<span class="sd">    """</span>
+    <span class="kn">import</span> <span class="nn">gdown</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">'https://drive.google.com/uc?id=1OD2l7ynVzLlqY92gYiCx5xq32-D1wJMe'</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s1">'one1.pkl'</span>
+    <span class="n">gdown</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+
+    <span class="n">cda</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'one1.pkl'</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span><span class="k">as</span> <span class="n">f</span><span class="p">:</span> 
+        <span class="n">m2</span><span class="p">,</span> <span class="n">to2</span><span class="p">,</span> <span class="n">xsAll2</span><span class="p">,</span> <span class="n">yAll2</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">m2</span><span class="p">,</span> <span class="n">to2</span><span class="p">,</span> <span class="n">xsAll2</span><span class="p">,</span> <span class="n">yAll2</span>
+<span class="n">data_load_state</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">'Loading data...'</span><span class="p">)</span>
+<span class="n">m1</span><span class="p">,</span> <span class="n">to1</span><span class="p">,</span> <span class="n">xsAll1</span><span class="p">,</span> <span class="n">yAll1</span><span class="o">=</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">data_load_state</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">"Loaded data (using st.cache)"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">add_datepart</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="s2">"Helper function that adds columns relevant to a date in the column `field_name` of `df`."</span>
+    <span class="kn">import</span> <span class="nn">re</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    
+    <span class="k">def</span> <span class="nf">ifnone</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="s2">"`b` if `a` is None else `a`"</span>
+        <span class="k">return</span> <span class="n">b</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">a</span>
+    
+    <span class="k">def</span> <span class="nf">make_date</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">date_field</span><span class="p">):</span>
+        <span class="s2">"Make sure `df[date_field]` is of the right date type."</span>
+        
+        <span class="n">field_dtype</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">date_field</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field_dtype</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">DatetimeTZDtype</span><span class="p">):</span>
+            <span class="n">field_dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">field_dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">):</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">date_field</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">date_field</span><span class="p">],</span> <span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    
+    <span class="n">make_date</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span>
+    <span class="n">field</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">ifnone</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">'[Dd]ate$'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">field_name</span><span class="p">))</span>
+    <span class="n">attr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Year'</span><span class="p">,</span> <span class="s1">'Month'</span><span class="p">,</span> <span class="s1">'Week'</span><span class="p">,</span> <span class="s1">'Day'</span><span class="p">,</span> <span class="s1">'Dayofweek'</span><span class="p">,</span> <span class="s1">'Dayofyear'</span><span class="p">,</span> <span class="s1">'Is_month_end'</span><span class="p">,</span> <span class="s1">'Is_month_start'</span><span class="p">,</span>
+            <span class="s1">'Is_quarter_end'</span><span class="p">,</span> <span class="s1">'Is_quarter_start'</span><span class="p">,</span> <span class="s1">'Is_year_end'</span><span class="p">,</span> <span class="s1">'Is_year_start'</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">time</span><span class="p">:</span> <span class="n">attr</span> <span class="o">=</span> <span class="n">attr</span> <span class="o">+</span> <span class="p">[</span><span class="s1">'Hour'</span><span class="p">,</span> <span class="s1">'Minute'</span><span class="p">,</span> <span class="s1">'Second'</span><span class="p">]</span>
+    <span class="c1"># Pandas removed `dt.week` in v1.1.10</span>
+    <span class="n">week</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">isocalendar</span><span class="p">()</span><span class="o">.</span><span class="n">week</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="s1">'isocalendar'</span><span class="p">)</span> <span class="k">else</span> <span class="n">field</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">week</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">attr</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="s1">'Week'</span> <span class="k">else</span> <span class="n">week</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="o">~</span><span class="n">field</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">prefix</span> <span class="o">+</span> <span class="s1">'Elapsed'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span><span class="n">field</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span> <span class="o">//</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">9</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">drop</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+<span class="k">def</span> <span class="nf">get_predTodayNotExact</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">address</span><span class="p">,</span><span class="n">toTEMP</span><span class="p">,</span><span class="n">xs_final</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Given model m, address, initial pd of houses to, and adjusted pd xs_final</span>
+<span class="sd">    output is house price prediction</span>
+<span class="sd">    """</span>
+    <span class="kn">import</span> <span class="nn">copy</span>
+    <span class="c1"># convert to current date</span>
+    <span class="n">colsAll</span><span class="o">=</span><span class="n">xs_final</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">colsNoDate</span><span class="o">=</span><span class="p">[</span><span class="s1">'Type'</span><span class="p">,</span> <span class="s1">'Index of Multiple Deprivation'</span><span class="p">,</span> <span class="s1">'Latitude'</span><span class="p">,</span>
+                <span class="s1">'Average Income'</span><span class="p">,</span> <span class="s1">'Longitude'</span><span class="p">,</span> <span class="s1">'Postcode'</span><span class="p">,</span> <span class="s1">'Introduced'</span><span class="p">,</span> <span class="s1">'Address'</span><span class="p">,</span>
+           <span class="s1">'Altitude'</span><span class="p">]</span>
+    <span class="n">xsNoDate</span><span class="o">=</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">xs_final</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'Elapsed'</span><span class="p">,</span><span class="s1">'Year'</span><span class="p">]))</span>
+    
+    <span class="n">xsNoDate</span><span class="p">[</span><span class="s1">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">"today"</span><span class="p">)</span>
+    <span class="n">xsNoDate</span> <span class="o">=</span> <span class="n">add_datepart</span><span class="p">(</span><span class="n">xsNoDate</span><span class="p">,</span> <span class="s1">'Date'</span><span class="p">)</span>
+    <span class="n">xs_finalTEMP</span><span class="o">=</span><span class="n">xsNoDate</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">colsAll</span><span class="p">]</span>
+
+    <span class="c1"># each address has a unique number</span>
+    <span class="n">aa</span><span class="o">=</span><span class="n">toTEMP</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">'Address'</span><span class="p">]</span>
+    <span class="c1"># findwhich number is address give (take 1st if more than 1)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">ii</span><span class="o">=</span><span class="p">[</span><span class="n">ii</span> <span class="k">for</span> <span class="n">ii</span><span class="p">,</span><span class="n">aa1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span> <span class="k">if</span> <span class="n">aa1</span><span class="o">==</span> <span class="n">address</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># 1 address can have multiple sales so we need index in dataframes</span>
+        <span class="n">ii</span><span class="o">=</span><span class="n">toTEMP</span><span class="p">[</span><span class="n">toTEMP</span><span class="p">[</span><span class="s1">'Address'</span><span class="p">]</span><span class="o">==</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">preda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xs_finalTEMP</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ii</span><span class="p">:</span><span class="n">ii</span><span class="p">])</span> <span class="p">)</span><span class="o">/</span><span class="mi">1000</span> <span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ii</span><span class="p">])</span><span class="o">/</span><span class="mi">1000</span> <span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="n">typeAll</span><span class="o">=</span><span class="n">toTEMP</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">'Type'</span><span class="p">]</span>
+        <span class="n">typa</span><span class="o">=</span><span class="n">typeAll</span><span class="p">[</span><span class="n">xs_finalTEMP</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ii</span><span class="p">:</span><span class="n">ii</span><span class="p">,</span><span class="s1">'Type'</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">aa</span><span class="o">=</span><span class="n">toTEMP</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">'Address'</span><span class="p">]</span>
+        <span class="n">aaStreet</span><span class="o">=</span><span class="n">toTEMP</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">'Street'</span><span class="p">]</span>
+        <span class="n">ii</span><span class="o">=</span><span class="p">[</span><span class="n">ii</span> <span class="k">for</span> <span class="n">ii</span><span class="p">,</span><span class="n">aa1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">aaStreet</span><span class="p">)</span> <span class="k">if</span> <span class="n">aa1</span><span class="o">==</span> <span class="n">Street</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">xsTemp</span><span class="o">=</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span> <span class="n">xs_finalTEMP</span><span class="p">[</span><span class="n">xs_finalTEMP</span><span class="p">[</span><span class="s1">'Street'</span><span class="p">]</span><span class="o">==</span><span class="n">ii</span><span class="p">]</span> <span class="p">)</span>
+        <span class="n">xsTemp</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># find nearest house by houseno</span>
+        <span class="n">No</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xsTemp</span><span class="p">[</span><span class="s1">'HouseNo'</span><span class="p">])</span>
+
+        <span class="n">yo</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">No</span><span class="o">-</span><span class="n">HouseNo</span><span class="p">))</span>
+        <span class="n">yo1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">yo</span><span class="p">)</span>
+        <span class="c1"># get index of the nearest house</span>
+        <span class="n">yo</span><span class="o">=</span><span class="n">No</span><span class="p">[</span><span class="n">yo</span><span class="o">==</span><span class="n">yo1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  
+
+        <span class="n">ii</span><span class="o">=</span><span class="p">[</span><span class="n">ii</span> <span class="k">for</span> <span class="n">ii</span><span class="p">,</span><span class="n">aa1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">xsTemp</span><span class="o">.</span><span class="n">HouseNo</span><span class="p">)</span> <span class="k">if</span> <span class="n">aa1</span><span class="o">==</span> <span class="n">yo</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">xsTemp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ii</span><span class="p">:</span><span class="n">ii</span><span class="p">,</span><span class="s1">'HouseNo'</span><span class="p">]</span><span class="o">=</span><span class="n">HouseNo</span>
+        <span class="c1"># If want to change house type</span>
+        
+<span class="c1">#         xsTemp.loc[ii:ii,'Type']=2</span>
+<span class="c1">#         print(xsTemp.loc[ii:ii,'Type'])</span>
+<span class="c1">#         print(xsTemp.loc[ii:ii])</span>
+        
+        <span class="n">preda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xsTemp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ii</span><span class="p">:</span><span class="n">ii</span><span class="p">])</span> <span class="p">)</span><span class="o">/</span><span class="mi">1000</span> <span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">prev</span><span class="o">=</span><span class="mi">0</span>
+        
+        <span class="n">typeAll</span><span class="o">=</span><span class="n">toTEMP</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">'Type'</span><span class="p">]</span>
+        <span class="n">typa</span><span class="o">=</span><span class="n">typeAll</span><span class="p">[</span><span class="n">xsTemp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ii</span><span class="p">:</span><span class="n">ii</span><span class="p">,</span><span class="s1">'Type'</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+        
+        
+    <span class="k">return</span> <span class="n">preda</span><span class="p">,</span> <span class="n">prev</span><span class="p">,</span> <span class="n">typa</span>
+
+
+<span class="k">def</span> <span class="nf">doSelect</span><span class="p">(</span><span class="n">typee</span><span class="p">,</span><span class="n">option2</span><span class="p">,</span><span class="n">typeeOut</span><span class="p">,</span><span class="n">toTEMP</span><span class="p">):</span>
+        <span class="n">streetAll</span><span class="o">=</span><span class="n">toTEMP</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="n">typee</span><span class="p">]</span>
+        <span class="n">AdAll</span><span class="o">=</span><span class="n">toTEMP</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="n">typeeOut</span><span class="p">]</span>
+        <span class="c1"># this finds index of postcode for example SA1 0EA = 62</span>
+        <span class="n">indexPC1</span><span class="o">=</span><span class="p">[</span><span class="n">ita</span> <span class="k">for</span> <span class="n">ita</span><span class="p">,</span><span class="n">ij</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">streetAll</span><span class="p">)</span> <span class="k">if</span> <span class="n">ij</span><span class="o">==</span><span class="n">option2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># finds all indexes of addresses with given post code index </span>
+        <span class="n">indexAdds</span><span class="o">=</span><span class="p">[</span><span class="n">ita</span> <span class="k">for</span> <span class="n">ita</span><span class="p">,</span> <span class="n">ij</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">toTEMP</span><span class="p">[</span><span class="n">typee</span><span class="p">])</span> <span class="k">if</span> <span class="n">ij</span><span class="o">==</span><span class="n">indexPC1</span><span class="p">]</span>
+
+        <span class="c1"># Find address index numbers for those given above</span>
+        <span class="n">indexAddSel</span><span class="o">=</span><span class="n">toTEMP</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">indexAdds</span><span class="p">][</span><span class="n">typeeOut</span><span class="p">]</span>
+
+        <span class="c1"># Convert these to actual addresses</span>
+        <span class="n">AdSel</span><span class="o">=</span><span class="n">AdAll</span><span class="p">[</span><span class="n">indexAddSel</span><span class="p">]</span>
+        
+        <span class="c1"># unique values</span>
+        <span class="n">AdSel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">AdSel</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">AdSel</span>
+    
+
+<span class="n">pcodesSA</span><span class="o">=</span><span class="p">[</span><span class="s1">'SA1'</span><span class="p">,</span> <span class="s1">'SA2'</span><span class="p">,</span> <span class="s1">'SA3'</span><span class="p">,</span> <span class="s1">'SA4'</span><span class="p">,</span> <span class="s1">'SA5'</span><span class="p">,</span> <span class="s1">'SA6'</span><span class="p">,</span> <span class="s1">'SA7'</span><span class="p">,</span> <span class="s1">'SA8'</span><span class="p">,</span>          
+          <span class="s1">'SA9'</span><span class="p">,</span> <span class="s1">'SA10'</span> <span class="p">,</span><span class="s1">'SA11'</span><span class="p">,</span> <span class="s1">'SA12'</span><span class="p">,</span> <span class="s1">'SA13'</span><span class="p">,</span> <span class="s1">'SA14'</span><span class="p">,</span><span class="s1">'SA15'</span><span class="p">,</span><span class="s1">'SA18'</span><span class="p">]</span>
+
+<span class="n">choice</span><span class="o">=</span><span class="p">[</span><span class="s1">'Post Code'</span><span class="p">,</span><span class="s1">'Region'</span><span class="p">,</span> <span class="s1">'Street'</span><span class="p">]</span>
+
+<span class="n">to</span><span class="o">=</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">to1</span><span class="p">)</span>
+<span class="n">m</span><span class="o">=</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span>
+<span class="n">xsAll</span><span class="o">=</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">xsAll1</span><span class="p">)</span>
+<span class="n">yAll</span><span class="o">=</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">yAll1</span><span class="p">)</span>
+<span class="c1"># These are the list of all addresses etc by actual name</span>
+<span class="n">AdAll</span><span class="o">=</span><span class="p">(</span><span class="n">to</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">'Address'</span><span class="p">])</span>
+<span class="n">pcAll</span><span class="o">=</span><span class="p">(</span><span class="n">to</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">'Postcode'</span><span class="p">])</span>
+<span class="n">regionAll</span><span class="o">=</span><span class="p">(</span><span class="n">to</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">'Region'</span><span class="p">])</span>
+<span class="n">streetAll</span><span class="o">=</span><span class="p">(</span><span class="n">to</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">'Street'</span><span class="p">])</span>
+
+<span class="c1"># An optionbox- Select How search</span>
+<span class="n">optionSELECT</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span>
+    <span class="s1">'Select how to search'</span><span class="p">,</span>
+     <span class="n">choice</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">optionSELECT</span><span class="o">==</span><span class="s1">'Post Code'</span><span class="p">:</span>
+    <span class="c1"># An optionbox- Select Postcode Start e.g. SA1</span>
+    <span class="n">option</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span>
+        <span class="s1">'Select Area'</span><span class="p">,</span>
+         <span class="n">pcodesSA</span><span class="p">)</span>
+
+
+    <span class="c1"># Select Postcode All</span>
+
+    <span class="c1"># This finds a set of postcodes given by optionbox</span>
+    <span class="n">indexPCSA</span><span class="o">=</span><span class="p">[</span><span class="n">ij</span> <span class="k">for</span> <span class="n">ij</span> <span class="ow">in</span> <span class="n">pcAll</span> <span class="k">if</span> <span class="n">ij</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">option</span><span class="p">]</span>
+
+    <span class="c1"># optionbox to select particular postcode </span>
+    <span class="c1"># Outcome e.g. SA1 0EA</span>
+    <span class="n">option2</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span>
+        <span class="s1">'Select Postcode'</span><span class="p">,</span>
+        <span class="n">indexPCSA</span><span class="p">)</span>
+
+    <span class="n">AdSel</span> <span class="o">=</span> <span class="n">doSelect</span><span class="p">(</span><span class="n">typee</span><span class="o">=</span><span class="s1">'Postcode'</span><span class="p">,</span><span class="n">option2</span><span class="o">=</span><span class="n">option2</span><span class="p">,</span><span class="n">typeeOut</span><span class="o">=</span><span class="s1">'Address'</span><span class="p">,</span><span class="n">toTEMP</span><span class="o">=</span><span class="p">(</span><span class="n">to</span><span class="p">))</span>
+    
+
+<span class="k">elif</span> <span class="n">optionSELECT</span><span class="o">==</span><span class="s1">'Region'</span><span class="p">:</span>
+
+    
+    <span class="n">option2</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span>
+         <span class="s1">'Select Region'</span><span class="p">,</span>
+         <span class="n">regionAll</span><span class="p">)</span>
+    
+    <span class="n">StreetSel</span> <span class="o">=</span> <span class="n">doSelect</span><span class="p">(</span><span class="n">typee</span><span class="o">=</span><span class="s1">'Region'</span><span class="p">,</span><span class="n">option2</span><span class="o">=</span><span class="n">option2</span><span class="p">,</span><span class="n">typeeOut</span><span class="o">=</span><span class="s1">'Street'</span><span class="p">,</span><span class="n">toTEMP</span><span class="o">=</span><span class="p">(</span><span class="n">to</span><span class="p">))</span>
+       
+        
+    <span class="n">option3</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span>
+         <span class="s1">'Select Street'</span><span class="p">,</span>
+         <span class="n">StreetSel</span><span class="p">)</span>
+    
+    <span class="n">AdSel</span> <span class="o">=</span> <span class="n">doSelect</span><span class="p">(</span><span class="n">typee</span><span class="o">=</span><span class="s1">'Street'</span><span class="p">,</span><span class="n">option2</span><span class="o">=</span><span class="n">option3</span><span class="p">,</span><span class="n">typeeOut</span><span class="o">=</span><span class="s1">'Address'</span><span class="p">,</span><span class="n">toTEMP</span><span class="o">=</span><span class="p">(</span><span class="n">to</span><span class="p">))</span>
+        
+    
+
+<span class="k">elif</span> <span class="n">optionSELECT</span><span class="o">==</span><span class="s1">'Street'</span><span class="p">:</span>
+
+    
+    <span class="n">option2</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span>
+         <span class="s1">'Select Street'</span><span class="p">,</span>
+         <span class="n">streetAll</span><span class="p">)</span>
+    
+    <span class="n">AdSel</span> <span class="o">=</span> <span class="n">doSelect</span><span class="p">(</span><span class="n">typee</span><span class="o">=</span><span class="s1">'Street'</span><span class="p">,</span><span class="n">option2</span><span class="o">=</span><span class="n">option2</span><span class="p">,</span><span class="n">typeeOut</span><span class="o">=</span><span class="s1">'Address'</span><span class="p">,</span><span class="n">toTEMP</span><span class="o">=</span><span class="p">(</span><span class="n">to</span><span class="p">))</span>
+    
+    
+
+<span class="n">address</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span>
+    <span class="s1">'Select Address'</span><span class="p">,</span>
+    <span class="n">AdSel</span><span class="p">)</span>
+
+<span class="n">Pri1</span><span class="p">,</span> <span class="n">Pri2</span><span class="p">,</span> <span class="n">typa</span><span class="o">=</span><span class="n">get_predTodayNotExact</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">address</span><span class="p">,(</span><span class="n">to</span><span class="p">),(</span><span class="n">xsAll</span><span class="p">),(</span><span class="n">yAll</span><span class="p">))</span>
+
+<span class="c1">#tell user what they selected</span>
+<span class="s1">'You selected: '</span><span class="p">,</span> <span class="n">option2</span><span class="p">,</span> <span class="s1">'and'</span><span class="p">,</span> <span class="n">address</span>
+<span class="s1">'Property type is '</span><span class="p">,</span><span class="n">typa</span>
+
+<span class="n">stra</span> <span class="o">=</span> <span class="s1">'The predicted price is: '</span>
+<span class="n">st</span><span class="o">.</span><span class="n">subheader</span><span class="p">(</span><span class="n">stra</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="s1">'£'</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">Pri1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">'k'</span><span class="p">)</span>
 </pre></div>
 
     </div>
