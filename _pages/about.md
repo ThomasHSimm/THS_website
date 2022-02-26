@@ -13,7 +13,10 @@ permalink: /about/
 
 ### [Some Computer Programming projects](https://thomashsimm.wordpress.com/computer-programming/)
 
-### [Swansea house prices- regression model ](https://thomashsimm.com/2021/08/04/Swansea-House-Price-Report.html)
+### [Swansea house prices- regression model](https://thomashsimm.com/streamlit/randomforrests/houseprices/python/2022/02/23/SwanseaHousePriceApp.html)
+#### 1.  [Part 1- Census and location data](https://thomashsimm.com/2021/08/04/Swansea-House-Price-Report.html)
+#### 2.  [Part 2- Property sale data](https://thomashsimm.com/jupyter/python/randomforests/tabulardata/sklearn/2022/02/17/SwanseaHousePrices_Part2.html)
+#### 3.  [Part 3- Creating a property prediction App](https://thomashsimm.com/streamlit/randomforrests/houseprices/python/2022/02/23/SwanseaHousePriceApp.html)
 
 ### [Building a NN Image Classifier App on the web](https://thomashsimm.com/fastai/jupyter/binder/voila/mybinder/thomashsimm/2021/10/10/ImageClassifier.html)
 
