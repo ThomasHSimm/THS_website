@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Golf Swing Part III- Using pre-trained models and FiftyOne to find golf positions | Thomas Simm</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Golf Swing Part III- Using pre-trained models and FiftyOne to find golf positions" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Using Python and Coco to identify parts of the body and club during a golf swing" />
+<meta property="og:description" content="Using Python and Coco to identify parts of the body and club during a golf swing" />
+<link rel="canonical" href="https://thomashsimm.com/neural%20networks/fiftyone/golf%20swing/python/2022/02/27/GolfSwingPart3.html" />
+<meta property="og:url" content="https://thomashsimm.com/neural%20networks/fiftyone/golf%20swing/python/2022/02/27/GolfSwingPart3.html" />
+<meta property="og:site_name" content="Thomas Simm" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-02-27T00:00:00-06:00" />
+<script type="application/ld+json">
+{"datePublished":"2022-02-27T00:00:00-06:00","url":"https://thomashsimm.com/neural%20networks/fiftyone/golf%20swing/python/2022/02/27/GolfSwingPart3.html","@type":"BlogPosting","headline":"Golf Swing Part III- Using pre-trained models and FiftyOne to find golf positions","dateModified":"2022-02-27T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://thomashsimm.com/neural%20networks/fiftyone/golf%20swing/python/2022/02/27/GolfSwingPart3.html"},"description":"Using Python and Coco to identify parts of the body and club during a golf swing","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://thomashsimm.com/feed.xml" title="Thomas Simm" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Thomas Simm</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Golf Swing Part III- Using pre-trained models and FiftyOne to find golf positions</h1><p class="page-description">Using Python and Coco to identify parts of the body and club during a golf swing</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-02-27T00:00:00-06:00" itemprop="datePublished">
+        Feb 27, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      2 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#Neural networks">Neural networks</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#FiftyOne">FiftyOne</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Golf Swing">Golf Swing</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Python">Python</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ThomasHSimm/THS_website/tree/master/_notebooks/2022-02-27-GolfSwingPart3.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ThomasHSimm/THS_website/master?filepath=_notebooks%2F2022-02-27-GolfSwingPart3.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ThomasHSimm/THS_website/blob/master/_notebooks/2022-02-27-GolfSwingPart3.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Overview">Overview </a></li>
+<li class="toc-entry toc-h2"><a href="#Code">Code </a></li>
+<li class="toc-entry toc-h2"><a href="#Installs-and-imports">Installs and imports </a></li>
+<li class="toc-entry toc-h2"><a href="#Upoad-some-images-to-the-workspace">Upoad some images to the workspace </a></li>
+<li class="toc-entry toc-h2"><a href="#Load-the-trained-model">Load the trained model </a></li>
+<li class="toc-entry toc-h2"><a href="#Extract-data-from-the-model">Extract data from the model </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-02-27-GolfSwingPart3.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/header2.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Overview">
+<a class="anchor" href="#Overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview<a class="anchor-link" href="#Overview"> </a>
+</h2>
+<p>In a previous part <a href="https://thomashsimm.com/jupyter/2021/12/01/GolfPos1FastAI.html">Part 1</a> a neural network model was used to find positions on the body during a golf swing. The model was not particularly succesful, perhaps due to the lack of data (specific to the golf swing) that was used to train the model on.</p>
+<p>This problem can be got around by using a model that has been pre-trained on human gestures. Several pre-trained models can be found here <a href="https://voxel51.com/docs/fiftyone/user_guide/model_zoo/models.html">Pre-trained models</a>. I tried a few and found the chose the model <code>keypoint-rcnn-resnet50-fpn-coco-torch</code> worked well with this data. <a href="https://voxel51.com/docs/fiftyone/user_guide/model_zoo/models.html#keypoint-rcnn-resnet50-fpn-coco-torch">Link to model</a> and <a href="https://arxiv.org/abs/1603.00502">Paper of model</a>.</p>
+<p>More information on <a href="https://voxel51.com/">fiftyOne</a>.</p>
+<p>The input to the model is taken from <a href="https://thomashsimm.com/neural%20networks/pytourch/golf%20swing/python/2022/02/26/GolfSwingPart2.html">Part 2</a> which separated a golf video into a series of images of the swing.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Code">
+<a class="anchor" href="#Code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code<a class="anchor-link" href="#Code"> </a>
+</h2>
+<p>The code can be run on google colab here <a href="https://colab.research.google.com/drive/17Bb8n9D9_4aAuJlCf2yOQE08L7vjUtBm?usp=sharing">COCO50_1</a> (works best on google chrome)</p>
+<h2 id="Installs-and-imports">
+<a class="anchor" href="#Installs-and-imports" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installs and imports<a class="anchor-link" href="#Installs-and-imports"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip uninstall opencv_python_headless
+
+<span class="o">!</span>pip install opencv-python-headless<span class="o">==</span><span class="m">4</span>.5.4.60
+
+<span class="o">!</span>pip install fiftyone
+
+<span class="kn">import</span> <span class="nn">fiftyone</span> <span class="k">as</span> <span class="nn">fo</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Upoad-some-images-to-the-workspace">
+<a class="anchor" href="#Upoad-some-images-to-the-workspace" aria-hidden="true"><span class="octicon octicon-link"></span></a>Upoad some images to the workspace<a class="anchor-link" href="#Upoad-some-images-to-the-workspace"> </a>
+</h2>
+<p>Untar and create a dataset object from them</p>
+<p>And look at them</p>
+<p>The image files can be found here <a href="https://drive.google.com/file/d/1FMOP3Lm-0Ed1SmuPYdcm6emUu-Jhv2CW/view?usp=sharing">GC2.tgz</a></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">tarfile</span>
+<span class="n">my_tar</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'/content/GC2.tgz'</span><span class="p">)</span>
+<span class="n">my_tar</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s1">'/content/my_folder'</span><span class="p">)</span> <span class="c1"># specify which folder to extract to</span>
+<span class="n">my_tar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">fiftyone</span> <span class="k">as</span> <span class="nn">fo</span>
+<span class="kn">import</span> <span class="nn">fiftyone.zoo</span> <span class="k">as</span> <span class="nn">foz</span>
+
+<span class="kn">import</span> <span class="nn">fiftyone</span> <span class="k">as</span> <span class="nn">fo</span>
+
+<span class="n">name</span> <span class="o">=</span> <span class="s2">"my_folder"</span>
+<span class="n">dataset_dir</span> <span class="o">=</span> <span class="s2">"/content"</span>
+
+<span class="c1"># Create the dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">fo</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_dir</span><span class="p">(</span>
+    <span class="n">dataset_dir</span><span class="o">=</span><span class="n">dataset_dir</span><span class="p">,</span>
+    <span class="n">dataset_type</span><span class="o">=</span><span class="n">fo</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">ImageDirectory</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">session</span> <span class="o">=</span> <span class="n">fo</span><span class="o">.</span><span class="n">launch_app</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/fiftyOneScreen.png" alt=""></p>
+<p>This screen is interative and allows us to look at the images</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Load-the-trained-model">
+<a class="anchor" href="#Load-the-trained-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>Load the trained model<a class="anchor-link" href="#Load-the-trained-model"> </a>
+</h2>
+<p>Apply the model to the dataset</p>
+<p>View the results</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">foz</span><span class="o">.</span><span class="n">load_zoo_model</span><span class="p">(</span><span class="s2">"keypoint-rcnn-resnet50-fpn-coco-torch"</span><span class="p">)</span>
+
+<span class="c1"># label_types=["classification", "classifications", "detections", "instances", "segmentations", "keypoints", "polylines", "polygons", "scalar"],</span>
+
+<span class="n">dataset</span><span class="o">.</span><span class="n">apply_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">label_field</span><span class="o">=</span><span class="s2">"predictions"</span><span class="p">,</span><span class="n">label_types</span><span class="o">=</span><span class="s1">'predictions_keypoints'</span><span class="p">)</span>
+
+<span class="n">session</span> <span class="o">=</span> <span class="n">fo</span><span class="o">.</span><span class="n">launch_app</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/foo2.png" alt="">
+
+</p>
+<center class="youtube-iframe-wrapper">
+    <iframe width="730" height="315" src="https://www.youtube.com/embed/dkxtOBWD7Vw" frameborder="0" allowfullscreen=""></iframe>
+</center>
+
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Extract-data-from-the-model">
+<a class="anchor" href="#Extract-data-from-the-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>Extract data from the model<a class="anchor-link" href="#Extract-data-from-the-model"> </a>
+</h2>
+<p>We might want to use the data from the model outside of fiftyOne.</p>
+<p>In the following I extract the data so that it can be plotted.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plotPredOne</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+  <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+  <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+  <span class="kn">import</span> <span class="nn">matplotlib.image</span> <span class="k">as</span> <span class="nn">mpimg</span>
+
+  <span class="n">img</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">'filepath'</span><span class="p">])</span>
+
+  <span class="c1">#need to take account of more than one person in image</span>
+  <span class="n">points1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">'predictions_keypoints'</span><span class="p">][</span><span class="s1">'keypoints'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">'points'</span><span class="p">])</span>
+  <span class="n">adjPts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">img</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">box1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">'predictions_detections'</span><span class="p">][</span><span class="s1">'detections'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">'bounding_box'</span><span class="p">])</span> 
+  <span class="n">box1</span><span class="o">=</span><span class="n">box1</span><span class="o">*</span><span class="n">adjPts</span>
+  <span class="c1"># Bboxes are in [top-left-x, top-left-y, width, height] format</span>
+  <span class="n">box2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> 
+      <span class="p">[</span><span class="n">box1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">box1</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+      <span class="p">[</span><span class="n">box1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span><span class="n">box1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">,</span><span class="n">box1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">],</span>
+      <span class="p">[</span><span class="n">box1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span><span class="n">box1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">,</span><span class="n">box1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span><span class="n">box1</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span> <span class="p">,</span>
+      <span class="p">[</span><span class="n">box1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="p">,</span><span class="n">box1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span><span class="n">box1</span><span class="p">[</span><span class="mi">3</span><span class="p">]],</span>
+      <span class="p">[</span><span class="n">box1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">box1</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+      <span class="p">])</span>
+ 
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">points1</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">adjPts</span><span class="p">,</span><span class="n">points1</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">adjPts</span><span class="p">,</span> <span class="s1">'+k'</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">box2</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">box2</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">'--og'</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1">#back of body</span>
+  <span class="n">v</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">16</span><span class="p">]</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">points1</span><span class="p">[</span><span class="n">v</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">adjPts</span><span class="p">,</span><span class="n">points1</span><span class="p">[</span><span class="n">v</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">adjPts</span><span class="p">,</span> <span class="s1">'-k&lt;'</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+  <span class="c1">#front of body</span>
+  <span class="n">v</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">15</span><span class="p">]</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">points1</span><span class="p">[</span><span class="n">v</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">adjPts</span><span class="p">,</span><span class="n">points1</span><span class="p">[</span><span class="n">v</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">adjPts</span><span class="p">,</span> <span class="s1">'-w&gt;'</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+  <span class="n">vects</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span><span class="c1">#shoulders also 4?</span>
+         <span class="p">[</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">],</span> <span class="c1">#hips</span>
+         <span class="p">[</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">],</span> <span class="c1">#knees</span>
+         <span class="p">[</span><span class="mi">15</span><span class="p">,</span><span class="mi">16</span><span class="p">],</span><span class="c1">#heels</span>
+         <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span><span class="c1">#elbows</span>
+         <span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span><span class="c1">#hands</span>
+         <span class="p">])</span> 
+  <span class="n">mak</span><span class="o">=</span><span class="s1">'gcyrmb'</span>
+  <span class="k">for</span> <span class="n">iv</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vects</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">points1</span><span class="p">[</span><span class="n">v</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">adjPts</span><span class="p">,</span><span class="n">points1</span><span class="p">[</span><span class="n">v</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">adjPts</span><span class="p">,</span> <span class="s1">'-'</span><span class="o">+</span><span class="n">mak</span><span class="p">[</span><span class="n">iv</span><span class="p">],</span><span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">iii</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
+  
+  <span class="n">plotPredOne</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/foo3.png" alt=""></p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ThomasHSimm/THS_website"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/neural%20networks/fiftyone/golf%20swing/python/2022/02/27/GolfSwingPart3.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Thomas H Simm</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/thomashsimm" target="_blank" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/thomashsimm" target="_blank" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
