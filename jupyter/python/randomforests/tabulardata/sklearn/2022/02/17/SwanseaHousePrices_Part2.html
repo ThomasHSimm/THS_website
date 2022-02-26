@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Swansea House Prices- Part 2 | Thomas Simm</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Swansea House Prices- Part 2" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Using machine learning to predict property prices- using property sales" />
+<meta property="og:description" content="Using machine learning to predict property prices- using property sales" />
+<link rel="canonical" href="https://thomashsimm.com/jupyter/python/randomforests/tabulardata/sklearn/2022/02/17/SwanseaHousePrices_Part2.html" />
+<meta property="og:url" content="https://thomashsimm.com/jupyter/python/randomforests/tabulardata/sklearn/2022/02/17/SwanseaHousePrices_Part2.html" />
+<meta property="og:site_name" content="Thomas Simm" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-02-17T00:00:00-06:00" />
+<script type="application/ld+json">
+{"datePublished":"2022-02-17T00:00:00-06:00","url":"https://thomashsimm.com/jupyter/python/randomforests/tabulardata/sklearn/2022/02/17/SwanseaHousePrices_Part2.html","@type":"BlogPosting","headline":"Swansea House Prices- Part 2","dateModified":"2022-02-17T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://thomashsimm.com/jupyter/python/randomforests/tabulardata/sklearn/2022/02/17/SwanseaHousePrices_Part2.html"},"description":"Using machine learning to predict property prices- using property sales","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://thomashsimm.com/feed.xml" title="Thomas Simm" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Thomas Simm</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Swansea House Prices- Part 2</h1><p class="page-description">Using machine learning to predict property prices- using property sales</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-02-17T00:00:00-06:00" itemprop="datePublished">
+        Feb 17, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      9 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#jupyter">jupyter</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#python">python</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#randomforests">randomforests</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#tabulardata">tabulardata</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#sklearn">sklearn</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ThomasHSimm/THS_website/tree/master/_notebooks/2022-02-17-SwanseaHousePrices_Part2.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ThomasHSimm/THS_website/master?filepath=_notebooks%2F2022-02-17-SwanseaHousePrices_Part2.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ThomasHSimm/THS_website/blob/master/_notebooks/2022-02-17-SwanseaHousePrices_Part2.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Overview">Overview </a></li>
+<li class="toc-entry toc-h2"><a href="#Import-modules-and-prepare-the-data">Import modules and prepare the data </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Some-imports">Some imports </a></li>
+<li class="toc-entry toc-h3"><a href="#Download-the-data">Download the data </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#'A'-Property-Sales-Data">&#39;A&#39; Property Sales Data </a></li>
+<li class="toc-entry toc-h4"><a href="#'B'-The-PostCode-data">&#39;B&#39; The PostCode data </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#Merge-the-two-data-frames">Merge the two data frames </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Modify-data-ready-for-model">Modify data ready for model </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Add-date-details">Add date details </a></li>
+<li class="toc-entry toc-h3"><a href="#Seperate-details-of-address-out">Seperate details of address out </a></li>
+<li class="toc-entry toc-h3"><a href="#Create-train-and-validation-sets">Create train and validation sets </a></li>
+<li class="toc-entry toc-h3"><a href="#Some-functions-to-fit-or-get-results-of-fit">Some functions to fit or get results of fit </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Fit-the-model-and-optimise">Fit the model and optimise </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Look-at-which-columns-are-important">Look at which columns are important </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Keep-ones-with-most-importance">Keep ones with most importance </a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Save-the-results">Save the results </a></li>
+<li class="toc-entry toc-h2"><a href="#Get-the-Predictions">Get the Predictions </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#First-need-a-way-to-convert-sale-date-to-today's-date">First need a way to convert sale date to today&#39;s date </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Summary">Summary </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-02-17-SwanseaHousePrices_Part2.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/header2.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Overview">
+<a class="anchor" href="#Overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview<a class="anchor-link" href="#Overview"> </a>
+</h2>
+<p>In part 1 (<a href="https://thomashsimm.com/2021/08/04/Swansea-House-Price-Report.html">https://thomashsimm.com/2021/08/04/Swansea-House-Price-Report.html</a>) house price predictions were done using Census regions and information about the locations.</p>
+<p>Whereas, in this part the main focus is on using property sales data to obtain price predictions.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Import-modules-and-prepare-the-data">
+<a class="anchor" href="#Import-modules-and-prepare-the-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Import modules and prepare the data<a class="anchor-link" href="#Import-modules-and-prepare-the-data"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Some-imports">
+<a class="anchor" href="#Some-imports" aria-hidden="true"><span class="octicon octicon-link"></span></a>Some imports<a class="anchor-link" href="#Some-imports"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">wget</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">fastbook</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">kaggle</span> <span class="kn">import</span> <span class="n">api</span>
+<span class="kn">from</span> <span class="nn">pandas.api.types</span> <span class="kn">import</span> <span class="n">is_string_dtype</span><span class="p">,</span> <span class="n">is_numeric_dtype</span><span class="p">,</span> <span class="n">is_categorical_dtype</span>
+<span class="kn">from</span> <span class="nn">fastai.tabular.all</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="kn">from</span> <span class="nn">dtreeviz.trees</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display_svg</span><span class="p">,</span> <span class="n">SVG</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_rows</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_columns</span> <span class="o">=</span> <span class="mi">8</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Create a local path</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">URLs</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="s1">'SwansProp'</span><span class="p">)</span>
+<span class="n">Path</span><span class="o">.</span><span class="n">BASE_PATH</span> <span class="o">=</span> <span class="n">path</span>
+<span class="n">path</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Path('.')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Download-the-data">
+<a class="anchor" href="#Download-the-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Download the data<a class="anchor-link" href="#Download-the-data"> </a>
+</h3>
+<p>A) Get the property sales from <a href="https://www.doogal.co.uk/PropertySalesCSV.ashx?area=">https://www.doogal.co.uk/PropertySalesCSV.ashx?area=</a></p>
+<p>B) And then the postcode details from <a href="https://www.doogal.co.uk/UKPostcodesCSV.ashx?Search=SA">https://www.doogal.co.uk/UKPostcodesCSV.ashx?Search=SA</a> for</p>
+<ul>
+<li>lattitude and longitude </li>
+<li>Census data and related data<ul>
+<li>Avg income</li>
+<li>Deprivation index</li>
+<li>etc</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Unique postcode starts
+SA1 
+SA2 
+SA3 
+SA4 
+SA5 
+SA6 
+SA7 
+SA8 
+SA9 
+SA10
+SA11
+SA12
+SA13
+SA80
+SA99</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">'data'</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">pcodesSA</span><span class="o">=</span><span class="p">[</span><span class="s1">'SA1'</span><span class="p">,</span> <span class="s1">'SA2'</span><span class="p">,</span> <span class="s1">'SA3'</span><span class="p">,</span> <span class="s1">'SA4'</span><span class="p">,</span> <span class="s1">'SA5'</span><span class="p">,</span> <span class="s1">'SA6'</span><span class="p">,</span> <span class="s1">'SA7'</span><span class="p">,</span> <span class="s1">'SA8'</span><span class="p">,</span>
+          <span class="s1">'SA9'</span><span class="p">,</span> <span class="s1">'SA10'</span> <span class="p">,</span><span class="s1">'SA11'</span><span class="p">,</span> <span class="s1">'SA12'</span><span class="p">,</span> <span class="s1">'SA13'</span><span class="p">,</span> <span class="s1">'SA14'</span><span class="p">,</span><span class="s1">'SA15'</span><span class="p">,</span><span class="s1">'SA18'</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="'A'-Property-Sales-Data">
+<a class="anchor" href="#'A'-Property-Sales-Data" aria-hidden="true"><span class="octicon octicon-link"></span></a>'A' Property Sales Data<a class="anchor-link" href="#'A'-Property-Sales-Data"> </a>
+</h4>
+<p>Download the data</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span><span class="o">=</span><span class="s1">'https://www.doogal.co.uk/PropertySalesCSV.ashx?area='</span>
+
+
+<span class="k">for</span> <span class="n">pc</span> <span class="ow">in</span> <span class="n">pcodesSA</span><span class="p">:</span>
+    <span class="n">patha</span><span class="o">=</span><span class="n">path</span><span class="o">/</span><span class="s1">'</span><span class="si">{}</span><span class="s1">.csv'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pc</span><span class="p">)</span>
+    <span class="n">wget</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="o">+</span><span class="n">pc</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">patha</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>100% [............................................................................] 935424 / 935424</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Create a dataframe from the downloaded csv files</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">pc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pcodesSA</span><span class="p">):</span>
+    <span class="n">patha</span><span class="o">=</span><span class="n">path</span><span class="o">/</span><span class="s1">'</span><span class="si">{}</span><span class="s1">.csv'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pc</span><span class="p">)</span>
+    <span class="n">dfTemp</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">patha</span><span class="p">))</span>
+    
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">df</span><span class="o">=</span><span class="n">dfTemp</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dfTemp</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0
+19432
+35015
+47639
+67896
+79210
+92148
+99680
+104480
+109669
+122570
+136404
+147937
+155697
+169021
+183674
+195094
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Address</th>
+      <th>Postcode</th>
+      <th>Price</th>
+      <th>Type</th>
+      <th>Ownership</th>
+      <th>NewBuild</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2021-10-22</td>
+      <td>60 Danygraig Road, Port Tennant</td>
+      <td>SA1 8LZ</td>
+      <td>192000</td>
+      <td>Terraced</td>
+      <td>Freehold</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2021-10-01</td>
+      <td>2 Camona Drive, Maritime Quarter</td>
+      <td>SA1 1YJ</td>
+      <td>179950</td>
+      <td>Flat</td>
+      <td>Leasehold</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2021-09-24</td>
+      <td>36 Balaclava Street, St Thomas</td>
+      <td>SA1 8BR</td>
+      <td>140000</td>
+      <td>Terraced</td>
+      <td>Freehold</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021-09-21</td>
+      <td>7 Abernethy Square, Maritime Quarter</td>
+      <td>SA1 1UH</td>
+      <td>133000</td>
+      <td>Flat</td>
+      <td>Leasehold</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2021-09-17</td>
+      <td>6 Brynffordd, Townhill</td>
+      <td>SA1 6RA</td>
+      <td>176000</td>
+      <td>Semi-detached</td>
+      <td>Freehold</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">copy</span>
+<span class="n">dfOrig</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="'B'-The-PostCode-data">
+<a class="anchor" href="#'B'-The-PostCode-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>'B' The PostCode data<a class="anchor-link" href="#'B'-The-PostCode-data"> </a>
+</h4>
+<p>Dwonload the data</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span><span class="o">=</span><span class="s2">"https://www.doogal.co.uk/UKPostcodesCSV.ashx?Search=SA"</span>
+<span class="n">patha</span> <span class="o">=</span> <span class="n">path</span><span class="o">/</span><span class="s1">'SA.csv'</span>
+<span class="n">wget</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">patha</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>-1 / unknown</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'C:\\Users\\44781\\.fastai\\archive\\SwansProp\\SA (1).csv'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://www.doogal.co.uk/PostcodeCsvFields.php">https://www.doogal.co.uk/PostcodeCsvFields.php</a></p>
+<ol>
+<li>Latitude</li>
+<li>Longitude</li>
+<li>Introduced</li>
+<li>Rural/urban</li>
+<li>Altitude</li>
+<li>Index of Multiple Deprivation</li>
+<li>Average income</li>
+</ol>
+<p>['Latitude','Longitude','Introduced','Rural/urban',''Altitude','Index of Multiple Deprivation','Average income']</p>
+<p>Create a dataFrame from the data</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfCensus</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">patha</span><span class="p">),</span><span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s2">"Postcode"</span><span class="p">,</span><span class="s2">"Ward Code"</span><span class="p">,</span><span class="s2">"District Code"</span><span class="p">,</span><span class="s1">'Latitude'</span><span class="p">,</span><span class="s1">'Longitude'</span><span class="p">,</span><span class="s1">'Introduced'</span><span class="p">,</span><span class="s1">'Rural/urban'</span><span class="p">,</span><span class="s1">'Altitude'</span><span class="p">,</span><span class="s1">'Index of Multiple Deprivation'</span><span class="p">,</span><span class="s1">'Average Income'</span><span class="p">])</span>
+<span class="n">dfCensus</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Postcode</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>District Code</th>
+      <th>...</th>
+      <th>Rural/urban</th>
+      <th>Altitude</th>
+      <th>Index of Multiple Deprivation</th>
+      <th>Average Income</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SA1 1AA</td>
+      <td>51.647984</td>
+      <td>-3.923586</td>
+      <td>W06000011</td>
+      <td>...</td>
+      <td>Urban city and town</td>
+      <td>16.0</td>
+      <td>355</td>
+      <td>29200.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SA1 1AB</td>
+      <td>51.618878</td>
+      <td>-3.939834</td>
+      <td>W06000011</td>
+      <td>...</td>
+      <td>Urban city and town</td>
+      <td>10.0</td>
+      <td>1105</td>
+      <td>28600.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SA1 1AD</td>
+      <td>51.618878</td>
+      <td>-3.939834</td>
+      <td>W06000011</td>
+      <td>...</td>
+      <td>Urban city and town</td>
+      <td>10.0</td>
+      <td>1105</td>
+      <td>28600.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SA1 1AE</td>
+      <td>51.618878</td>
+      <td>-3.939834</td>
+      <td>W06000011</td>
+      <td>...</td>
+      <td>Urban city and town</td>
+      <td>10.0</td>
+      <td>1105</td>
+      <td>28600.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SA1 1AF</td>
+      <td>51.619766</td>
+      <td>-3.939424</td>
+      <td>W06000011</td>
+      <td>...</td>
+      <td>Urban city and town</td>
+      <td>13.0</td>
+      <td>36</td>
+      <td>28600.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>29399</th>
+      <td>SA99 1ZU</td>
+      <td>51.669997</td>
+      <td>-3.945445</td>
+      <td>W06000011</td>
+      <td>...</td>
+      <td>Urban city and town</td>
+      <td>132.0</td>
+      <td>1230</td>
+      <td>30500.0</td>
+    </tr>
+    <tr>
+      <th>29400</th>
+      <td>SA99 1ZW</td>
+      <td>51.669997</td>
+      <td>-3.945445</td>
+      <td>W06000011</td>
+      <td>...</td>
+      <td>Urban city and town</td>
+      <td>132.0</td>
+      <td>1230</td>
+      <td>30500.0</td>
+    </tr>
+    <tr>
+      <th>29401</th>
+      <td>SA99 1ZX</td>
+      <td>51.669997</td>
+      <td>-3.945445</td>
+      <td>W06000011</td>
+      <td>...</td>
+      <td>Urban city and town</td>
+      <td>132.0</td>
+      <td>1230</td>
+      <td>30500.0</td>
+    </tr>
+    <tr>
+      <th>29402</th>
+      <td>SA99 1ZY</td>
+      <td>51.669997</td>
+      <td>-3.945445</td>
+      <td>W06000011</td>
+      <td>...</td>
+      <td>Urban city and town</td>
+      <td>132.0</td>
+      <td>1230</td>
+      <td>30500.0</td>
+    </tr>
+    <tr>
+      <th>29403</th>
+      <td>SA99 1ZZ</td>
+      <td>51.669997</td>
+      <td>-3.945445</td>
+      <td>W06000011</td>
+      <td>...</td>
+      <td>Urban city and town</td>
+      <td>132.0</td>
+      <td>1230</td>
+      <td>30500.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>29404 rows × 10 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Merge-the-two-data-frames">
+<a class="anchor" href="#Merge-the-two-data-frames" aria-hidden="true"><span class="octicon octicon-link"></span></a>Merge the two data frames<a class="anchor-link" href="#Merge-the-two-data-frames"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">dfCensus</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index(['Date', 'Address', 'Postcode', 'Price', 'Type', 'Ownership', 'NewBuild',
+       'Latitude', 'Longitude', 'District Code', 'Ward Code', 'Introduced',
+       'Rural/urban', 'Altitude', 'Index of Multiple Deprivation',
+       'Average Income'],
+      dtype='object')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Date                              object
+Address                           object
+Postcode                          object
+Price                              int64
+Type                              object
+Ownership                         object
+NewBuild                          object
+Latitude                         float64
+Longitude                        float64
+District Code                     object
+Ward Code                         object
+Introduced                        object
+Rural/urban                       object
+Altitude                         float64
+Index of Multiple Deprivation      int64
+Average Income                   float64
+dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfOrig</span><span class="o">=</span><span class="n">dfOrig</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Modify-data-ready-for-model">
+<a class="anchor" href="#Modify-data-ready-for-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>Modify data ready for model<a class="anchor-link" href="#Modify-data-ready-for-model"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Add-date-details">
+<a class="anchor" href="#Add-date-details" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add date details<a class="anchor-link" href="#Add-date-details"> </a>
+</h3>
+<p>From date get Year, Month, Week etc</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">add_datepart</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">'Date'</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index(['Address', 'Postcode', 'Price', 'Type', 'Ownership', 'NewBuild',
+       'Latitude', 'Longitude', 'District Code', 'Ward Code', 'Introduced',
+       'Rural/urban', 'Altitude', 'Index of Multiple Deprivation',
+       'Average Income', 'Year', 'Month', 'Week', 'Day', 'Dayofweek',
+       'Dayofyear', 'Is_month_end', 'Is_month_start', 'Is_quarter_end',
+       'Is_quarter_start', 'Is_year_end', 'Is_year_start', 'Elapsed'],
+      dtype='object')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Seperate-details-of-address-out">
+<a class="anchor" href="#Seperate-details-of-address-out" aria-hidden="true"><span class="octicon octicon-link"></span></a>Seperate details of address out<a class="anchor-link" href="#Seperate-details-of-address-out"> </a>
+</h3>
+<p>Want to sepaerate details of address so that</p>
+<p><code>chx='Flat 30, Henllys, Wind Street, Swansea'</code></p>
+<p>gives <code>modAdd(chx)=('Swansea', 900, 'Henllys')</code></p>
+<p>Or</p>
+<p><code>chx='15A Bethania Road, Upper Tumble'</code></p>
+<p>gives <code>modAdd(chx)=('Upper Tumble', 15, 'Bethania Road')</code></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">modAdd</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">re</span>
+
+    <span class="n">split1</span> <span class="o">=</span> <span class="n">address</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">split1</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">:</span>
+        <span class="n">split1</span> <span class="o">=</span> <span class="n">address</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'####'</span><span class="p">,</span><span class="n">split1</span> <span class="p">)</span> 
+    
+    <span class="n">FirstLine</span><span class="o">=</span><span class="n">split1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">Region</span> <span class="o">=</span> <span class="n">split1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">Region</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">"[A-Za-z][A-Za-z\s]*"</span><span class="p">,</span><span class="n">Region</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">Region</span><span class="o">=</span><span class="n">Region</span>
+    
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">HouseNo</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">"[0-9]*"</span><span class="p">,</span><span class="n">FirstLine</span><span class="p">)</span>
+<span class="c1">#         print(HouseNo)</span>
+        <span class="n">HouseNo</span> <span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">HouseNo</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">FirstLine</span><span class="o">=</span><span class="n">split1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">HouseNo</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">"[\s0-9]*"</span><span class="p">,</span><span class="n">FirstLine</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">HouseNo</span> <span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">HouseNo</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">HouseNo</span><span class="o">=</span><span class="mi">900</span>
+        
+    <span class="k">try</span><span class="p">:</span>    
+        <span class="n">Street</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">"\s[A-Za-z][A-Za-z\s]*"</span><span class="p">,</span><span class="n">FirstLine</span><span class="p">)</span>
+        <span class="n">Street</span><span class="o">=</span><span class="n">Street</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">Street</span><span class="o">=</span><span class="n">Street</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">Street</span><span class="o">=</span><span class="n">split1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">Street</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">"\s[A-Za-z][A-Za-z\s]*"</span><span class="p">,</span><span class="n">Street</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">Street</span><span class="o">=</span><span class="n">Street</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">Street</span><span class="o">=</span><span class="s1">'NA'</span>
+<span class="c1">#         print(FirstLine)</span>
+        
+<span class="c1">#     print('Region {}\n Number {} \n Street {} '.format(Region,HouseNo,Street))</span>
+
+    <span class="k">return</span> <span class="n">Region</span><span class="p">,</span><span class="n">HouseNo</span><span class="p">,</span><span class="n">Street</span>
+    
+<span class="k">def</span> <span class="nf">addAdddets_df</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">Street</span><span class="p">,</span><span class="n">HouseNo</span><span class="p">,</span><span class="n">Region</span><span class="o">=</span><span class="p">[],[],[]</span>
+    <span class="k">for</span> <span class="n">ita</span><span class="p">,</span><span class="n">oo</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">):</span>
+        
+        <span class="n">addTemp</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">ita</span><span class="p">]</span><span class="o">.</span><span class="n">Address</span>
+        <span class="n">RegionTemp</span><span class="p">,</span><span class="n">HouseNoTemp</span><span class="p">,</span><span class="n">StreetTemp</span><span class="o">=</span><span class="n">modAdd</span><span class="p">(</span><span class="n">addTemp</span><span class="p">)</span>
+        <span class="n">Region</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RegionTemp</span><span class="p">)</span>
+        <span class="n">HouseNo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">HouseNoTemp</span><span class="p">)</span>
+        <span class="n">Street</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">StreetTemp</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">'Street'</span><span class="p">,</span><span class="n">Street</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">'HouseNo'</span><span class="p">,</span><span class="n">HouseNo</span><span class="p">)</span>    
+    <span class="n">df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">'Region'</span><span class="p">,</span><span class="n">Region</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'Street'</span><span class="p">,</span><span class="s1">'HouseNo'</span><span class="p">,</span><span class="s1">'Region'</span><span class="p">],</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">pass</span>
+<span class="n">df</span><span class="o">=</span><span class="n">addAdddets_df</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Create-train-and-validation-sets">
+<a class="anchor" href="#Create-train-and-validation-sets" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create train and validation sets<a class="anchor-link" href="#Create-train-and-validation-sets"> </a>
+</h3>
+<p>Do this randomly in this case 97:3 split</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sza</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">df</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">randAr</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">sza</span><span class="p">)</span>
+<span class="n">cond</span> <span class="o">=</span> <span class="n">randAr</span><span class="o">&gt;=</span><span class="mi">3</span>
+
+<span class="n">train_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">cond</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">valid_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="o">~</span><span class="n">cond</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">splits</span> <span class="o">=</span> <span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">train_idx</span><span class="p">),</span><span class="nb">list</span><span class="p">(</span><span class="n">valid_idx</span><span class="p">))</span>
+
+<span class="n">valid_idx</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">train_idx</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Specify which column we are fitting to</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dep_var</span> <span class="o">=</span> <span class="s1">'Price'</span>
+
+<span class="c1"># for this fit to the log of it</span>
+<span class="n">df</span><span class="p">[</span><span class="n">dep_var</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">dep_var</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Split into test and validation and convert to TabularPandas</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cont</span><span class="p">,</span><span class="n">cat</span> <span class="o">=</span> <span class="n">cont_cat_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dep_var</span><span class="o">=</span><span class="n">dep_var</span><span class="p">)</span>
+
+<span class="n">procs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Categorify</span><span class="p">,</span> <span class="n">FillMissing</span><span class="p">]</span>
+<span class="n">to</span> <span class="o">=</span> <span class="n">TabularPandas</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">procs</span><span class="p">,</span> <span class="n">cat</span><span class="p">,</span> <span class="n">cont</span><span class="p">,</span> <span class="n">y_names</span><span class="o">=</span><span class="n">dep_var</span><span class="p">,</span> <span class="n">splits</span><span class="o">=</span><span class="n">splits</span><span class="p">)</span>
+
+<span class="n">xs</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">xs</span><span class="p">,</span><span class="n">to</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">y</span>
+<span class="n">valid_xs</span><span class="p">,</span><span class="n">valid_y</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">valid</span><span class="o">.</span><span class="n">xs</span><span class="p">,</span><span class="n">to</span><span class="o">.</span><span class="n">valid</span><span class="o">.</span><span class="n">y</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What are the columns?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">ii</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">to</span><span class="o">.</span><span class="n">all_col_names</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>['Address',
+ 'Region',
+ 'Street',
+ 'Postcode',
+ 'Type',
+ 'Ownership',
+ 'NewBuild',
+ 'District Code',
+ 'Ward Code',
+ 'Introduced',
+ 'Rural/urban',
+ 'Is_month_end',
+ 'Is_month_start',
+ 'Is_quarter_end',
+ 'Is_quarter_start',
+ 'Is_year_end',
+ 'Is_year_start',
+ 'HouseNo',
+ 'Latitude',
+ 'Longitude',
+ 'Altitude',
+ 'Index of Multiple Deprivation',
+ 'Average Income',
+ 'Year',
+ 'Month',
+ 'Week',
+ 'Day',
+ 'Dayofweek',
+ 'Dayofyear',
+ 'Elapsed',
+ 'Price']</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Some-functions-to-fit-or-get-results-of-fit">
+<a class="anchor" href="#Some-functions-to-fit-or-get-results-of-fit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Some functions to fit or get results of fit<a class="anchor-link" href="#Some-functions-to-fit-or-get-results-of-fit"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">r_mse</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="n">y</span><span class="p">):</span> <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(((</span><span class="n">pred</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">m_rmse</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span> <span class="k">return</span> <span class="n">r_mse</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">r_abs</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="n">y</span><span class="p">):</span> <span class="k">return</span> <span class="nb">round</span><span class="p">(</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">m_abs</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span> <span class="k">return</span> <span class="n">r_abs</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span>
+
+<span class="k">def</span> <span class="nf">rf</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">max_samples</span><span class="o">=</span><span class="mi">100_000</span><span class="p">,</span>
+       <span class="n">max_features</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="n">n_estimators</span><span class="p">,</span>
+        <span class="n">max_samples</span><span class="o">=</span><span class="n">max_samples</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="n">max_features</span><span class="p">,</span>
+        <span class="n">min_samples_leaf</span><span class="o">=</span><span class="n">min_samples_leaf</span><span class="p">,</span> <span class="n">oob_score</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Fit-the-model-and-optimise">
+<a class="anchor" href="#Fit-the-model-and-optimise" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fit the model and optimise<a class="anchor-link" href="#Fit-the-model-and-optimise"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Basic model with 4 nodes</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_leaf_nodes</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m_rmse</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span><span class="n">m_rmse</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">valid_xs</span><span class="p">,</span> <span class="n">valid_y</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(0.511491, 0.503983)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Increase the number of leafs, reduces the errors</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">to</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">xs</span><span class="p">,</span> <span class="n">to</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+<span class="n">m_rmse</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">m_rmse</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">valid_xs</span><span class="p">,</span> <span class="n">valid_y</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(0.338283, 0.370846)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Using the modified function above</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">rf</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">m_rmse</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">xs_imp</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">m_rmse</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">valid_xs_imp</span><span class="p">,</span> <span class="n">valid_y</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(0.287589, 0.335017)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Look-at-which-columns-are-important">
+<a class="anchor" href="#Look-at-which-columns-are-important" aria-hidden="true"><span class="octicon octicon-link"></span></a>Look at which columns are important<a class="anchor-link" href="#Look-at-which-columns-are-important"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cluster_columns</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/cluster_columns.png" alt=""></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">rf_feat_importance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'cols'</span><span class="p">:</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="s1">'imp'</span><span class="p">:</span><span class="n">m</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">}</span>
+                       <span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'imp'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fi</span> <span class="o">=</span> <span class="n">rf_feat_importance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">xs</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot_fi</span><span class="p">(</span><span class="n">fi</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">fi</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">'cols'</span><span class="p">,</span> <span class="s1">'imp'</span><span class="p">,</span> <span class="s1">'barh'</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plot_fi</span><span class="p">(</span><span class="n">fi</span><span class="p">[:</span><span class="mi">30</span><span class="p">]);</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/rf_feat_importance.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Keep-ones-with-most-importance">
+<a class="anchor" href="#Keep-ones-with-most-importance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Keep ones with most importance<a class="anchor-link" href="#Keep-ones-with-most-importance"> </a>
+</h4>
+<p>Reduces columns to use from 30 to 17</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">to_keep</span> <span class="o">=</span> <span class="n">fi</span><span class="p">[</span><span class="n">fi</span><span class="o">.</span><span class="n">imp</span><span class="o">&gt;</span><span class="mf">0.01</span><span class="p">]</span><span class="o">.</span><span class="n">cols</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">to_keep</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">cols</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(13, 30)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">to_keep</span><span class="o">=</span><span class="n">to_keep</span><span class="p">[</span><span class="n">to_keep</span><span class="o">!=</span><span class="s1">'Address'</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">xs_imp</span> <span class="o">=</span> <span class="n">xs</span><span class="p">[</span><span class="n">to_keep</span><span class="p">]</span>
+<span class="n">valid_xs_imp</span> <span class="o">=</span> <span class="n">valid_xs</span><span class="p">[</span><span class="n">to_keep</span><span class="p">]</span>
+<span class="n">m_imp</span> <span class="o">=</span> <span class="n">rf</span><span class="p">(</span><span class="n">xs_imp</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">m_rmse</span><span class="p">(</span><span class="n">m_imp</span><span class="p">,</span> <span class="n">xs_imp</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">m_rmse</span><span class="p">(</span><span class="n">m_imp</span><span class="p">,</span> <span class="n">valid_xs_imp</span><span class="p">,</span> <span class="n">valid_y</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(0.296979, 0.335829)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fi2</span> <span class="o">=</span> <span class="n">rf_feat_importance</span><span class="p">(</span><span class="n">m_imp</span><span class="p">,</span> <span class="n">xs_imp</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot_fi</span><span class="p">(</span><span class="n">fi2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">fi2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">'cols'</span><span class="p">,</span> <span class="s1">'imp'</span><span class="p">,</span> <span class="s1">'barh'</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plot_fi</span><span class="p">(</span><span class="n">fi2</span><span class="p">[:</span><span class="mi">30</span><span class="p">]);</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/rf_feat_importance2.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Save-the-results">
+<a class="anchor" href="#Save-the-results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Save the results<a class="anchor-link" href="#Save-the-results"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Combine the test and valid datasets</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">xsAll</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">xs_imp</span><span class="p">,</span><span class="n">valid_xs_imp</span><span class="p">])</span>
+<span class="n">yAll</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">y</span><span class="p">,</span> <span class="n">valid_y</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="n">cda</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="n">cda</span> <span class="o">=</span> <span class="n">cda</span> <span class="o">+</span> <span class="s1">'</span><span class="se">\\</span><span class="s1">pickles</span><span class="se">\\</span><span class="s1">'</span>
+
+<span class="c1"># Saving the objects:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cda</span><span class="o">+</span><span class="s1">'RFrand_New4varB.pkl'</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">([</span><span class="n">m_imp</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">xsAll</span><span class="p">,</span> <span class="n">yAll</span><span class="p">],</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">0.335829</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>1.3990997582955578</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Get-the-Predictions">
+<a class="anchor" href="#Get-the-Predictions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get the Predictions<a class="anchor-link" href="#Get-the-Predictions"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Reload the data saved</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cda</span><span class="o">+</span><span class="s1">'RFrand_New4varB.pkl'</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span><span class="k">as</span> <span class="n">f</span><span class="p">:</span> 
+        <span class="n">m2</span><span class="p">,</span> <span class="n">to2</span><span class="p">,</span> <span class="n">xsAll2</span><span class="p">,</span> <span class="n">yAll2</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="First-need-a-way-to-convert-sale-date-to-today's-date">
+<a class="anchor" href="#First-need-a-way-to-convert-sale-date-to-today's-date" aria-hidden="true"><span class="octicon octicon-link"></span></a>First need a way to convert sale date to today's date<a class="anchor-link" href="#First-need-a-way-to-convert-sale-date-to-today's-date"> </a>
+</h3>
+<p>Function takes the dataFrame and changes 'Date' features to today's date 
+Taken from fastai functions</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">add_datepart</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="s2">"Helper function that adds columns relevant to a date in the column `field_name` of `df`."</span>
+    <span class="kn">import</span> <span class="nn">re</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    
+    <span class="k">def</span> <span class="nf">ifnone</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="s2">"`b` if `a` is None else `a`"</span>
+        <span class="k">return</span> <span class="n">b</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">a</span>
+    
+    <span class="k">def</span> <span class="nf">make_date</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">date_field</span><span class="p">):</span>
+        <span class="s2">"Make sure `df[date_field]` is of the right date type."</span>
+        
+        <span class="n">field_dtype</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">date_field</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field_dtype</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">DatetimeTZDtype</span><span class="p">):</span>
+            <span class="n">field_dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">field_dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">):</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">date_field</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">date_field</span><span class="p">],</span> <span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            
+    <span class="n">make_date</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span>
+    <span class="n">field</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">ifnone</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">'[Dd]ate$'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">field_name</span><span class="p">))</span>
+    <span class="n">attr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Year'</span><span class="p">,</span> <span class="s1">'Month'</span><span class="p">,</span> <span class="s1">'Week'</span><span class="p">,</span> <span class="s1">'Day'</span><span class="p">,</span> <span class="s1">'Dayofweek'</span><span class="p">,</span> <span class="s1">'Dayofyear'</span><span class="p">,</span> <span class="s1">'Is_month_end'</span><span class="p">,</span> <span class="s1">'Is_month_start'</span><span class="p">,</span>
+            <span class="s1">'Is_quarter_end'</span><span class="p">,</span> <span class="s1">'Is_quarter_start'</span><span class="p">,</span> <span class="s1">'Is_year_end'</span><span class="p">,</span> <span class="s1">'Is_year_start'</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">time</span><span class="p">:</span> <span class="n">attr</span> <span class="o">=</span> <span class="n">attr</span> <span class="o">+</span> <span class="p">[</span><span class="s1">'Hour'</span><span class="p">,</span> <span class="s1">'Minute'</span><span class="p">,</span> <span class="s1">'Second'</span><span class="p">]</span>
+    <span class="c1"># Pandas removed `dt.week` in v1.1.10</span>
+    <span class="n">week</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">isocalendar</span><span class="p">()</span><span class="o">.</span><span class="n">week</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="s1">'isocalendar'</span><span class="p">)</span> <span class="k">else</span> <span class="n">field</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">week</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">attr</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="s1">'Week'</span> <span class="k">else</span> <span class="n">week</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="o">~</span><span class="n">field</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">prefix</span> <span class="o">+</span> <span class="s1">'Elapsed'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span><span class="n">field</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span> <span class="o">//</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">9</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">drop</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The next function uses the above function to update the date details.</p>
+<p>Then looks up the address given so that predictions can be made. This is because address are not in xsAll2 dataFrame</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">xsAll2</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index(['Elapsed', 'Type', 'Year', 'Index of Multiple Deprivation', 'Latitude',
+       'Average Income', 'Longitude', 'Introduced', 'Postcode', 'Altitude',
+       'HouseNo', 'Street'],
+      dtype='object')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">colsNoDate</span><span class="o">=</span><span class="p">[</span> <span class="s1">'Type'</span><span class="p">,</span>  <span class="s1">'Index of Multiple Deprivation'</span><span class="p">,</span> <span class="s1">'Latitude'</span><span class="p">,</span>
+       <span class="s1">'Average Income'</span><span class="p">,</span> <span class="s1">'Longitude'</span><span class="p">,</span> <span class="s1">'Introduced'</span><span class="p">,</span> <span class="s1">'Postcode'</span><span class="p">,</span> <span class="s1">'Altitude'</span><span class="p">,</span>
+       <span class="s1">'HouseNo'</span><span class="p">,</span> <span class="s1">'Street'</span><span class="p">]</span>
+<span class="n">colsDate</span><span class="o">=</span><span class="p">[</span><span class="s1">'Elapsed'</span><span class="p">,</span><span class="s1">'Year'</span><span class="p">]</span>
+    
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_predTodayNotExact</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">address</span><span class="p">,</span><span class="n">toTEMP</span><span class="p">,</span><span class="n">xs_final</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Given model m, address, initial pd of houses to, and adjusted pd xs_final</span>
+<span class="sd">    output is house price prediction</span>
+<span class="sd">    """</span>
+    <span class="kn">import</span> <span class="nn">copy</span>
+
+    <span class="n">colsAll</span><span class="o">=</span><span class="n">xs_final</span><span class="o">.</span><span class="n">columns</span>
+
+    <span class="c1">#columns with dates need to remove</span>
+    <span class="n">colsDate</span><span class="o">=</span><span class="p">[</span><span class="s1">'Elapsed'</span><span class="p">,</span><span class="s1">'Year'</span><span class="p">]</span>
+    <span class="n">xsNoDate</span><span class="o">=</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">xs_final</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">colsDate</span><span class="p">))</span>
+    
+    <span class="c1"># add date part to dataframe</span>
+    <span class="n">xsNoDate</span><span class="p">[</span><span class="s1">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">"today"</span><span class="p">)</span>
+    <span class="n">xsNoDate</span> <span class="o">=</span> <span class="n">add_datepart</span><span class="p">(</span><span class="n">xsNoDate</span><span class="p">,</span> <span class="s1">'Date'</span><span class="p">)</span>
+    <span class="n">xs_finalTEMP</span><span class="o">=</span><span class="n">xsNoDate</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">colsAll</span><span class="p">]</span>
+
+    <span class="c1"># each address has a unique number</span>
+    <span class="n">aa</span><span class="o">=</span><span class="n">toTEMP</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">'Address'</span><span class="p">]</span>
+    <span class="c1"># findwhich number is address give (take 1st if more than 1)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">ii</span><span class="o">=</span><span class="p">[</span><span class="n">ii</span> <span class="k">for</span> <span class="n">ii</span><span class="p">,</span><span class="n">aa1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span> <span class="k">if</span> <span class="n">aa1</span><span class="o">==</span> <span class="n">address</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># 1 address can have multiple sales so we need index in dataframes</span>
+        <span class="n">ii</span><span class="o">=</span><span class="n">toTEMP</span><span class="p">[</span><span class="n">toTEMP</span><span class="p">[</span><span class="s1">'Address'</span><span class="p">]</span><span class="o">==</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">preda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xs_finalTEMP</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ii</span><span class="p">:</span><span class="n">ii</span><span class="p">])</span> <span class="p">)</span><span class="o">/</span><span class="mi">1000</span> <span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ii</span><span class="p">])</span><span class="o">/</span><span class="mi">1000</span> <span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="n">typeAll</span><span class="o">=</span><span class="n">toTEMP</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">'Type'</span><span class="p">]</span>
+        <span class="n">typa</span><span class="o">=</span><span class="n">typeAll</span><span class="p">[</span><span class="n">xs_finalTEMP</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ii</span><span class="p">:</span><span class="n">ii</span><span class="p">,</span><span class="s1">'Type'</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">aa</span><span class="o">=</span><span class="n">toTEMP</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">'Address'</span><span class="p">]</span>
+        <span class="n">aaStreet</span><span class="o">=</span><span class="n">toTEMP</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">'Street'</span><span class="p">]</span>
+        <span class="n">ii</span><span class="o">=</span><span class="p">[</span><span class="n">ii</span> <span class="k">for</span> <span class="n">ii</span><span class="p">,</span><span class="n">aa1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">aaStreet</span><span class="p">)</span> <span class="k">if</span> <span class="n">aa1</span><span class="o">==</span> <span class="n">Street</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">xsTemp</span><span class="o">=</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span> <span class="n">xs_finalTEMP</span><span class="p">[</span><span class="n">xs_finalTEMP</span><span class="p">[</span><span class="s1">'Street'</span><span class="p">]</span><span class="o">==</span><span class="n">ii</span><span class="p">]</span> <span class="p">)</span>
+        <span class="n">xsTemp</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># find nearest house by houseno</span>
+        <span class="n">No</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xsTemp</span><span class="p">[</span><span class="s1">'HouseNo'</span><span class="p">])</span>
+
+        <span class="n">yo</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">No</span><span class="o">-</span><span class="n">HouseNo</span><span class="p">))</span>
+        <span class="n">yo1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">yo</span><span class="p">)</span>
+        <span class="c1"># get index of the nearest house</span>
+        <span class="n">yo</span><span class="o">=</span><span class="n">No</span><span class="p">[</span><span class="n">yo</span><span class="o">==</span><span class="n">yo1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  
+
+        <span class="n">ii</span><span class="o">=</span><span class="p">[</span><span class="n">ii</span> <span class="k">for</span> <span class="n">ii</span><span class="p">,</span><span class="n">aa1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">xsTemp</span><span class="o">.</span><span class="n">HouseNo</span><span class="p">)</span> <span class="k">if</span> <span class="n">aa1</span><span class="o">==</span> <span class="n">yo</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">xsTemp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ii</span><span class="p">:</span><span class="n">ii</span><span class="p">,</span><span class="s1">'HouseNo'</span><span class="p">]</span><span class="o">=</span><span class="n">HouseNo</span>
+        
+        <span class="c1"># If want to change house type</span>
+        
+<span class="c1">#         xsTemp.loc[ii:ii,'Type']=2</span>
+<span class="c1">#         print(xsTemp.loc[ii:ii,'Type'])</span>
+<span class="c1">#         print(xsTemp.loc[ii:ii])</span>
+        
+        <span class="n">preda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xsTemp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ii</span><span class="p">:</span><span class="n">ii</span><span class="p">])</span> <span class="p">)</span><span class="o">/</span><span class="mi">1000</span> <span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">prev</span><span class="o">=</span><span class="mi">0</span>
+        
+        <span class="n">typeAll</span><span class="o">=</span><span class="n">toTEMP</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s1">'Type'</span><span class="p">]</span>
+        <span class="n">typa</span><span class="o">=</span><span class="n">typeAll</span><span class="p">[</span><span class="n">xsTemp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ii</span><span class="p">:</span><span class="n">ii</span><span class="p">,</span><span class="s1">'Type'</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+        
+        
+    <span class="k">return</span> <span class="n">preda</span><span class="p">,</span> <span class="n">prev</span><span class="p">,</span> <span class="n">typa</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">address</span><span class="o">=</span><span class="s1">'20 Malvern Terrace, Brynmill'</span>
+<span class="n">get_predTodayNotExact</span><span class="p">(</span><span class="n">m2</span><span class="p">,</span><span class="n">address</span><span class="p">,</span><span class="n">to2</span><span class="p">,</span><span class="n">xsAll2</span><span class="p">,</span><span class="n">yAll2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(array([180.1]), 54.5, 'Terraced')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Summary">
+<a class="anchor" href="#Summary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary<a class="anchor-link" href="#Summary"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">r_abs</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="n">y</span><span class="p">):</span> <span class="k">return</span> <span class="nb">round</span><span class="p">(</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">m_abs</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span> <span class="k">return</span> <span class="n">r_abs</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span>
+
+<span class="n">m_abs</span><span class="p">(</span><span class="n">m2</span><span class="p">,</span> <span class="n">xsAll2</span><span class="p">,</span> <span class="n">yAll2</span><span class="p">)</span><span class="c1">#, m_abs(m, valid_xs_final, valid_y)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>23.159</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The average error in price predictions is £23,000</p>
+<p>Which is comparable to values seen with regions and fairly good given the details of the houses used in the model are limited</p>
+<p>This model is put into an app here <a href="https://thomashsimm.com/streamlit/randomforrests/houseprices/python/2022/02/23/SwanseaHousePriceApp.html">https://thomashsimm.com/streamlit/randomforrests/houseprices/python/2022/02/23/SwanseaHousePriceApp.html</a>
+
+</p>
+<center class="youtube-iframe-wrapper">
+    <iframe width="730" height="315" src="https://www.youtube.com/embed/IGykZUeZqRA" frameborder="0" allowfullscreen=""></iframe>
+</center>
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><a class="u-url" href="/jupyter/python/randomforests/tabulardata/sklearn/2022/02/17/SwanseaHousePrices_Part2.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Thomas H Simm</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/thomashsimm" target="_blank" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/thomashsimm" target="_blank" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
