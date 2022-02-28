@@ -4,19 +4,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Golf Swing Part III- Using pre-trained models and FiftyOne to find golf positions | Thomas Simm</title>
+<title>Golf Swing Part III- Using pre-trained models- FiftyOne and Streamlit App | Thomas Simm</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Golf Swing Part III- Using pre-trained models and FiftyOne to find golf positions" />
+<meta property="og:title" content="Golf Swing Part III- Using pre-trained models- FiftyOne and Streamlit App" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Using Python and Coco to identify parts of the body and club during a golf swing" />
-<meta property="og:description" content="Using Python and Coco to identify parts of the body and club during a golf swing" />
+<meta name="description" content="Using Python and pre-trained to identify parts of the body and club during a golf swing. Uses both FiftyOne and creates an app using Streamlit" />
+<meta property="og:description" content="Using Python and pre-trained to identify parts of the body and club during a golf swing. Uses both FiftyOne and creates an app using Streamlit" />
 <link rel="canonical" href="https://thomashsimm.com/neural%20networks/fiftyone/golf%20swing/python/2022/02/27/GolfSwingPart3.html" />
 <meta property="og:url" content="https://thomashsimm.com/neural%20networks/fiftyone/golf%20swing/python/2022/02/27/GolfSwingPart3.html" />
 <meta property="og:site_name" content="Thomas Simm" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2022-02-27T00:00:00-06:00" />
 <script type="application/ld+json">
-{"datePublished":"2022-02-27T00:00:00-06:00","url":"https://thomashsimm.com/neural%20networks/fiftyone/golf%20swing/python/2022/02/27/GolfSwingPart3.html","@type":"BlogPosting","headline":"Golf Swing Part III- Using pre-trained models and FiftyOne to find golf positions","dateModified":"2022-02-27T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://thomashsimm.com/neural%20networks/fiftyone/golf%20swing/python/2022/02/27/GolfSwingPart3.html"},"description":"Using Python and Coco to identify parts of the body and club during a golf swing","@context":"https://schema.org"}</script>
+{"datePublished":"2022-02-27T00:00:00-06:00","url":"https://thomashsimm.com/neural%20networks/fiftyone/golf%20swing/python/2022/02/27/GolfSwingPart3.html","@type":"BlogPosting","headline":"Golf Swing Part III- Using pre-trained models- FiftyOne and Streamlit App","dateModified":"2022-02-27T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://thomashsimm.com/neural%20networks/fiftyone/golf%20swing/python/2022/02/27/GolfSwingPart3.html"},"description":"Using Python and pre-trained to identify parts of the body and club during a golf swing. Uses both FiftyOne and creates an app using Streamlit","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://thomashsimm.com/feed.xml" title="Thomas Simm" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -71,7 +71,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Golf Swing Part III- Using pre-trained models and FiftyOne to find golf positions</h1><p class="page-description">Using Python and Coco to identify parts of the body and club during a golf swing</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-02-27T00:00:00-06:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">Golf Swing Part III- Using pre-trained models- FiftyOne and Streamlit App</h1><p class="page-description">Using Python and pre-trained to identify parts of the body and club during a golf swing. Uses both FiftyOne and creates an app using Streamlit</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-02-27T00:00:00-06:00" itemprop="datePublished">
         Feb 27, 2022
       </time>
        • <span class="read-time" title="Estimated read time">
@@ -172,7 +172,7 @@ window.onload = wrap_img;
 <center class="youtube-iframe-wrapper">
     <iframe width="730" height="315" src="https://www.youtube.com/embed/Q0BB0huWb6s" frameborder="0" allowfullscreen=""></iframe>
 </center>
-
+<a href="https://youtu.be/Q0BB0huWb6s">https://youtu.be/Q0BB0huWb6s</a>
 
 </div>
 </div>
