@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Using NLP for text generation | Thomas Simm</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Using NLP for text generation" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Using FastAI to build a NLP text generator" />
+<meta property="og:description" content="Using FastAI to build a NLP text generator" />
+<link rel="canonical" href="https://thomashsimm.com/nlp/neural%20networks/fastai/python/2022/03/15/NLPtextgenerator.html" />
+<meta property="og:url" content="https://thomashsimm.com/nlp/neural%20networks/fastai/python/2022/03/15/NLPtextgenerator.html" />
+<meta property="og:site_name" content="Thomas Simm" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-03-15T00:00:00-05:00" />
+<script type="application/ld+json">
+{"datePublished":"2022-03-15T00:00:00-05:00","url":"https://thomashsimm.com/nlp/neural%20networks/fastai/python/2022/03/15/NLPtextgenerator.html","@type":"BlogPosting","headline":"Using NLP for text generation","dateModified":"2022-03-15T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://thomashsimm.com/nlp/neural%20networks/fastai/python/2022/03/15/NLPtextgenerator.html"},"description":"Using FastAI to build a NLP text generator","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://thomashsimm.com/feed.xml" title="Thomas Simm" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Thomas Simm</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Using NLP for text generation</h1><p class="page-description">Using FastAI to build a NLP text generator</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-03-15T00:00:00-05:00" itemprop="datePublished">
+        Mar 15, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      4 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#NLP">NLP</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Neural networks">Neural networks</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#FastAI">FastAI</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Python">Python</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ThomasHSimm/THS_website/tree/master/_notebooks/2022-03-15-NLPtextgenerator.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ThomasHSimm/THS_website/master?filepath=_notebooks%2F2022-03-15-NLPtextgenerator.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ThomasHSimm/THS_website/blob/master/_notebooks/2022-03-15-NLPtextgenerator.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Introduction">Introduction </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#NLP">NLP </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#What-is-below">What is below </a></li>
+<li class="toc-entry toc-h2"><a href="#Code">Code </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Get-some-text-to-act-as-a-style">Get some text to act as a style </a></li>
+<li class="toc-entry toc-h3"><a href="#Language-model-using-DataBlock">Language model using DataBlock </a></li>
+<li class="toc-entry toc-h3"><a href="#Create-model-and-Run">Create model and Run </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Model-Text-Generation">Model Text Generation </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-03-15-NLPtextgenerator.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/header2.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Introduction">
+<a class="anchor" href="#Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction<a class="anchor-link" href="#Introduction"> </a>
+</h2>
+<h3 id="NLP">
+<a class="anchor" href="#NLP" aria-hidden="true"><span class="octicon octicon-link"></span></a>NLP<a class="anchor-link" href="#NLP"> </a>
+</h3>
+<p>NLP, or natural language processing, is a machine learning priocess used on language data. Some applications include:</p>
+<ol>
+<li>search, ranking</li>
+<li>spam detection</li>
+<li>ads recommendation</li>
+<li>email categorization</li>
+<li>machine translation</li>
+<li>speech recognition</li>
+<li>Sentiment analysis</li>
+</ol>
+<p>From <code>FastAI FastBooks</code>:</p>
+
+<pre><code>What we call a language model is a model that has been trained to guess what the next word in a text is (having read the ones before). This kind of task is called self-supervised learning: we do not need to give labels to our model, just feed it lots and lots of texts. It has a process to automatically get labels from the data, and this task isn't trivial: to properly guess the next word in a sentence, the model will have to develop an understanding of the English (or other) language
+
+Even if our language model knows the basics of the language we are using in the task (e.g., our pretrained model is in English), it helps to get used to the style of the corpus we are targeting. It may be more informal language, or more technical, with new words to learn or different ways of composing sentences. In the case of the IMDb dataset, there will be lots of names of movie directors and actors, and often a less formal style of language than that seen in Wikipedia.
+
+We already saw that with fastai, we can download a pretrained English language model and use it to get state-of-the-art results for NLP classification. 
+
+</code></pre>
+<h2 id="What-is-below">
+<a class="anchor" href="#What-is-below" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is below<a class="anchor-link" href="#What-is-below"> </a>
+</h2>
+<p>Here I'll use the IMDB dataset and train it on the works of Shakespeare to generate text in the style of his work given a starting few words.</p>
+<p>Uses fastAI, modified from "10_nlp.ipynb" in fastAI/fastbook</p>
+<p><a href="https://colab.research.google.com/drive/11JRjYu7XsmSzo3IT8oH2KNf-e-v6W5tf?usp=sharing">https://colab.research.google.com/drive/11JRjYu7XsmSzo3IT8oH2KNf-e-v6W5tf?usp=sharing</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Code">
+<a class="anchor" href="#Code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code<a class="anchor-link" href="#Code"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install -Uqq fastbook
+<span class="kn">import</span> <span class="nn">fastbook</span>
+<span class="n">fastbook</span><span class="o">.</span><span class="n">setup_book</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="nn">fastbook</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span><span class="n">HTML</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Get-some-text-to-act-as-a-style">
+<a class="anchor" href="#Get-some-text-to-act-as-a-style" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get some text to act as a style<a class="anchor-link" href="#Get-some-text-to-act-as-a-style"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span><span class="o">=</span><span class="s1">'https://ocw.mit.edu/ans7870/6/6.006/s08/lecturenotes/files/t8.shakespeare.txt'</span>
+
+<span class="c1"># Going to put in a folder called BARD which we create</span>
+<span class="n">dest</span><span class="o">=</span><span class="s1">'BARD'</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">dest</span><span class="p">)</span>
+
+<span class="c1"># get the text from the url and put as data</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+
+<span class="c1"># reduce data to miss start and end guff</span>
+<span class="n">xstart</span><span class="o">=</span><span class="mi">10450</span>
+<span class="n">xend</span><span class="o">=</span><span class="mi">580</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">xstart</span><span class="p">:</span><span class="o">-</span><span class="n">xend</span><span class="p">]</span>
+
+<span class="c1"># create a text file every 1000</span>
+<span class="c1"># use format number_0.txt seems to work best for DataBlock</span>
+<span class="n">rr</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rr</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dest</span> <span class="o">+</span> <span class="s1">'/</span><span class="si">{}</span><span class="s1">_0.txt'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)),</span><span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">data</span><span class="p">[</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="p">:</span><span class="n">i</span><span class="o">*</span><span class="mi">1000</span> <span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Language-model-using-DataBlock">
+<a class="anchor" href="#Language-model-using-DataBlock" aria-hidden="true"><span class="octicon octicon-link"></span></a>Language model using DataBlock<a class="anchor-link" href="#Language-model-using-DataBlock"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span><span class="o">=</span><span class="n">Path</span><span class="p">()</span>
+
+<span class="c1"># get's the text parts- will just come from folder dest </span>
+<span class="c1"># where the text files are saved</span>
+<span class="n">get_shak</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">get_text_files</span><span class="p">,</span><span class="n">folders</span><span class="o">=</span><span class="n">dest</span><span class="p">)</span>
+
+<span class="c1"># Craete a dataBlock- using the Class of TextBlock and the classes </span>
+<span class="c1"># in-built function from folder</span>
+<span class="n">dbb</span> <span class="o">=</span> <span class="n">DataBlock</span><span class="p">(</span>
+    <span class="n">blocks</span><span class="o">=</span><span class="n">TextBlock</span><span class="o">.</span><span class="n">from_folder</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">is_lm</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">get_items</span><span class="o">=</span><span class="n">get_shak</span><span class="p">,</span> <span class="n">splitter</span><span class="o">=</span><span class="n">RandomSplitter</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Now create the dataLoaders</span>
+<span class="n">dls</span> <span class="o">=</span><span class="n">dbb</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">bs</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">seq_len</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+
+<span class="c1"># Have a look at the batches</span>
+<span class="n">dls</span><span class="o">.</span><span class="n">show_batch</span><span class="p">(</span><span class="n">max_n</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/bard.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Create-model-and-Run">
+<a class="anchor" href="#Create-model-and-Run" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create model and Run<a class="anchor-link" href="#Create-model-and-Run"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span> <span class="o">=</span> <span class="n">language_model_learner</span><span class="p">(</span>
+    <span class="n">dls</span><span class="p">,</span> <span class="n">AWD_LSTM</span><span class="p">,</span> <span class="n">drop_mult</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> 
+    <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">accuracy</span><span class="p">,</span> <span class="n">Perplexity</span><span class="p">()])</span><span class="o">.</span><span class="n">to_fp16</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2e-2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/bard2.png" alt=""></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span><span class="o">.</span><span class="n">unfreeze</span><span class="p">()</span>
+<span class="n">learn</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">2e-3</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/bard3.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Model-Text-Generation">
+<a class="anchor" href="#Model-Text-Generation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Model Text Generation<a class="anchor-link" href="#Model-Text-Generation"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">TEXT</span> <span class="o">=</span> <span class="s2">"Hi Romeo how are you?"</span>
+<span class="n">N_WORDS</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">N_SENTENCES</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">preds</span> <span class="o">=</span> <span class="p">[</span><span class="n">learn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">TEXT</span><span class="p">,</span> <span class="n">N_WORDS</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span> 
+         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_SENTENCES</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">preds</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>"Cannot get rid of this spot" 30 words, 2 sentences</p>
+
+<pre><code>Can not get rid of this spot ? No ; I 'll set a foot to Caesar . If i can tell you , Triumvirate , that know the heads of
+
+Can not get rid of this spot ? When one sees England here , he next is sure to be sent for . If i be not , my King , you must
+
+
+</code></pre>
+<p>"Hi Romeo how are you?" 60words 2sent. 0.75temp.</p>
+
+<pre><code>Hi Romeo how are you ? What 's your will ? My heart is split . What , my soul ! My body 's as cold as wax ; my heart is now as a nail in my heart ; thou shalt see Romeo set a crown on't ! Come , and that ring i gave him , the ring
+
+</code></pre>
+<p>"Where shall i go for my holiday?"</p>
+
+<pre><code>Where shall i go for my holiday ? Am i to France ? Are you English ? Are you a Spanish man ? [ aside ] i know not what ; nor no other man but this . [ they speak ] If i speak , i am going .
+
+</code></pre>
+<p>"Poor me , poor me , poor me another drink"</p>
+
+<pre><code>Poor me , poor me , poor me another drink , I 'll burn out King Lear 's grave . Thou art too dear to me ; i am perfect i am least of all . I 'll go live i ' th ' middle , and there will i not live in this .</code></pre>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ThomasHSimm/THS_website"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/nlp/neural%20networks/fastai/python/2022/03/15/NLPtextgenerator.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Thomas H Simm</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/thomashsimm" target="_blank" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/thomashsimm" target="_blank" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
