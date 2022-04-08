@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Tweepy | Thomas Simm</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Tweepy" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Searching tweets using tweepy" />
+<meta property="og:description" content="Searching tweets using tweepy" />
+<link rel="canonical" href="https://thomashsimm.com/twitter/tweepy/python/2022/04/08/Tweepy.html" />
+<meta property="og:url" content="https://thomashsimm.com/twitter/tweepy/python/2022/04/08/Tweepy.html" />
+<meta property="og:site_name" content="Thomas Simm" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-04-08T00:00:00-05:00" />
+<script type="application/ld+json">
+{"datePublished":"2022-04-08T00:00:00-05:00","url":"https://thomashsimm.com/twitter/tweepy/python/2022/04/08/Tweepy.html","@type":"BlogPosting","headline":"Tweepy","dateModified":"2022-04-08T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://thomashsimm.com/twitter/tweepy/python/2022/04/08/Tweepy.html"},"description":"Searching tweets using tweepy","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://thomashsimm.com/feed.xml" title="Thomas Simm" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Thomas Simm</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Tweepy</h1><p class="page-description">Searching tweets using tweepy</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-04-08T00:00:00-05:00" itemprop="datePublished">
+        Apr 8, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      5 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#twitter">twitter</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#tweepy">tweepy</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Python">Python</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ThomasHSimm/THS_website/tree/master/_notebooks/2022-04-08-Tweepy.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ThomasHSimm/THS_website/master?filepath=_notebooks%2F2022-04-08-Tweepy.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ThomasHSimm/THS_website/blob/master/_notebooks/2022-04-08-Tweepy.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Resources">Resources </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#A.-Getting-started-with-twitter-API---Twitter-Developer-Platform">A. Getting started with twitter API - Twitter Developer Platform </a></li>
+<li class="toc-entry toc-h4"><a href="#B.-Tweepy-Documentation">B. Tweepy Documentation </a></li>
+<li class="toc-entry toc-h4"><a href="#C.-A-comprehensive-guide-for-using-the-Twitter-API-v2-with-Tweepy-in-Python---Suhem-Parack">C. A comprehensive guide for using the Twitter API v2 with Tweepy in Python - Suhem Parack </a></li>
+<li class="toc-entry toc-h4"><a href="#D.-Making-queries-to-Twitter-API-on-tweepy---Roberto-Aguilar">D. Making queries to Twitter API on tweepy - Roberto Aguilar </a></li>
+<li class="toc-entry toc-h4"><a href="#E.-Accessing-the-Twitter-API-with-Python---Mihajlo-Pavloski">E. Accessing the Twitter API with Python - Mihajlo Pavloski </a></li>
+<li class="toc-entry toc-h4"><a href="#F.-How-to-Apply-for-a-Twitter-Developer-Account---jean-christophe-chouinard">F. How to Apply for a Twitter Developer Account - jean-christophe-chouinard </a></li>
+<li class="toc-entry toc-h4"><a href="#G.-How-to-get-Twitter-API-Credentials-(API-Keys)---jean-christophe-chouinard">G. How to get Twitter API Credentials (API Keys) - jean-christophe-chouinard </a></li>
+<li class="toc-entry toc-h4"><a href="#H.-Twitter-API-with-Python-(Complete-Guide)---jean-christophe-chouinard">H. Twitter API with Python (Complete Guide) - jean-christophe-chouinard </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Setting-up-twitter-API">Setting up twitter API </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#1.-Apply-for-a-developer-account">1. Apply for a developer account </a></li>
+<li class="toc-entry toc-h3"><a href="#2.-Create-a-project/app">2. Create a project/app </a></li>
+<li class="toc-entry toc-h3"><a href="#3.-Set-up-an-environment">3. Set up an environment </a></li>
+<li class="toc-entry toc-h3"><a href="#4.-Install-tweepy">4. Install tweepy </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Tweepy-code">Tweepy code </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Import-and-check-it-is-authenticated">Import and check it is authenticated </a></li>
+<li class="toc-entry toc-h3"><a href="#Search-tweets">Search tweets </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Query">Query </a></li>
+<li class="toc-entry toc-h4"><a href="#Dates">Dates </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#The-results-file">The results file </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-04-08-Tweepy.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/header2.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Resources">
+<a class="anchor" href="#Resources" aria-hidden="true"><span class="octicon octicon-link"></span></a>Resources<a class="anchor-link" href="#Resources"> </a>
+</h2>
+<h4 id="A.-Getting-started-with-twitter-API---Twitter-Developer-Platform">
+<a class="anchor" href="#A.-Getting-started-with-twitter-API---Twitter-Developer-Platform" aria-hidden="true"><span class="octicon octicon-link"></span></a>A. Getting started with twitter API - Twitter Developer Platform<a class="anchor-link" href="#A.-Getting-started-with-twitter-API---Twitter-Developer-Platform"> </a>
+</h4>
+<p><a href="https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api">https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api</a></p>
+<h4 id="B.-Tweepy-Documentation">
+<a class="anchor" href="#B.-Tweepy-Documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>B. Tweepy Documentation<a class="anchor-link" href="#B.-Tweepy-Documentation"> </a>
+</h4>
+<p><a href="https://docs.tweepy.org/en/stable/index.html">https://docs.tweepy.org/en/stable/index.html</a></p>
+<h4 id="C.-A-comprehensive-guide-for-using-the-Twitter-API-v2-with-Tweepy-in-Python---Suhem-Parack">
+<a class="anchor" href="#C.-A-comprehensive-guide-for-using-the-Twitter-API-v2-with-Tweepy-in-Python---Suhem-Parack" aria-hidden="true"><span class="octicon octicon-link"></span></a>C. A comprehensive guide for using the Twitter API v2 with Tweepy in Python - Suhem Parack<a class="anchor-link" href="#C.-A-comprehensive-guide-for-using-the-Twitter-API-v2-with-Tweepy-in-Python---Suhem-Parack"> </a>
+</h4>
+<p><a href="https://dev.to/twitterdev/a-comprehensive-guide-for-using-the-twitter-api-v2-using-tweepy-in-python-15d9">https://dev.to/twitterdev/a-comprehensive-guide-for-using-the-twitter-api-v2-using-tweepy-in-python-15d9</a></p>
+<h4 id="D.-Making-queries-to-Twitter-API-on-tweepy---Roberto-Aguilar">
+<a class="anchor" href="#D.-Making-queries-to-Twitter-API-on-tweepy---Roberto-Aguilar" aria-hidden="true"><span class="octicon octicon-link"></span></a>D. Making queries to Twitter API on tweepy - Roberto Aguilar<a class="anchor-link" href="#D.-Making-queries-to-Twitter-API-on-tweepy---Roberto-Aguilar"> </a>
+</h4>
+<p><a href="https://medium.com/@robguilarr/making-queries-to-twitter-api-on-tweepy-66afeb7184a4">https://medium.com/@robguilarr/making-queries-to-twitter-api-on-tweepy-66afeb7184a4</a></p>
+<h4 id="E.-Accessing-the-Twitter-API-with-Python---Mihajlo-Pavloski">
+<a class="anchor" href="#E.-Accessing-the-Twitter-API-with-Python---Mihajlo-Pavloski" aria-hidden="true"><span class="octicon octicon-link"></span></a>E. Accessing the Twitter API with Python - Mihajlo Pavloski<a class="anchor-link" href="#E.-Accessing-the-Twitter-API-with-Python---Mihajlo-Pavloski"> </a>
+</h4>
+<p><a href="https://stackabuse.com/accessing-the-twitter-api-with-python/">https://stackabuse.com/accessing-the-twitter-api-with-python/</a></p>
+<h4 id="F.-How-to-Apply-for-a-Twitter-Developer-Account---jean-christophe-chouinard">
+<a class="anchor" href="#F.-How-to-Apply-for-a-Twitter-Developer-Account---jean-christophe-chouinard" aria-hidden="true"><span class="octicon octicon-link"></span></a>F. How to Apply for a Twitter Developer Account - jean-christophe-chouinard<a class="anchor-link" href="#F.-How-to-Apply-for-a-Twitter-Developer-Account---jean-christophe-chouinard"> </a>
+</h4>
+<p><a href="https://www.jcchouinard.com/apply-for-a-twitter-developer-account/">https://www.jcchouinard.com/apply-for-a-twitter-developer-account/</a></p>
+<h4 id="G.-How-to-get-Twitter-API-Credentials-(API-Keys)---jean-christophe-chouinard">
+<a class="anchor" href="#G.-How-to-get-Twitter-API-Credentials-(API-Keys)---jean-christophe-chouinard" aria-hidden="true"><span class="octicon octicon-link"></span></a>G. How to get Twitter API Credentials (API Keys) - jean-christophe-chouinard<a class="anchor-link" href="#G.-How-to-get-Twitter-API-Credentials-(API-Keys)---jean-christophe-chouinard"> </a>
+</h4>
+<p><a href="https://www.jcchouinard.com/twitter-api-credentials/">https://www.jcchouinard.com/twitter-api-credentials/</a></p>
+<h4 id="H.-Twitter-API-with-Python-(Complete-Guide)---jean-christophe-chouinard">
+<a class="anchor" href="#H.-Twitter-API-with-Python-(Complete-Guide)---jean-christophe-chouinard" aria-hidden="true"><span class="octicon octicon-link"></span></a>H. Twitter API with Python (Complete Guide) - jean-christophe-chouinard<a class="anchor-link" href="#H.-Twitter-API-with-Python-(Complete-Guide)---jean-christophe-chouinard"> </a>
+</h4>
+<p><a href="https://www.jcchouinard.com/twitter-api/">https://www.jcchouinard.com/twitter-api/</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Setting-up-twitter-API">
+<a class="anchor" href="#Setting-up-twitter-API" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting up twitter API<a class="anchor-link" href="#Setting-up-twitter-API"> </a>
+</h2>
+<h3 id="1.-Apply-for-a-developer-account">
+<a class="anchor" href="#1.-Apply-for-a-developer-account" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Apply for a developer account<a class="anchor-link" href="#1.-Apply-for-a-developer-account"> </a>
+</h3>
+<pre><code>Before using the Twitter API, you first need a Twitter account, and to have obtained some credentials. The process of getting credentials could change with time, but currently it is as follows:
+
+Visit the Application Management page at https://apps.twitter.com/, and sign in with your Twitter account
+Click on the "Create New App" button, fill in the details and agree the Terms of Service
+Navigate to "Keys and Access Tokens" section and take a note of your Consumer Key and Secret
+In the same section click on "Create my access token" button
+Take note of your Access Token and Access Token Secret
+And that's all. The consumer key/secret is used to authenticate the app that is using the Twitter API, while the access token/secret authenticates the user. All of these parameters should be treated as passwords, and should not be included in your code in plain text. One suitable way is to store them in a JSON file "twitter_credentials.json" and load these values from your code when needed.
+
+</code></pre>
+<p>Source <a href="https://stackabuse.com/accessing-the-twitter-api-with-python/">E. Accessing the Twitter API with Python - Mihajlo Pavloski</a></p>
+
+<pre><code>Twitter API access levels and versions
+
+While the Twitter API v2 is the primary Twitter API, the platform currently supports previous versions (v1.1, Gnip 2.0) as well. We recommend that all users start with v2 as this is where all future innovation will happen. 
+
+The Twitter API v2 includes a few access levels to help you scale your usage on the platform. In general, new accounts can quickly sign up for free, Essential access. Should you want additional access, you may choose to apply for free Elevated access and beyond. 
+
+</code></pre>
+<p>Source <a href="https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api">A. Getting started with twitter API - Twitter Developer Platform</a></p>
+<p><img src="/images/copied_from_nb/ghtop_images/twitterAccesstypes.png" alt=""></p>
+<p>I applied for elevated access. This involved filling in several questions about what I would user twitter API for and a follow up email.</p>
+<p>For more info on how to apply for a twitter development account see <a href="https://www.jcchouinard.com/apply-for-a-twitter-developer-account/">F. How to Apply for a Twitter Developer Account - jean-christophe-chouinard</a></p>
+<h3 id="2.-Create-a-project/app">
+<a class="anchor" href="#2.-Create-a-project/app" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Create a project/app<a class="anchor-link" href="#2.-Create-a-project/app"> </a>
+</h3>
+<p>To use the twitter API you need to create a twitter App. From this you can then get the security IDs, bearer_token, API_key etc.</p>
+<p>For more details on this see <a href="https://www.jcchouinard.com/twitter-api-credentials/">G. How to get Twitter API Credentials (API Keys) - jean-christophe-chouinard</a></p>
+<h3 id="3.-Set-up-an-environment">
+<a class="anchor" href="#3.-Set-up-an-environment" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Set up an environment<a class="anchor-link" href="#3.-Set-up-an-environment"> </a>
+</h3>
+<pre><code>Twitter API bestows us several endpoints at the moment we request our App access. From which 3 of them are for searching methods, those that bring samples of the tweets we want according to specific criteria.
+api.search_30_day()
+
+Premium Search for tweets from the last 30 days.
+Monthly limitation of 4500 tweets per minute, without exceeding 25K tweets per month — Sandbox
+
+api.search_full_archive()
+
+Premium Search for tweets from March of 2006.
+Monthly limitation of 3000 tweets per minute, without exceeding 5K tweets per month — Sandbox
+
+api.search_tweets()
+
+Regular Search for tweets from the last 6–9 days as maximum.
+Monthly limitation of 3000 tweets per minute — Sandbox, this is the one that we gonna use in this case.
+
+</code></pre>
+<p>From <a href="https://medium.com/@robguilarr/making-queries-to-twitter-api-on-tweepy-66afeb7184a4">D. Making queries to Twitter API on tweepy - Roberto Aguilar</a></p>
+<p>These environments are found at <a href="https://developer.twitter.com/en/account/environments">https://developer.twitter.com/en/account/environments</a>.</p>
+<p>And the name of the environment is included in the particular search (as shown below <code>label=XXX</code>.</p>
+<h3 id="4.-Install-tweepy">
+<a class="anchor" href="#4.-Install-tweepy" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Install tweepy<a class="anchor-link" href="#4.-Install-tweepy"> </a>
+</h3>
+<p><code>pip install tweepy</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tweepy-code">
+<a class="anchor" href="#Tweepy-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tweepy code<a class="anchor-link" href="#Tweepy-code"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"BEARER_TOKEN"</span><span class="p">]</span><span class="o">=</span><span class="s2">" insert here "</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"API_key"</span><span class="p">]</span><span class="o">=</span><span class="s1">'insert here'</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"API_secret"</span><span class="p">]</span><span class="o">=</span><span class="s1">' insert here'</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"access_token"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">" insert here "</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"access_token_secret"</span><span class="p">]</span><span class="o">=</span><span class="s2">" insert here "</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Import-and-check-it-is-authenticated">
+<a class="anchor" href="#Import-and-check-it-is-authenticated" aria-hidden="true"><span class="octicon octicon-link"></span></a>Import and check it is authenticated<a class="anchor-link" href="#Import-and-check-it-is-authenticated"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">tweepy</span>
+
+<span class="c1"># API keys that yous saved earlier</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"API_KEY"</span><span class="p">)</span>
+<span class="n">api_secrets</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"API_secret"</span><span class="p">)</span>
+<span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"access_token"</span><span class="p">)</span>
+<span class="n">access_secret</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"access_token_secret"</span><span class="p">)</span>
+ 
+<span class="c1"># Authenticate to Twitter</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">OAuthHandler</span><span class="p">(</span><span class="n">api_key</span><span class="p">,</span><span class="n">api_secrets</span><span class="p">)</span>
+<span class="n">auth</span><span class="o">.</span><span class="n">set_access_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">,</span><span class="n">access_secret</span><span class="p">)</span>
+ 
+<span class="n">api</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">API</span><span class="p">(</span><span class="n">auth</span><span class="p">)</span>
+ 
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">api</span><span class="o">.</span><span class="n">verify_credentials</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Successful Authentication'</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Failed authentication'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Search-tweets">
+<a class="anchor" href="#Search-tweets" aria-hidden="true"><span class="octicon octicon-link"></span></a>Search tweets<a class="anchor-link" href="#Search-tweets"> </a>
+</h3>
+<p>Two main ones:</p>
+<p>For last 30 days:</p>
+<p><code>outa = api.search_30_day(label, query, *, tag, fromDate, toDate, maxResults,next)</code></p>
+<p>And for any times:</p>
+<p><code>outa = api.search_full_archive(label, query, *, tag, fromDate, toDate,                                maxResults, next)</code></p>
+<h4 id="Query">
+<a class="anchor" href="#Query" aria-hidden="true"><span class="octicon octicon-link"></span></a>Query<a class="anchor-link" href="#Query"> </a>
+</h4>
+<p>from the python script:</p>
+
+<pre><code>The equivalent of one premium rule/filter, with up to 1,024 characters (256 with Sandbox dev environments).
+
+This parameter should include ALL portions of the rule/filter,including all operators, and portions of the rule should not be separated into other parameters of the query.
+
+</code></pre>
+<p>Following adapted from <a href="https://medium.com/@robguilarr/making-queries-to-twitter-api-on-tweepy-66afeb7184a4">D. Making queries to Twitter API on tweepy - Roberto Aguilar</a></p>
+<ul>
+<li>Search for a term</li>
+</ul>
+<p><code>query = 'holiday'</code></p>
+<ul>
+<li>Containing two words</li>
+</ul>
+<p><code>query = 'holiday jet2'</code></p>
+<ul>
+<li>Containing exact words</li>
+</ul>
+<p><code>query='"jet2 braces" "holiday"'</code></p>
+<ul>
+<li>Contain one word OR another</li>
+</ul>
+<p><code>query='jet2 OR "tuiuk"'</code></p>
+<ul>
+<li>Hashtags and mentions</li>
+</ul>
+<p><code>query = '@jet2tweets #holiday'</code></p>
+<ul>
+<li>Exclude words</li>
+</ul>
+<p><code>query='@jet2tweets -travel'</code></p>
+<ul>
+<li>Who the tweet is sent from and to</li>
+</ul>
+<p><code>query='holiday from:jet2tweets'</code></p>
+<p><code>query='holiday to:jet2tweets'</code></p>
+<h4 id="Dates">
+<a class="anchor" href="#Dates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dates<a class="anchor-link" href="#Dates"> </a>
+</h4>
+<p>Dates are in the format YYYYMMDDHHmm</p>
+<p>So 0:00 21st March 2021 = '202103210000'</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-results-file">
+<a class="anchor" href="#The-results-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>The results file<a class="anchor-link" href="#The-results-file"> </a>
+</h3>
+<p><code>outa=api.search_full_archive(label=label,
+         query=query,toDate=end_time,fromDate=start_time)</code></p>
+<p>The information from outa is accessed for each element using _json, i.e.</p>
+<p><code>outa[0]._json</code> gives the first search result</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">xx</span><span class="o">=</span><span class="n">outa</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_json</span>
+<span class="k">for</span> <span class="n">ii</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">xx</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/tweepy_outputs.png" alt=""></p>
+<p>If the tweet is longer than 140 char the <code>text</code> property doesn't display all the text of the tweet.</p>
+<p>This will normally then be in the <code>extended_tweet</code> property but also sometimes in the <code>retweeted_status</code> property.</p>
+<p>So to get around this put in exceptions.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">textAll</span><span class="o">=</span><span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">numa</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">xx</span><span class="o">=</span><span class="n">outa1</span><span class="p">[</span><span class="n">numa</span><span class="p">]</span><span class="o">.</span><span class="n">_json</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">textAll</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numa</span><span class="p">,</span><span class="s1">'1'</span><span class="p">,</span> <span class="n">xx</span><span class="p">[</span><span class="s1">'created_at'</span><span class="p">],</span>
+              <span class="n">xx</span><span class="p">[</span><span class="s1">'retweeted_status'</span><span class="p">][</span><span class="s1">'extended_tweet'</span><span class="p">][</span><span class="s1">'full_text'</span><span class="p">]</span> <span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">textAll</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numa</span><span class="p">,</span><span class="s1">'2'</span><span class="p">,</span><span class="n">xx</span><span class="p">[</span><span class="s1">'created_at'</span><span class="p">],</span>
+                  <span class="n">xx</span><span class="p">[</span><span class="s1">'extended_tweet'</span><span class="p">][</span><span class="s1">'full_text'</span><span class="p">])</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">textAll</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numa</span><span class="p">,</span><span class="s1">'3'</span><span class="p">,</span><span class="n">xx</span><span class="p">[</span><span class="s1">'created_at'</span><span class="p">],</span><span class="n">xx</span><span class="p">[</span><span class="s1">'text'</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ThomasHSimm/THS_website"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/twitter/tweepy/python/2022/04/08/Tweepy.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Thomas H Simm</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/thomashsimm" target="_blank" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/thomashsimm" target="_blank" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
