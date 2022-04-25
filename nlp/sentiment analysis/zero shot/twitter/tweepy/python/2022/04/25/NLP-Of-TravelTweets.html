@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Natural Language Processing of Travel Tweets | Thomas Simm</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Natural Language Processing of Travel Tweets" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="NLP of tweets of travel companies during COVID" />
+<meta property="og:description" content="NLP of tweets of travel companies during COVID" />
+<link rel="canonical" href="https://thomashsimm.com/nlp/sentiment%20analysis/zero%20shot/twitter/tweepy/python/2022/04/25/NLP-Of-TravelTweets.html" />
+<meta property="og:url" content="https://thomashsimm.com/nlp/sentiment%20analysis/zero%20shot/twitter/tweepy/python/2022/04/25/NLP-Of-TravelTweets.html" />
+<meta property="og:site_name" content="Thomas Simm" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-04-25T00:00:00-05:00" />
+<script type="application/ld+json">
+{"datePublished":"2022-04-25T00:00:00-05:00","url":"https://thomashsimm.com/nlp/sentiment%20analysis/zero%20shot/twitter/tweepy/python/2022/04/25/NLP-Of-TravelTweets.html","@type":"BlogPosting","headline":"Natural Language Processing of Travel Tweets","dateModified":"2022-04-25T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://thomashsimm.com/nlp/sentiment%20analysis/zero%20shot/twitter/tweepy/python/2022/04/25/NLP-Of-TravelTweets.html"},"description":"NLP of tweets of travel companies during COVID","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://thomashsimm.com/feed.xml" title="Thomas Simm" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Thomas Simm</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Natural Language Processing of Travel Tweets</h1><p class="page-description">NLP of tweets of travel companies during COVID</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-04-25T00:00:00-05:00" itemprop="datePublished">
+        Apr 25, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      7 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#NLP">NLP</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#sentiment analysis">sentiment analysis</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#zero shot">zero shot</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#twitter">twitter</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#tweepy">tweepy</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Python">Python</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ThomasHSimm/THS_website/tree/master/_notebooks/2022-04-25-NLP-Of-TravelTweets.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ThomasHSimm/THS_website/master?filepath=_notebooks%2F2022-04-25-NLP-Of-TravelTweets.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ThomasHSimm/THS_website/blob/master/_notebooks/2022-04-25-NLP-Of-TravelTweets.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Introduction">Introduction </a></li>
+<li class="toc-entry toc-h2"><a href="#Twitter-Data">Twitter Data </a></li>
+<li class="toc-entry toc-h2"><a href="#Natural-Language-Processing-(NLP)">Natural Language Processing (NLP) </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Labels-for-travel-data">Labels for travel data </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Analysis-of-Labelled-data">Analysis of Labelled data </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Sentiment">Sentiment </a></li>
+<li class="toc-entry toc-h4"><a href="#Customer-Service-Queries">Customer Service Queries </a></li>
+<li class="toc-entry toc-h4"><a href="#Complaints">Complaints </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-04-25-NLP-Of-TravelTweets.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/header2.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Introduction">
+<a class="anchor" href="#Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction<a class="anchor-link" href="#Introduction"> </a>
+</h2>
+<p>Travel analysis of twitter feeds of UK travel companies TUI and Jet2 twitter accounts before and during the COVID pandemic.</p>
+<ul>
+<li>Twitter data is obtained from the twitter API using tweepy. </li>
+<li>NLP analysis is done using a zero-shot method from transformers. </li>
+<li>Analyis of NLP data is kept at a basic level using pandas and matplotlib</li>
+</ul>
+<h2 id="Twitter-Data">
+<a class="anchor" href="#Twitter-Data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Twitter Data<a class="anchor-link" href="#Twitter-Data"> </a>
+</h2>
+<p>Tweets were obtained using the twitter API and tweepy more details on twitter and API <a href="https://thomashsimm.com/twitter/tweepy/python/2022/04/08/Tweepy.html">here- tweepy</a>.</p>
+<p>I decided to keep the query simple and just use tweets containing the handle of TUI and Jet2's UK twitter accounts, as shown below. This was mainly because of the API limitation meant experimenting on the best query took away from getting data.</p>
+<p><code>query='@tuiuk'</code> or <code>query='@jet2tweets'</code></p>
+<p>I also decided to get tweets from a 3 day period, at first the start of a month and later in the middle. The tweets were focussed on dates around January 2020 (the start of the pandemic), with data obtained up to ~2 years before this and just over 2 years after this to the present (April 2022). And Use the <code>search_full_archive</code> call from twitter api. Broadly the call is as shown below.</p>
+<p><code>from datetime import date</code></p>
+<p><code>from datetime import timedelta</code></p>
+<p><code>start_time = date.fromisoformat('2020-02-01')
+end_time = start_time + timedelta(3)</code></p>
+<p><code>outa=api.search_full_archive(label="mytwitterlabel",
+         query=query,toDate=toDate,fromDate=fromDate)</code></p>
+<p>This leads to around 1500 tweets per firm at the time of analysis, due to twitter API call being limited.</p>
+<p><img src="ghtop_images/hist_notweets.png" alt=""></p>
+
+<pre><code> The number of tweets for Tui and Jet2 after removing 'duplicate' tweets</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Natural-Language-Processing-(NLP)">
+<a class="anchor" href="#Natural-Language-Processing-(NLP)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Natural Language Processing (NLP)<a class="anchor-link" href="#Natural-Language-Processing-(NLP)"> </a>
+</h2>
+<p>The most 'reliable' way to analyse text data is to do a two step process:</p>
+<ol>
+<li>creating a language model for the data</li>
+<li>using this language model with labelled data to classify different texts</li>
+</ol>
+<p>This method is shown here <a href="https://www.kaggle.com/code/thomassimm/imdb-sentiment-analysis">https://www.kaggle.com/code/thomassimm/imdb-sentiment-analysis</a> for sentiment analysis (i.e. are reviews positive or negative) of IMDB data. But the labels need not be positive or negative but can be more nuanced.</p>
+<p>However, for this twitter data there is no labelled data. I could label the data myself but will first try an alternative approach-&gt; the <a href="https://joeddav.github.io/blog/2020/05/29/ZSL.html">zero shot</a> learning method. The advantage is no labelled data is needed nor any prior training. But the accuracy will be reduced without any training as shown below.</p>
+<p><img src="https://joeddav.github.io/blog/images/zsl/gpt3_triviahq.png" alt=""></p>
+<p>Another advantage of the method is that it can be used to classify text data by broad labels based on the language model as shown by the example from the link below:</p>
+<p><code>sentence = 'Who are you voting for in 2020?'</code></p>
+<p><code>labels = ['business', 'art &amp; culture', 'politics']</code></p>
+<p>And the similarity for each label (high the better):</p>
+<p><code>label: politics     similarity: 0.21561521291732788</code></p>
+<p><code>label: business     similarity: 0.004524140153080225</code></p>
+<p><code>label: art &amp; culture    similarity: -0.027396833524107933</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Labels-for-travel-data">
+<a class="anchor" href="#Labels-for-travel-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Labels for travel data<a class="anchor-link" href="#Labels-for-travel-data"> </a>
+</h3>
+<p>At this point in analysis the goals are broad, I mainly want to know if I can understand how customers were reacting to the travel restriction changes being imposed on them and how this differed for the two travel companies. So what may be things we would want to classify from the tweets:</p>
+<ol>
+<li>How happy/unhappy are the customers?</li>
+<li>Is there a change in the number of what would be classed as complaints?</li>
+<li>Can sentiments be separated by what is the cause? e.g. customer service, cancellations, company policies</li>
+<li>(similar to above) What do the tweets refer to?</li>
+<li>Can we remove customer tweets from spam/promotional details/business changes etc?</li>
+</ol>
+<p>After a bit of iterating I decided on the following labels (see <a href="https://www.kaggle.com/code/thomassimm/travel-tweets-nlp/">https://www.kaggle.com/code/thomassimm/travel-tweets-nlp/</a> for trying out different labels).</p>
+<p><code>candidate_labels=['query','complaint',
+                  'holiday','hotel',
+                  'flight','flight cancellation','flight delay',
+                  'website or app problem','customer service',
+                  'travel regulations','price',
+                 'holiday cancellation']</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let us examine how the labels work for different tweets (picked randomly but avoiding tweets with similarity):</p>
+
+<pre><code>    A) Hi there, do you know the transfer time? I couldn’t see it on the website. Thanks 
+
+</code></pre>
+<ul>
+<li>query                          0.98 </li>
+<li>complaint                      0.73     </li>
+<li>holiday                        0.00   </li>
+<li>hotel                          0.62 </li>
+<li>flight                         0.24  </li>
+<li>flight cancellation            0.01                             </li>
+<li>flight delay                   0.15        </li>
+<li>website or app problem         0.89                  </li>
+<li>customer service               0.97            </li>
+<li>travel regulations             0.26              </li>
+<li>price                          0.00 </li>
+<li>
+<p>holiday cancellation           0.00</p>
+
+<pre><code>  B) Worst ever sent details of complaint Florida villa including memory stick with photos sent in never heard a thing don’t bother they just ignore you</code></pre>
+</li>
+</ul>
+<ul>
+<li>query                          0.72 </li>
+<li>complaint                      0.98     </li>
+<li>holiday                        0.73   </li>
+<li>hotel                          0.03 </li>
+<li>flight                         0.00  </li>
+<li>flight cancellation            0.00                             </li>
+<li>flight delay                   0.00        </li>
+<li>website or app problem         0.00                  </li>
+<li>customer service               0.82            </li>
+<li>travel regulations             0.06              </li>
+<li>price                          0.09 </li>
+<li>
+<p>holiday cancellation           0.13</p>
+
+<pre><code>      C) hi I’ve been trying to book a holiday for a few days on my pc or via the mobile app but when I try to check out I get this error message</code></pre>
+</li>
+</ul>
+<ul>
+<li>query                          0.73 </li>
+<li>complaint                      0.97     </li>
+<li>holiday                        0.94   </li>
+<li>hotel                          0.47 </li>
+<li>flight                         0.17  </li>
+<li>flight cancellation            0.00                             </li>
+<li>flight delay                   0.00        </li>
+<li>website or app problem         1.00                  </li>
+<li>customer service               0.70            </li>
+<li>travel regulations             0.22              </li>
+<li>price                          0.07 </li>
+<li>holiday cancellation           0.94            </li>
+</ul>
+
+<pre><code>        D) how do I amend dates on my holiday. Iv tried ringing customer service but was given wrong number to ring. Thanks 
+
+
+</code></pre>
+<ul>
+<li>query                          0.91</li>
+<li>complaint                      0.93     </li>
+<li>holiday                        0.99   </li>
+<li>hotel                          0.17 </li>
+<li>flight                         0.11  </li>
+<li>flight cancellation            0.02                             </li>
+<li>flight delay                   0.02        </li>
+<li>website or app problem         0.00                  </li>
+<li>customer service               0.67            </li>
+<li>travel regulations             0.57              </li>
+<li>price                          0.00 </li>
+<li>holiday cancellation           0.38 </li>
+</ul>
+
+<pre><code>        E) Maybe not quite neighbouring - Trinidad and Tobago 😁😁😂 
+
+</code></pre>
+<ul>
+<li>query                          0.37</li>
+<li>complaint                      0.87     </li>
+<li>holiday                        0.03   </li>
+<li>hotel                          0.03 </li>
+<li>flight                         0.03  </li>
+<li>flight cancellation            0.01                             </li>
+<li>flight delay                   0.01        </li>
+<li>website or app problem         0.02                  </li>
+<li>customer service               0.06            </li>
+<li>travel regulations             0.08              </li>
+<li>price                          0.04 </li>
+<li>holiday cancellation           0.06 </li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Some quick comments:</p>
+<ol>
+<li>Overall the labels make sense to the particular tweets.</li>
+<li>Complaint seems to be high for all even when they are clearly not complaints (D and E). Although, obvious complaints have higher values. Maybe combine with sentiment analysis?</li>
+<li>Website and app issues well picked up, preseumably as they use the words website or app</li>
+<li>The one with no relevance to customer service (E) scores low for query and customer service, so maybe the metric can help to distinguish these.</li>
+<li>Highest value for flight was for A even though flight not explicitly mentioned</li>
+</ol>
+<p>Lots of positives from this small selection. But to get a good idea of classification may take some more modication in terms of what to use and what values they give for different things. Perhaps this can be done as a neural network after some sort of labelling?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Analysis-of-Labelled-data">
+<a class="anchor" href="#Analysis-of-Labelled-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Analysis of Labelled data<a class="anchor-link" href="#Analysis-of-Labelled-data"> </a>
+</h2>
+<p>A brief analysis of the NLP results is given here <a href="https://www.kaggle.com/code/thomassimm/travel-tweets-analyseresults">https://www.kaggle.com/code/thomassimm/travel-tweets-analyseresults</a> and presented below.</p>
+<p>The most obvious thing to check first is the change in the sentiment of tweets. The figure below does this by taking the average of the positive sentiment for each time period.</p>
+<h4 id="Sentiment">
+<a class="anchor" href="#Sentiment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sentiment<a class="anchor-link" href="#Sentiment"> </a>
+</h4>
+<p><img src="/images/copied_from_nb/ghtop_images/positive_sent.png" alt=""></p>
+<p>Some initial comments:</p>
+<ol>
+<li>Jet2 gets more positive tweets than Tui</li>
+<li>The data may be noisy. The changes before the pandemic are noticeably large and it is not obvious if these are real trends or just noise. More digging would need to be done to establish what the changes are before COVID before the change during COVID could be assessed.</li>
+<li>The overall sentiment appears to be at a low in early 2022, the easing of restrictions may be suggesting a more positive sentiment in the future.</li>
+<li>Since this is an average of a random selection of tweets. A change in the nature of the tweets would have a big influence on the results.</li>
+</ol>
+<h4 id="Customer-Service-Queries">
+<a class="anchor" href="#Customer-Service-Queries" aria-hidden="true"><span class="octicon octicon-link"></span></a>Customer Service Queries<a class="anchor-link" href="#Customer-Service-Queries"> </a>
+</h4>
+<p>Given the last of the comments (the nature of the tweets), we may wish to separate tweets based on some overall criteria- e.g. review (inclusing complaint), query and other (including none customer queries, general comments, spam etc). Or remove the last of these by some other criteria such as 'customer service' and/or 'query' more than a certain amount.</p>
+<p><img src="/images/copied_from_nb/ghtop_images/query_sent.png" alt="">
+<img src="/images/copied_from_nb/ghtop_images/custserv_sent.png" alt=""></p>
+<p>Based on the above figures the percentage of tweets that are labelled 'query' or 'customer service' increase sharply during the pandemic. This would make sense given the confusion around the situation and the questions that customers will have around COVID regulations and company policies in dealing with these changes.</p>
+<h4 id="Complaints">
+<a class="anchor" href="#Complaints" aria-hidden="true"><span class="octicon octicon-link"></span></a>Complaints<a class="anchor-link" href="#Complaints"> </a>
+</h4>
+<p>Returning to the overall sentiment figure above, can a classification of tweets based on whether they are a complaint help with the changes?</p>
+<p>As shown in the figure below the complaint classification shows a clearer increase during the COVID period. Perhaps this offers a better way instead of the sentiment analysis to understand the nature of the tweets, but more analysis would be required.</p>
+<p>The maximum values for this metric for both cmpanies at the end of 2021 / start of 2022, are worth exploring in more detail</p>
+<p><img src="/images/copied_from_nb/ghtop_images/complaint_sent.png" alt=""></p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ThomasHSimm/THS_website"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/nlp/sentiment%20analysis/zero%20shot/twitter/tweepy/python/2022/04/25/NLP-Of-TravelTweets.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Thomas H Simm</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/thomashsimm" target="_blank" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/thomashsimm" target="_blank" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
