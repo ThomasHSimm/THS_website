@@ -271,7 +271,7 @@
   
       ,"page1": {
           "title": "About Me",
-          "content": ". Materials scientist / Data scientist . Projects . Materials science data viz . Some Computer Programming projects . Swansea house prices- regression model . 1. Part 1- Census and location data . 2. Part 2- Property sale data . 3. Part 3- Creating a property prediction App . Golf Swing Analysis . 1. Part 1- Body Position by fastai . 2. Part 2- Separating golf video into positions . 3. Part 3- Using pre-trained models- FiftyOne and Streamlit App . Building a NN Image Classifier App on the web . Neural network art style transfer . Bike share in Chicago data science . Python Web Scraping . Data Science Courses Completed . Links . GitHub . LinkedIn . Google Scholar . Research Gate . Wordpress site . Tweets by ThomasHSimm",
+          "content": ". Materials scientist / Data scientist . Projects . Materials science data viz . Some Computer Programming projects . Swansea house prices- regression model . 1. Part 1- Census and location data . 2. Part 2- Property sale data . 3. Part 3- Creating a property prediction App . Golf Swing Analysis . 1. Part 1- Body Position by fastai . 2. Part 2- Separating golf video into positions . 3. Part 3- Using pre-trained models- FiftyOne and Streamlit App . Natural Language Processing of Travel Tweets . Data Science Courses Completed . Links . GitHub . LinkedIn . Google Scholar . Research Gate . Wordpress site . Tweets by ThomasHSimm",
           "url": "https://thomashsimm.com/about/",
           "relUrl": "/about/",
           "date": ""
