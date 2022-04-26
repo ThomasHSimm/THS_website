@@ -35,6 +35,6 @@ permalink: /about/
 ### [LinkedIn](https://www.linkedin.com/in/thomashsimm/)
 
 ### [Google Scholar](https://scholar.google.com/citations?user=HdPDn1sAAAAJ)
-
+ 
 
 {% twitter https://twitter.com/thomashsimm %}
