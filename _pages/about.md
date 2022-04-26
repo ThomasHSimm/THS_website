@@ -35,8 +35,6 @@ permalink: /about/
 ### [LinkedIn](https://www.linkedin.com/in/thomashsimm/)
 
 ### [Google Scholar](https://scholar.google.com/citations?user=HdPDn1sAAAAJ)
- 
-### [Research Gate](https://www.researchgate.net/profile/Thomas-Simm)
 
 ### [Wordpress site](https://thomashsimm.wordpress.com)
 
