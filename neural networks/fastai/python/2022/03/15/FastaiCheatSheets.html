@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>FastAI CheatSheet | Thomas Simm</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="FastAI CheatSheet" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Using FastAI" />
+<meta property="og:description" content="Using FastAI" />
+<link rel="canonical" href="https://thomashsimm.com/neural%20networks/fastai/python/2022/03/15/FastaiCheatSheets.html" />
+<meta property="og:url" content="https://thomashsimm.com/neural%20networks/fastai/python/2022/03/15/FastaiCheatSheets.html" />
+<meta property="og:site_name" content="Thomas Simm" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-03-15T00:00:00-05:00" />
+<script type="application/ld+json">
+{"datePublished":"2022-03-15T00:00:00-05:00","url":"https://thomashsimm.com/neural%20networks/fastai/python/2022/03/15/FastaiCheatSheets.html","@type":"BlogPosting","headline":"FastAI CheatSheet","dateModified":"2022-03-15T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://thomashsimm.com/neural%20networks/fastai/python/2022/03/15/FastaiCheatSheets.html"},"description":"Using FastAI","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://thomashsimm.com/feed.xml" title="Thomas Simm" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Thomas Simm</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">FastAI CheatSheet</h1><p class="page-description">Using FastAI</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-03-15T00:00:00-05:00" itemprop="datePublished">
+        Mar 15, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      4 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#Neural networks">Neural networks</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#FastAI">FastAI</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Python">Python</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ThomasHSimm/THS_website/tree/master/_notebooks/2022-03-15-FastaiCheatSheets.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ThomasHSimm/THS_website/master?filepath=_notebooks%2F2022-03-15-FastaiCheatSheets.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ThomasHSimm/THS_website/blob/master/_notebooks/2022-03-15-FastaiCheatSheets.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Misc.">Misc. </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Creating-a-path">Creating a path </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Loading-the-data">Loading the data </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#DataBlocks">DataBlocks </a></li>
+<li class="toc-entry toc-h3"><a href="#DataLoaders">DataLoaders </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#The-model">The model </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Different-models">Different models </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Vision">Vision </a></li>
+<li class="toc-entry toc-h4"><a href="#Text">Text </a></li>
+<li class="toc-entry toc-h4"><a href="#Tabular">Tabular </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#Learning">Learning </a></li>
+<li class="toc-entry toc-h3"><a href="#Some-other-useful-bits">Some other useful bits </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-03-15-FastaiCheatSheets.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/copied_from_nb/ghtop_images/header2.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Misc.">
+<a class="anchor" href="#Misc." aria-hidden="true"><span class="octicon octicon-link"></span></a>Misc.<a class="anchor-link" href="#Misc."> </a>
+</h2>
+<h3 id="Creating-a-path">
+<a class="anchor" href="#Creating-a-path" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating a path<a class="anchor-link" href="#Creating-a-path"> </a>
+</h3>
+<p>Where the data is</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span><span class="o">=</span><span class="n">Path</span><span class="p">()</span>
+
+<span class="n">Path</span><span class="o">.</span><span class="n">BASE_PATH</span> <span class="o">=</span> <span class="n">path</span>
+
+<span class="c1"># another folder off cwd</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'bears'</span><span class="p">)</span>
+<span class="c1">#if doesn't exist can do</span>
+<span class="n">path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+
+<span class="c1"># as part of downloading inbuilt data</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">untar_data</span><span class="p">(</span><span class="n">URLs</span><span class="o">.</span><span class="n">IMDB</span><span class="p">)</span>
+
+
+<span class="c1"># When using path to select a subfolder</span>
+<span class="err">`</span><span class="n">trains</span> <span class="o">=</span> <span class="n">path</span><span class="o">/</span><span class="s1">'train'</span><span class="err">`</span>
+<span class="n">Or</span> <span class="n">to</span> <span class="n">view</span>
+<span class="err">`</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s1">'train'</span><span class="p">)</span><span class="o">.</span><span class="n">ls</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Loading-the-data">
+<a class="anchor" href="#Loading-the-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Loading the data<a class="anchor-link" href="#Loading-the-data"> </a>
+</h2>
+<p><code>DataLoaders</code> is a thin class that just stores whatever <code>DataLoader</code> objects you pass to it, and makes them available as <code>train</code> and <code>valid</code>. Although it's a very simple class, it's very important in fastai: it provides the data for your model. The key functionality in <code>DataLoaders</code> is provided with just these four lines of code (it has some other minor functionality we'll skip over for now):</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DataLoaders</span><span class="p">(</span><span class="n">GetAttr</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">loaders</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">loaders</span> <span class="o">=</span> <span class="n">loaders</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">loaders</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">train</span><span class="p">,</span><span class="n">valid</span> <span class="o">=</span> <span class="n">add_props</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span><span class="bp">self</span><span class="p">:</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+<p>To turn our downloaded data into a <code>DataLoaders</code> object we need to tell fastai at least four things:</p>
+<ul>
+<li>What kinds of data we are working with</li>
+<li>How to get the list of items</li>
+<li>How to label these items</li>
+<li>How to create the validation set</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="DataBlocks">
+<a class="anchor" href="#DataBlocks" aria-hidden="true"><span class="octicon octicon-link"></span></a>DataBlocks<a class="anchor-link" href="#DataBlocks"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dBlock</span> <span class="o">=</span> <span class="n">DataBlock</span><span class="p">(</span>
+    <span class="n">blocks</span><span class="o">=</span><span class="p">(</span><span class="n">ImageBlock</span><span class="p">,</span> <span class="n">CategoryBlock</span><span class="p">),</span> 
+    <span class="n">get_items</span><span class="o">=</span><span class="n">get_image_files</span><span class="p">,</span> 
+    <span class="n">splitter</span><span class="o">=</span><span class="n">RandomSplitter</span><span class="p">(</span><span class="n">valid_pct</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+    <span class="n">get_y</span><span class="o">=</span><span class="n">parent_label</span><span class="p">,</span>
+    <span class="n">item_tfms</span><span class="o">=</span><span class="n">Resize</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>blocks</code> what format is the data?</p>
+<ul>
+<li><code>ImageBlock</code></li>
+<li><code>CategoryBlock</code></li>
+<li><code>TextBlock</code></li>
+</ul>
+<p><code>get_items</code> takes a function that that gives the list of all data (images/text etc)</p>
+<ul>
+<li><code>get_image_files</code></li>
+<li><code>partial(get_text_files, folders=['train', 'test', 'unsup'])</code></li>
+</ul>
+<p><code>splitter</code> how data is plit into test and validation sets</p>
+<ul>
+<li>
+<code>RandomSplitter(valid_pct=0.2, seed=42)</code> randomly</li>
+<li>
+<code>def splitter(df):
+  train = df.index[~df['is_valid']].tolist()
+  valid = df.index[df['is_valid']].tolist()
+  return train,valid</code> use a function this one uses data frame</li>
+</ul>
+<p><code>get_x</code> and <code>get_y</code> get the independent (x) and dependent variables (y) takes a function that provides labels for the data</p>
+<ul>
+<li>
+<code>parent_label</code> gets the name of the parent folder e.g. when doing categorical data put rabbits in 'rabbits' folder and horses in 'horses' folder</li>
+<li><code>def get_y(r): return r['labels'].split(' ')</code></li>
+</ul>
+<p><code>item_tfms</code> runs on individual items- allows for data augmentation, making images the same size etc</p>
+<ul>
+<li>
+<code>Resize(128)</code> resize all images to 128</li>
+<li>
+<code>Resize(128, ResizeMethod.Pad, pad_mode='zeros'</code> resize with zeros</li>
+</ul>
+<p><code>batch_tfms</code> similar to the above but apply to all batch</p>
+<ul>
+<li>
+<code>[*aug_transforms(size=size, min_scale=0.75),</code>
+ <code>Normalize.from_stats(*imagenet_stats)]</code>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="DataLoaders">
+<a class="anchor" href="#DataLoaders" aria-hidden="true"><span class="octicon octicon-link"></span></a>DataLoaders<a class="anchor-link" href="#DataLoaders"> </a>
+</h3>
+<p>The data block is like a template for creating a DataLoaders. We still need to tell fastai the actual source of our data—in this case, the path where the images can be found along with some other details.</p>
+<p>A <code>DataLoaders</code> includes validation and training <code>DataLoader</code>s. <code>DataLoader</code> is a class that provides batches of a few items at a time to the GPU. When you loop through a <code>DataLoader</code> fastai will give you 64 (by default) items at a time, all stacked up into a single tensor.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dls</span> <span class="o">=</span> <span class="n">dBlock</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> 
+            <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> 
+            <span class="n">bs</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> 
+            <span class="n">seq_len</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>after_item</code> applied after each item equivalent of <code>item_tfms</code></p>
+<p><code>before_batch</code> applied on list of items before they're collated</p>
+<p><code>after_batch</code> applied on the batch as a whole after construction- equivalent to <code>batch_tfms</code></p>
+<p><code>bs</code> batch size</p>
+<p><code>seq_len</code></p>
+<p><code>path</code> path to data</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-model">
+<a class="anchor" href="#The-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>The model<a class="anchor-link" href="#The-model"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Different-models">
+<a class="anchor" href="#Different-models" aria-hidden="true"><span class="octicon octicon-link"></span></a>Different models<a class="anchor-link" href="#Different-models"> </a>
+</h3>
+<h4 id="Vision">
+<a class="anchor" href="#Vision" aria-hidden="true"><span class="octicon octicon-link"></span></a>Vision<a class="anchor-link" href="#Vision"> </a>
+</h4>
+<p><code>from fastai.vision import models</code></p>
+<p><code>learn = cnn_learner(data, models.resnet18, metrics=accuracy)</code></p>
+<p>Torchvision models</p>
+<ul>
+<li>
+<code>resnet18</code>, <code>resnet34</code>, <code>resnet50</code>, <code>resnet101</code>, <code>resnet152</code>
+</li>
+<li>
+<code>squeezenet1_0</code>, <code>squeezenet1_1</code>
+</li>
+<li>
+<code>densenet121</code>, <code>densenet169</code>, <code>densenet201</code>, <code>densenet161</code>
+</li>
+<li>
+<code>vgg16_bn</code>, <code>vgg19_bn</code>
+</li>
+<li>
+<code>alexnet</code>
+Others</li>
+<li>
+<code>Darknet</code> </li>
+<li><code>unet</code></li>
+</ul>
+<h4 id="Text">
+<a class="anchor" href="#Text" aria-hidden="true"><span class="octicon octicon-link"></span></a>Text<a class="anchor-link" href="#Text"> </a>
+</h4>
+<p><code>from fastai.text import *</code></p>
+<p><code>learn = language_model_learner(data_lm, AWD_LSTM, drop_mult=0.5)</code></p>
+<p>Or for classification</p>
+<p><code>learn = text_classifier_learner(data_clas, AWD_LSTM, drop_mult=0.5)</code></p>
+<h4 id="Tabular">
+<a class="anchor" href="#Tabular" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tabular<a class="anchor-link" href="#Tabular"> </a>
+</h4>
+<p><code>from fastai.tabular import *</code></p>
+<p><code>learn = tabular_learner(data, layers=[200,100], emb_szs={'native-country': 10}, metrics=accuracy)</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Learning">
+<a class="anchor" href="#Learning" aria-hidden="true"><span class="octicon octicon-link"></span></a>Learning<a class="anchor-link" href="#Learning"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To fit the model we have a few options:</p>
+<ul>
+<li>
+<p><code>learn.fit(10,lr=4e-3)</code></p>
+</li>
+<li>
+<p><code>learn.fit_one_cycle()</code></p>
+</li>
+<li>
+<p><code>learn.fine_tune(10, base_lr=1e-3, freeze_epochs=7)</code></p>
+</li>
+<li>
+<p><code>learn.fine_tune(15, lr)</code></p>
+</li>
+</ul>
+<p>FastAI adds an extra 2 layers on the end of neural network when doing <strong>transfer learning</strong>, these can then be fitted using fine_tune. It is recommended to do a few fits frozen before unfreezing. This is normally the best option for transfer learning.</p>
+<p>But the other ones can be used. In general fit can be more unstable and lead to bigger losses, but can be useful if fine_tune is not bringing losses down.</p>
+<p><a href="https://forums.fast.ai/t/fine-tune-vs-fit-one-cycle/66029/6">https://forums.fast.ai/t/fine-tune-vs-fit-one-cycle/66029/6</a></p>
+
+<pre><code>fit_one_cycle = New Model
+
+fine_tuning = with Transfer Learning?
+
+I’d say yes but with a very strong but, only because it’s easy to fall into a trap that way. fine_tuning is geared towards transfer learning specifically, but you can also just do fit_one_cycle as well! (Or flat_cos).
+
+For beginners it’s a great starting fit function (and advanced too), but also don’t forget that you can then
+
+
+</code></pre>
+<p>An alternative to <code>fine_tuning</code> with transfer learning is to specify which layers are frozen:</p>
+<p>Unfreeze layers, to freeze all except the last two parameter groups use <code>freeze_to</code>:</p>
+<p><code>learn.freeze_to(-2)</code></p>
+<p><code>learn.fit_one_cycle(1, slice(1e-2/(2.6**4),1e-2))</code></p>
+<p>And unfreeze a bit more</p>
+<p><code>learn.freeze_to(-3)</code></p>
+<p>Or unfreeze the whole model</p>
+<p><code>learn.unfreeze</code></p>
+<p>Can see the difference between <code>fine_tune</code> and <code>fit_one_cycle</code> from the <code>fine_tune</code> function:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">fine_tune</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span><span class="n">Learner</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">base_lr</span><span class="o">=</span><span class="mf">2e-3</span><span class="p">,</span> <span class="n">freeze_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lr_mult</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+              <span class="n">pct_start</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">div</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="s2">"Fine tune with `freeze` for `freeze_epochs` then with `unfreeze` from `epochs` using discriminative LR"</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">freeze</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="n">freeze_epochs</span><span class="p">,</span> <span class="nb">slice</span><span class="p">(</span><span class="n">base_lr</span><span class="p">),</span> <span class="n">pct_start</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">base_lr</span> <span class="o">/=</span> <span class="mi">2</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">unfreeze</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="nb">slice</span><span class="p">(</span><span class="n">base_lr</span><span class="o">/</span><span class="n">lr_mult</span><span class="p">,</span> <span class="n">base_lr</span><span class="p">),</span> <span class="n">pct_start</span><span class="o">=</span><span class="n">pct_start</span><span class="p">,</span> <span class="n">div</span><span class="o">=</span><span class="n">div</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Some-other-useful-bits">
+<a class="anchor" href="#Some-other-useful-bits" aria-hidden="true"><span class="octicon octicon-link"></span></a>Some other useful bits<a class="anchor-link" href="#Some-other-useful-bits"> </a>
+</h3>
+<p>Find the best learing rate:</p>
+<p><code>learn.lr_find()</code></p>
+<p><img src="/images/copied_from_nb/ghtop_images/GOLF5.png" alt=""></p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ThomasHSimm/THS_website"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/neural%20networks/fastai/python/2022/03/15/FastaiCheatSheets.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Thomas H Simm</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/thomashsimm" target="_blank" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/thomashsimm" target="_blank" title="thomashsimm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
