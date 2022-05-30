@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      5 min read
+      10 min read
     
 </span></p>
 
@@ -160,6 +160,21 @@ window.onload = wrap_img;
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3.141592653589793
+5.830951894845301
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     
 
@@ -178,6 +193,22 @@ window.onload = wrap_img;
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.7617615023592539
+4
+2
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -210,6 +241,24 @@ window.onload = wrap_img;
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>pa
+Spa
+pam
+Spam
+SpamSpamSpam
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     
 
@@ -234,6 +283,26 @@ window.onload = wrap_img;
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">~\AppData\Local\Temp/ipykernel_16436/769787010.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">      1</span> <span class="ansi-red-intense-fg ansi-bold"># strings are not immutable</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 2</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>S<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-cyan-intense-fg ansi-bold">0</span><span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-blue-intense-fg ansi-bold">&#39;p&#39;</span> <span class="ansi-red-intense-fg ansi-bold">##error</span>
+
+<span class="ansi-red-intense-fg ansi-bold">TypeError</span>: &#39;str&#39; object does not support item assignment</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     
 
@@ -253,12 +322,34 @@ window.onload = wrap_img;
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>zpam
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="String-specific-methods">String specific methods<a class="anchor-link" href="#String-specific-methods"> </a></h2>
+<h2 id="String-specific-methods">String specific methods<a class="anchor-link" href="#String-specific-methods"> </a></h2><p><a href="https://docs.python.org/3/library/stdtypes.html#string-methods">https://docs.python.org/3/library/stdtypes.html#string-methods</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Split">Split<a class="anchor-link" href="#Split"> </a></h3><p>Return a list of the words in the string, using sep as the delimiter string. If maxsplit is given, at most maxsplit splits are done (thus, the list will have at most maxsplit+1 elements). If maxsplit is not specified or -1, then there is no limit on the number of splits (all possible splits are made).</p>
+
 </div>
 </div>
 </div>
@@ -269,18 +360,29 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;pa&#39;</span><span class="p">))</span><span class="c1">#finds position</span>
-
-<span class="c1">#replace parts of a string</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;pa&#39;</span><span class="p">,</span><span class="s1">&#39;XYZ&#39;</span><span class="p">))</span>
-
-<span class="c1">#upper and lower case</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stra</span><span class="o">=</span><span class="s1">&#39;xsxhu csjoaij jsaijaio j dijoi&#39;</span>
+<span class="n">stra1</span><span class="o">=</span><span class="n">stra</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stra1</span><span class="p">)</span>
+<span class="n">stra1</span><span class="o">=</span><span class="n">stra</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span><span class="n">maxsplit</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stra1</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;xsxhu&#39;, &#39;csjoaij&#39;, &#39;jsaijaio&#39;, &#39;j&#39;, &#39;dijoi&#39;]
+[&#39;xsxhu cs&#39;, &#39;oai&#39;, &#39; jsaijaio j dijoi&#39;]
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -306,6 +408,357 @@ window.onload = wrap_img;
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Strip">Strip<a class="anchor-link" href="#Strip"> </a></h3><p>Return a copy of the string with the leading and trailing characters removed.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s1">&#39;   spacious   &#39;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;spacious&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Check-nature-of-string">Check nature of string<a class="anchor-link" href="#Check-nature-of-string"> </a></h3><p><code>str.isalnum()</code></p>
+<p>This method checks if all the characters of a string are alphanumeric (a-z, A-Z and 0-9).</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stra</span><span class="o">=</span><span class="s1">&#39;abcD1&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stra</span><span class="p">,</span><span class="n">stra</span><span class="o">.</span><span class="n">isalnum</span><span class="p">())</span>
+<span class="n">stra</span><span class="o">=</span><span class="s1">&#39;abcD1#&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stra</span><span class="p">,</span><span class="n">stra</span><span class="o">.</span><span class="n">isalnum</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abcD1 True
+abcD1# False
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>str.isalpha()</code></p>
+<p>This method checks if all the characters of a string are alphabetical (a-z and A-Z).</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stra</span><span class="o">=</span><span class="s1">&#39;abcD1&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stra</span><span class="p">,</span><span class="n">stra</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
+<span class="n">stra</span><span class="o">=</span><span class="s1">&#39;abcD&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stra</span><span class="p">,</span><span class="n">stra</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abcD1 False
+abcD True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>str.isdigit()</code></p>
+<p>This method checks if all the characters of a string are digits (0-9)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>stra='abcD1'
+print(stra,stra.isdigit())
+stra='190'
+print(stra,stra.isdigit())</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>str.islower()</code></p>
+<p>This method checks if all the characters of a string are lowercase characters (a-z).</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stra</span><span class="o">=</span><span class="s1">&#39;abcD1&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stra</span><span class="p">,</span><span class="n">stra</span><span class="o">.</span><span class="n">islower</span><span class="p">())</span>
+<span class="n">stra</span><span class="o">=</span><span class="s1">&#39;190&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stra</span><span class="p">,</span><span class="n">stra</span><span class="o">.</span><span class="n">islower</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abcD1 False
+190 False
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>str.lower</code> or <code>str.upper</code> change whether upper or lower case</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stra</span><span class="o">=</span><span class="s1">&#39;abcD1&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stra</span><span class="p">,</span><span class="n">stra</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span><span class="n">stra</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abcD1 abcd1 ABCD1
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>captialize the first character</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">stra</span><span class="o">.</span><span class="n">capitalize</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Abcd1
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Find">Find<a class="anchor-link" href="#Find"> </a></h3><p>Find the position of a substring within a string</p>
+<p><code>string.find(stringIN)</code> scan left to right</p>
+<p><code>string.rfind(stringIN)</code> scan right to left</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stra</span><span class="o">=</span><span class="s1">&#39;ABCDCDC&#39;</span>
+<span class="n">straa</span><span class="o">=</span><span class="s1">&#39;BCD&#39;</span>
+<span class="n">stra</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;CD&#39;</span><span class="p">),</span><span class="n">stra</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;CD&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(2, 4)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Replace">Replace<a class="anchor-link" href="#Replace"> </a></h3><p><code>string.replace(sub_string,string)</code> replace parts of a string</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">S</span><span class="o">=</span><span class="s1">&#39;oke doke karaoke&#39;</span>
+
+<span class="c1">#replace parts of a string</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;karaoke&#39;</span><span class="p">,</span><span class="s1">&#39;noke&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>oke doke karaoke
+oke doke noke
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -363,7 +816,8 @@ window.onload = wrap_img;
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Lists">Lists<a class="anchor-link" href="#Lists"> </a></h2>
+<h2 id="Lists">Lists<a class="anchor-link" href="#Lists"> </a></h2><p><a href="https://docs.python.org/3/tutorial/datastructures.html?highlight=tuple">https://docs.python.org/3/tutorial/datastructures.html?highlight=tuple</a></p>
+
 </div>
 </div>
 </div>
@@ -376,6 +830,469 @@ They are also mutable—unlike strings, lists can be modified in-place by assign
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="New-List">New List<a class="anchor-link" href="#New-List"> </a></h3><p>Create a list with <code>list(XX)</code></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;1 2 3 4 5 6 7&#39;</span>
+<span class="n">lista</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;1&#39;, &#39; &#39;, &#39;2&#39;, &#39; &#39;, &#39;3&#39;, &#39; &#39;, &#39;4&#39;, &#39; &#39;, &#39;5&#39;, &#39; &#39;, &#39;6&#39;, &#39; &#39;, &#39;7&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Copy">Copy<a class="anchor-link" href="#Copy"> </a></h3><p><code>list.copy</code></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lista</span> <span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="n">lista</span><span class="o">=</span><span class="n">lista</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Original a=</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">lista</span><span class="p">)</span>
+<span class="n">listb</span><span class="o">=</span><span class="n">lista</span>
+<span class="n">listc</span><span class="o">=</span><span class="n">lista</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">listd</span><span class="o">=</span><span class="n">lista</span><span class="p">[:]</span>
+
+<span class="n">listb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;po&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;list b, where b=a and b[1] modified, b=</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">listb</span><span class="p">,</span>
+    <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Just using equals b=a after mods, a=</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">lista</span><span class="p">,</span>
+      <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> Using a copy c=a.copy(), c=</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">listc</span><span class="p">,</span>
+      <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> Using d=a[:] to create a copy, d=</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">listd</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Original a=
+ [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+list b, where b=a and b[1] modified, b=
+ [&#39;1&#39;, &#39;po&#39;, &#39;3&#39;] 
+Just using equals b=a after mods, a=
+ [&#39;1&#39;, &#39;po&#39;, &#39;3&#39;] 
+ Using a copy c=a.copy(), c=
+ [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;] 
+ Using d=a[:] to create a copy, d=
+ [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Append">Append<a class="anchor-link" href="#Append"> </a></h3><p><code>list.append(x)</code>, add x to end of a list</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+<span class="n">lista</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;ok&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;1&#39;, &#39;po&#39;, &#39;3&#39;]
+[&#39;1&#39;, &#39;po&#39;, &#39;3&#39;, &#39;ok&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Insert">Insert<a class="anchor-link" href="#Insert"> </a></h3><p><code>lista.insert(i,x)</code> insert x at position i</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lista</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;two&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;1&#39;, &#39;po&#39;, &#39;two&#39;, &#39;3&#39;, &#39;ok&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Remove">Remove<a class="anchor-link" href="#Remove"> </a></h3><p><code>lista.remove(x)</code> Remove the first item from the list whose value is equal to x.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lista</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;two&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;1&#39;, &#39;po&#39;, &#39;3&#39;, &#39;ok&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Pop">Pop<a class="anchor-link" href="#Pop"> </a></h3><p><code>lista.pop([i])</code> Remove the item at the given position in the list, and return it</p>
+<p><code>list.popleft</code> at left</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>po
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Remove">Remove<a class="anchor-link" href="#Remove"> </a></h3><p><code>list.clear()</code> Remove all items from the list. Equivalent to del a[:].</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="o">.</span><span class="n">clear</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>None
+[]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Index">Index<a class="anchor-link" href="#Index"> </a></h3><p><code>list.index(x,i)</code> Return position of x within list starting at position i</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">listc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">listc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">listc</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;1&#39;]
+0 2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Count">Count<a class="anchor-link" href="#Count"> </a></h3><p><code>lista.count(x)</code> Return the number of times x appears in the list.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">listc</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Sort">Sort<a class="anchor-link" href="#Sort"> </a></h3><p><code>lista.sort(*, key=None, reverse=False)</code>     Sort the items of the list in place (the arguments can be used for sort customization, see sorted() (<a href="https://docs.python.org/3/library/functions.html#sorted">https://docs.python.org/3/library/functions.html#sorted</a>) for their explanation).</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">listc</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">listc</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;1&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Reverse">Reverse<a class="anchor-link" href="#Reverse"> </a></h3><p><code>lista.reverse()</code> Reverse the elements of the list in place.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Del">Del<a class="anchor-link" href="#Del"> </a></h3><p><code>del lista[0]</code> remove an item from a list given its index instead of its value</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">listc</span><span class="p">)</span>
+<span class="k">del</span> <span class="n">listc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">listc</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;1&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+[&#39;1&#39;, &#39;1&#39;, &#39;3&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -410,12 +1327,31 @@ They are also mutable—unlike strings, lists can be modified in-place by assign
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[123, &#39;spam&#39;, 1.23]
+1.23
+[123, &#39;spam&#39;, 1.23, &#39;NI&#39;]
+[&#39;spam&#39;, 1.23, &#39;NI&#39;]
+[&#39;aa&#39;, &#39;boio&#39;, &#39;ccc&#39;, &#39;gsss&#39;, &#39;jeji&#39;, &#39;popo&#39;, &#39;zulu&#39;]
+[&#39;zulu&#39;, &#39;popo&#39;, &#39;jeji&#39;, &#39;gsss&#39;, &#39;ccc&#39;, &#39;boio&#39;, &#39;aa&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Comprehensions">Comprehensions<a class="anchor-link" href="#Comprehensions"> </a></h2><p>Python includes a more advanced operation known as a list comprehension expression, which turns out to be a powerful way to process structures like our matrix.</p>
+<h2 id="Comprehensions">Comprehensions<a class="anchor-link" href="#Comprehensions"> </a></h2><p>List comprehensions provide a concise way to create lists. Common applications are to make new lists where each element is the result of some operations applied to each member of another sequence or iterable, or to create a subsequence of those elements that satisfy a certain condition.</p>
 
 </div>
 </div>
@@ -427,21 +1363,27 @@ They are also mutable—unlike strings, lists can be modified in-place by assign
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">M</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-  <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
-  <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
-
-<span class="c1"># this is a comprehension</span>
-<span class="n">col1</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">M</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">col1</span><span class="p">)</span>
-
-<span class="c1">#put if statement in</span>
-<span class="nb">print</span><span class="p">([</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">M</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">%</span><span class="k">2</span> ==0])
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">squares</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">squares</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -455,12 +1397,173 @@ They are also mutable—unlike strings, lists can be modified in-place by assign
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">][:])</span>
-<span class="c1"># we can&#39;t do this! for a column</span>
-<span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)])</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A list comprehension consists of brackets containing an expression followed by a for clause, then zero or more for or if clauses. The result will be a new list resulting from evaluating the expression in the context of the for and if clauses which follow it. For example, this listcomp combines the elements of two lists if they are not equal:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span><span class="o">!=</span><span class="n">y</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">vec</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]]</span>
+<span class="p">[</span><span class="n">num</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">vec</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">elem</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[1, 2, 3, 4, 5, 6, 7, 8, 9]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">matrix</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]]</span>
+<span class="p">[[</span><span class="n">col</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[[1, 5, 9], [2, 6, 19], [3, 7, 11], [4, 8, 12]]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="List-to-string">List to string<a class="anchor-link" href="#List-to-string"> </a></h3><p>Convert a list to a string with <code>"".join(lista)</code></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stra</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">listd</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stra</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">stra</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>123 - 23
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -770,6 +1873,134 @@ operations:</p>
 <p>In the constructor method, we initialize the packages dictionary, which will contain the package objects available in this repository instance. We initialize the dictionary in the constructor to ensure that every instance of the Repository class has its own dictionary.</p>
 <p>We then define the add_package method, which takes a Package object as a parameter, and then adds it to our dictionary, using the package name attribute as the key.</p>
 <p>Finally, we define a total_size method which computes the total size of all packages contained in our repository. This method iterates through the values in our repository dictionary and adds together the size attributes from each package object contained in the dictionary, returning the total at the end. In this example, we’re making use of Package attributes within our Repository class. We’re also calling the values() method on our packages dictionary instance. Composition allows us to use objects as attributes, as well as access all their attributes and methods.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Print">Print<a class="anchor-link" href="#Print"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mf">30.5557889</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>30.55579
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">width</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;HackerRank&#39;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">width</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">))</span><span class="c1">#or rjust</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>HackerRank----------
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">width</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;HackerRank&#39;</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">width</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>-----HackerRank-----
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://docs.python.org/3/library/stdtypes.html#string-methods">https://docs.python.org/3/library/stdtypes.html#string-methods</a></p>
+<p>Conversion...........................      Meaning</p>
+<p><code>d</code>..................................... Signed integer decimal.</p>
+<p><code>i</code>.....................................                        Signed integer decimal.</p>
+<p><code>o</code>.....................................                        Signed octal value.</p>
+<p><code>u</code>.....................................                        Obsolete type – it is identical to 'd'.</p>
+<p><code>x</code>.....................................                        Signed hexadecimal (lowercase).</p>
+<p><code>X</code>.....................................                        Signed hexadecimal (uppercase).</p>
+<p><code>e</code> .....................................                       Floating point exponential format (lowercase).</p>
+<p><code>E</code>.....................................                        Floating point exponential format (uppercase).</p>
+<p><code>f</code>..................................... Floating point decimal format.</p>
+<p><code>F</code>..................................... Floating point decimal format.</p>
+<p><code>g</code>..................................... Floating point format. Uses lowercase exponential format if exponent is less than -4 or not less than precision, decimal format otherwise.</p>
+<p><code>G</code> ..................................... Floating point format. Uses uppercase exponential format if exponent is less than -4 or not less than precision, decimal format otherwise.</p>
+<p><code>c</code>..................................... Single character (accepts integer or single character string).</p>
+<p><code>r</code>..................................... String (converts any Python object using repr()).</p>
+<p><code>s</code>..................................... String (converts any Python object using str()).</p>
+<p><code>a</code>..................................... String (converts any Python object using ascii()).</p>
+<p><code>%</code>..................................... No argument is converted, results in a '%' character in the result.</p>
 
 </div>
 </div>
