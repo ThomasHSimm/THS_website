@@ -10,13 +10,13 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Using Swansea property prices as a regression example of random forests" />
 <meta property="og:description" content="Using Swansea property prices as a regression example of random forests" />
-<link rel="canonical" href="https://thomashsimm.com/rf/decision%20trees/random%20forests/python/2020/07/01/RandomForests.html" />
-<meta property="og:url" content="https://thomashsimm.com/rf/decision%20trees/random%20forests/python/2020/07/01/RandomForests.html" />
+<link rel="canonical" href="https://thomashsimm.com/rf/decision%20trees/random%20forests/python/2022/07/01/RandomForests.html" />
+<meta property="og:url" content="https://thomashsimm.com/rf/decision%20trees/random%20forests/python/2022/07/01/RandomForests.html" />
 <meta property="og:site_name" content="Thomas Simm" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-07-01T00:00:00-05:00" />
+<meta property="article:published_time" content="2022-07-01T00:00:00-05:00" />
 <script type="application/ld+json">
-{"datePublished":"2020-07-01T00:00:00-05:00","url":"https://thomashsimm.com/rf/decision%20trees/random%20forests/python/2020/07/01/RandomForests.html","@type":"BlogPosting","headline":"Decision Trees and Random Forests","dateModified":"2020-07-01T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://thomashsimm.com/rf/decision%20trees/random%20forests/python/2020/07/01/RandomForests.html"},"description":"Using Swansea property prices as a regression example of random forests","@context":"https://schema.org"}</script>
+{"datePublished":"2022-07-01T00:00:00-05:00","url":"https://thomashsimm.com/rf/decision%20trees/random%20forests/python/2022/07/01/RandomForests.html","@type":"BlogPosting","headline":"Decision Trees and Random Forests","dateModified":"2022-07-01T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://thomashsimm.com/rf/decision%20trees/random%20forests/python/2022/07/01/RandomForests.html"},"description":"Using Swansea property prices as a regression example of random forests","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://thomashsimm.com/feed.xml" title="Thomas Simm" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -71,8 +71,8 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Decision Trees and Random Forests</h1><p class="page-description">Using Swansea property prices as a regression example of random forests</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-07-01T00:00:00-05:00" itemprop="datePublished">
-        Jul 1, 2020
+    <h1 class="post-title p-name" itemprop="name headline">Decision Trees and Random Forests</h1><p class="page-description">Using Swansea property prices as a regression example of random forests</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-07-01T00:00:00-05:00" itemprop="datePublished">
+        Jul 1, 2022
       </time>
        • <span class="read-time" title="Estimated read time">
     
@@ -104,19 +104,19 @@ window.onload = wrap_img;
         <div class="pb-5 d-flex flex-wrap flex-justify-end">
           <div class="px-2">
 
-    <a href="https://github.com/ThomasHSimm/THS_website/tree/master/_notebooks/2020-07-01-RandomForests.ipynb" role="button" target="_blank">
+    <a href="https://github.com/ThomasHSimm/THS_website/tree/master/_notebooks/2022-07-01-RandomForests.ipynb" role="button" target="_blank">
 <img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
     </a>
 </div>
 
           <div class="px-2">
-    <a href="https://mybinder.org/v2/gh/ThomasHSimm/THS_website/master?filepath=_notebooks%2F2020-07-01-RandomForests.ipynb" target="_blank">
+    <a href="https://mybinder.org/v2/gh/ThomasHSimm/THS_website/master?filepath=_notebooks%2F2022-07-01-RandomForests.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
     </a>
 </div>
 
           <div class="px-2">
-    <a href="https://colab.research.google.com/github/ThomasHSimm/THS_website/blob/master/_notebooks/2020-07-01-RandomForests.ipynb" target="_blank">
+    <a href="https://colab.research.google.com/github/ThomasHSimm/THS_website/blob/master/_notebooks/2022-07-01-RandomForests.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
     </a>
 </div>
@@ -141,7 +141,7 @@ window.onload = wrap_img;
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
-# file to edit: _notebooks/2020-07-01-RandomForests.ipynb
+# file to edit: _notebooks/2022-07-01-RandomForests.ipynb
 -->
 
 <div class="container" id="notebook-container">
@@ -503,7 +503,7 @@ Here is the procedure that Breiman is proposing:</p>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_leaf_nodes</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span> 
 
 <span class="n">samp_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))[:</span><span class="mi">500</span><span class="p">]</span>
 <span class="n">dtreeviz</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">xs</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">samp_idx</span><span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">samp_idx</span><span class="p">],</span> <span class="n">xs</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">dep_var</span><span class="p">,</span>
@@ -556,7 +556,7 @@ Here is the procedure that Breiman is proposing:</p>
         theme="github-light"
         crossorigin="anonymous"
         async>
-</script><a class="u-url" href="/rf/decision%20trees/random%20forests/python/2020/07/01/RandomForests.html" hidden></a>
+</script><a class="u-url" href="/rf/decision%20trees/random%20forests/python/2022/07/01/RandomForests.html" hidden></a>
 </article>
       </div>
     </main><footer class="site-footer h-card">
